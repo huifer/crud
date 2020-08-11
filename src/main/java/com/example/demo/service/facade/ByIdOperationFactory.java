@@ -4,5 +4,4 @@ public interface ByIdOperationFactory {
 
   OperationCollections factory(Class<?> clazz);
 
-
 }

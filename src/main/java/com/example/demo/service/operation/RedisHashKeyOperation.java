@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-public class RedisHashKeyOperation<T> {
+public abstract class RedisHashKeyOperation<T> {
 
   Gson gson = new Gson();
   @Autowired

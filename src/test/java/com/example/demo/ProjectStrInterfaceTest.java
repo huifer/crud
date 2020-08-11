@@ -19,7 +19,7 @@ public class ProjectStrInterfaceTest {
   void testInsert() {
 
     ProjectStr project = new ProjectStr();
-    project.setId("a1");
+    project.setId("a4");
     project.setName("JJJ");
     this.projectStrStrIdInterfaceByIdOperationFacade.insert(project);
   }

@@ -5,7 +5,6 @@ import com.example.demo.service.facade.ByIdOperationFacade;
 import com.example.demo.service.facade.CommonByIdOperation;
 import com.example.demo.service.id.IntIdInterface;
 import com.example.demo.service.operation.DbOperation;
-import com.example.demo.service.operation.RedisOperation;
 import org.springframework.stereotype.Service;
 
 @Service("projectIntFacade")
@@ -14,16 +13,7 @@ public class ProjectIntFacade extends CommonByIdOperation<ProjectInt, IntIdInter
 
   @Override
   public boolean insert(ProjectInt projectInt) {
-    DbOperation dbOperation = this.getDbOperation();
-    boolean insert = false;
-    if (dbOperation != null) {
-      insert = dbOperation.insert(projectInt);
-    }
-    RedisOperation redisOperation = this.operationCollection().getRedisOperation();
-    if (redisOperation != null) {
-      redisOperation.insert(projectInt);
-    }
-    return insert;
+    return super.insert(projectInt);
   }
 
   @Override
@@ -36,7 +26,6 @@ public class ProjectIntFacade extends CommonByIdOperation<ProjectInt, IntIdInter
     return super.del(intIdInterface);
   }
 
-  @Override
   public boolean editor(IntIdInterface intIdInterface, ProjectInt projectInt) {
     return super.editor(intIdInterface, projectInt);
   }

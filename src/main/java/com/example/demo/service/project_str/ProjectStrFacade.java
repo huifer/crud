@@ -1,6 +1,5 @@
 package com.example.demo.service.project_str;
 
-import com.example.demo.entity.ProjectInt;
 import com.example.demo.entity.ProjectStr;
 import com.example.demo.service.facade.ByIdOperationFacade;
 import com.example.demo.service.facade.CommonByIdOperation;
@@ -15,16 +14,8 @@ public class ProjectStrFacade extends CommonByIdOperation<ProjectStr, StrIdInter
 
   @Override
   public boolean insert(ProjectStr projectInt) {
-    DbOperation dbOperation = this.getDbOperation();
-    boolean insert = false;
-    if (dbOperation != null) {
-      insert = dbOperation.insert(projectInt);
-    }
-    RedisOperation redisOperation = this.operationCollection().getRedisOperation();
-    if (redisOperation != null) {
-      redisOperation.insert(projectInt);
-    }
-    return insert;
+
+    return super.insert(projectInt);
   }
 
   @Override
@@ -37,7 +28,6 @@ public class ProjectStrFacade extends CommonByIdOperation<ProjectStr, StrIdInter
     return super.del(strIdInterface);
   }
 
-  @Override
   public boolean editor(StrIdInterface strIdInterface, ProjectStr projectInt) {
     return super.editor(strIdInterface, projectInt);
   }

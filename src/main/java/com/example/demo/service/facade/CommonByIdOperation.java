@@ -6,12 +6,31 @@ import com.example.demo.service.operation.RedisOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-public class CommonByIdOperation<T, I extends IdInterface> {
+public abstract class CommonByIdOperation<T, I extends IdInterface>
+    implements ByIdOperationFacade<T, I> {
 
   @Autowired
   @Qualifier("ByIdOperationFactoryImpl")
   ByIdOperationFactory byIdOperationFactory;
 
+  @Override
+  public boolean insert(T t) {
+    DbOperation dbOperation = this.getDbOperation();
+    boolean insert = false;
+    if (dbOperation != null) {
+      insert = dbOperation.insert(t);
+    }
+    RedisOperation redisOperation = this.operationCollection().getRedisOperation();
+    if (redisOperation != null) {
+      redisOperation.insert(t);
+    }
+    return insert;
+  }
+
+  @Override
+  public DbOperation getDbOperation() {
+    throw new RuntimeException("没有实现");
+  }
 
   public boolean editor(I i, T t) {
 
