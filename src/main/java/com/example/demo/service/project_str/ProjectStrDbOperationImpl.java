@@ -8,7 +8,7 @@ import com.example.demo.service.runner.MapperRunner;
 import org.springframework.stereotype.Service;
 
 @Service("ProjectStrDbOperationImpl")
-public class ProjectStrDbOperationImpl implements DbOperation<ProjectStr, StrIdInterface> {
+public class ProjectStrDbOperationImpl implements DbOperation<ProjectStr, StrIdInterface<String>> {
 
   private A<String, ProjectStr> getA() {
     A<String, ProjectStr> a = MapperRunner.getA(ProjectStr.class);
@@ -21,17 +21,17 @@ public class ProjectStrDbOperationImpl implements DbOperation<ProjectStr, StrIdI
   }
 
   @Override
-  public ProjectStr byId(StrIdInterface interfaces) {
-    return getA().selectByPrimaryKey((String) interfaces.id());
+  public ProjectStr byId(StrIdInterface<String> interfaces) {
+    return getA().selectByPrimaryKey(interfaces.id());
   }
 
   @Override
-  public boolean del(StrIdInterface interfaces) {
-    return getA().deleteByPrimaryKey((String) interfaces.id()) > 0;
+  public boolean del(StrIdInterface<String> interfaces) {
+    return getA().deleteByPrimaryKey(interfaces.id()) > 0;
   }
 
   @Override
-  public boolean editor(StrIdInterface interfaces, ProjectStr projectInt) {
+  public boolean editor(StrIdInterface<String> interfaces, ProjectStr projectInt) {
     // 更新存在策略
     ProjectStr projectInt1 = this.byId(interfaces);
     projectInt1.setName(projectInt.getName());

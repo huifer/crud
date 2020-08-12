@@ -63,7 +63,7 @@ class DemoApplicationTests {
     ProjectInt projectInt = this.byIdOperationFacade.byId(new IntIdInterface() {
       @Override
       public Integer id() {
-        return 1;
+        return 3;
       }
     });
     System.out.println();

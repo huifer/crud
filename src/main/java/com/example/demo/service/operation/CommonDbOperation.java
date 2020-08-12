@@ -3,7 +3,7 @@ package com.example.demo.service.operation;
 import com.example.demo.mapper.A;
 import com.example.demo.service.runner.MapperRunner;
 
-public abstract class CommonDbOperation<T, IdInterface> {
+public abstract class CommonDbOperation<T, I extends com.example.demo.service.id.IdInterface> {
 
   protected A getA() {
     return MapperRunner.getA(type());
@@ -13,7 +13,9 @@ public abstract class CommonDbOperation<T, IdInterface> {
     return getA().insert(o) > 0;
   }
 
-
+  protected T byId(I idInterface) {
+    return (T) getA().selectByPrimaryKey(idInterface.id());
+  }
 
   public Class type() {
     throw new RuntimeException("class is null");
