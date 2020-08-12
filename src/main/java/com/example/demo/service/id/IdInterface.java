@@ -1,5 +1,6 @@
 package com.example.demo.service.id;
 
-public interface IdInterface {
+public interface IdInterface<T> {
 
+  T id();
 }

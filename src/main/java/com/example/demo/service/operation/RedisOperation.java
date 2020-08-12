@@ -14,4 +14,5 @@ public interface RedisOperation<T, I extends IdInterface> {
   T byId(I i);
   Class<?> type();
 
+  String key();
 }

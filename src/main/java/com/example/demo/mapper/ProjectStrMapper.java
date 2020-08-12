@@ -4,16 +4,19 @@ import com.example.demo.entity.ProjectStr;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ProjectStrMapper {
-    int deleteByPrimaryKey(String id);
+public interface ProjectStrMapper extends A<String ,ProjectStr> {
 
-    int insert(ProjectStr record);
+  int deleteByPrimaryKey(String id);
 
-    int insertSelective(ProjectStr record);
+  int insert(ProjectStr record);
 
-    ProjectStr selectByPrimaryKey(String id);
+  int insertSelective(ProjectStr record);
 
-    int updateByPrimaryKeySelective(ProjectStr record);
+  ProjectStr selectByPrimaryKey(String id);
 
-    int updateByPrimaryKey(ProjectStr record);
+  int updateByPrimaryKeySelective(ProjectStr record);
+
+  int updateByPrimaryKey(ProjectStr record);
+
+
 }

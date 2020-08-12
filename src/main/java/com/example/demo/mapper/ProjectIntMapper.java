@@ -4,16 +4,17 @@ import com.example.demo.entity.ProjectInt;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ProjectIntMapper {
-    int deleteByPrimaryKey(Integer id);
+public interface ProjectIntMapper extends A<Integer, ProjectInt> {
 
-    int insert(ProjectInt record);
+  int deleteByPrimaryKey(Integer integer);
 
-    int insertSelective(ProjectInt record);
+  int insert(ProjectInt record);
 
-    ProjectInt selectByPrimaryKey(Integer id);
+  int insertSelective(ProjectInt record);
 
-    int updateByPrimaryKeySelective(ProjectInt record);
+  ProjectInt selectByPrimaryKey(Integer integer);
 
-    int updateByPrimaryKey(ProjectInt record);
+  int updateByPrimaryKeySelective(ProjectInt record);
+
+  int updateByPrimaryKey(ProjectInt record);
 }

@@ -12,27 +12,31 @@ public class ProjectStrRedisOperationImpl
     implements
     RedisOperation<ProjectStr, StrIdInterface> {
 
-  public static final String CACHE_PROJECT_INT = "cache:project_int";
+  public static final String CACHE_PROJECT_STR = "cache:project_str";
 
   public void insert(ProjectStr projectStr) {
-    super.insert(CACHE_PROJECT_INT, String.valueOf(projectStr.getId()), projectStr);
+    super.insert(String.valueOf(projectStr.getId()), projectStr);
   }
 
   public void update(StrIdInterface strIdInterface, ProjectStr projectStr) {
-    super.update(CACHE_PROJECT_INT, String.valueOf(strIdInterface.id()), projectStr);
+    super.update(String.valueOf(strIdInterface.id()), projectStr);
   }
 
   public void del(StrIdInterface strIdInterface) {
-    super.delete(CACHE_PROJECT_INT, String.valueOf(strIdInterface.id()));
+    super.delete(String.valueOf(strIdInterface.id()));
   }
 
   public ProjectStr byId(StrIdInterface intIdInterface) {
-    return super.byId(CACHE_PROJECT_INT, String.valueOf(intIdInterface.id()), ProjectStr.class);
-
+    return super.byId(String.valueOf(intIdInterface.id()));
   }
 
   @Override
   public Class<?> type() {
     return ProjectStr.class;
+  }
+
+  @Override
+  public String key() {
+    return CACHE_PROJECT_STR;
   }
 }

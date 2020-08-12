@@ -11,28 +11,36 @@ public abstract class RedisHashKeyOperation<T> {
   @Autowired
   private StringRedisTemplate redisTemplate;
 
-  protected void update(String key, String id, T t) {
+  protected void update(String id, T t) {
 
-    T redisObj = this.byId(key, id, t.getClass());
+    T redisObj = this.byId(id);
     if (!Objects.isNull(redisObj)) {
 
       // 如果是redis中的类型和当前传入的类型相同
       if (redisObj.getClass().equals(t.getClass())) {
-        this.insert(key, id, t);
+        this.insert(id, t);
       }
     }
   }
 
-  protected void insert(String key, String id, T t) {
-    redisTemplate.opsForHash().put(key, id, gson.toJson(t));
+  protected void insert(String id, T t) {
+    redisTemplate.opsForHash().put(key(), id, gson.toJson(t));
   }
 
-  protected T byId(String key, String id, Class<?> clazz) {
-    String o = (String) redisTemplate.opsForHash().get(key, id);
-    return (T) gson.fromJson(o, clazz);
+  protected T byId(String id) {
+    String o = (String) redisTemplate.opsForHash().get(key(), id);
+    return (T) gson.fromJson(o, type());
   }
 
-  protected void delete(String key, String id) {
-    this.redisTemplate.opsForHash().delete(key, id);
+  protected void delete(String id) {
+    this.redisTemplate.opsForHash().delete(key(), id);
+  }
+
+  protected Class<?> type() {
+    throw new RuntimeException("clazz is null");
+  }
+
+  protected String key() {
+    throw new RuntimeException("key is null");
   }
 }

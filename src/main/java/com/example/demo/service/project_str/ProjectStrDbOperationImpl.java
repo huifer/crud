@@ -1,34 +1,33 @@
 package com.example.demo.service.project_str;
 
-import com.example.demo.entity.ProjectInt;
 import com.example.demo.entity.ProjectStr;
-import com.example.demo.mapper.ProjectIntMapper;
-import com.example.demo.mapper.ProjectStrMapper;
-import com.example.demo.service.id.IntIdInterface;
+import com.example.demo.mapper.A;
 import com.example.demo.service.id.StrIdInterface;
 import com.example.demo.service.operation.DbOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.service.runner.MapperRunner;
 import org.springframework.stereotype.Service;
 
 @Service("ProjectStrDbOperationImpl")
 public class ProjectStrDbOperationImpl implements DbOperation<ProjectStr, StrIdInterface> {
 
-  @Autowired
-  private ProjectStrMapper projectStrMapper;
+  private A<String, ProjectStr> getA() {
+    A<String, ProjectStr> a = MapperRunner.getA(ProjectStr.class);
+    return a;
+  }
 
   @Override
   public boolean insert(ProjectStr projectInt) {
-    return projectStrMapper.insert(projectInt) > 0;
+    return getA().insert(projectInt) > 0;
   }
 
   @Override
   public ProjectStr byId(StrIdInterface interfaces) {
-    return projectStrMapper.selectByPrimaryKey(interfaces.id());
+    return getA().selectByPrimaryKey((String) interfaces.id());
   }
 
   @Override
   public boolean del(StrIdInterface interfaces) {
-    return projectStrMapper.deleteByPrimaryKey(interfaces.id()) > 0;
+    return getA().deleteByPrimaryKey((String) interfaces.id()) > 0;
   }
 
   @Override
@@ -37,7 +36,7 @@ public class ProjectStrDbOperationImpl implements DbOperation<ProjectStr, StrIdI
     ProjectStr projectInt1 = this.byId(interfaces);
     projectInt1.setName(projectInt.getName());
 
-    return this.projectStrMapper.updateByPrimaryKey(projectInt1) > 0;
+    return this.getA().updateByPrimaryKey(projectInt1) > 0;
   }
 
   @Override

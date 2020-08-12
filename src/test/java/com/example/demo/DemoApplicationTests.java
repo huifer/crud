@@ -26,7 +26,7 @@ class DemoApplicationTests {
   @Test
   void testInsert() {
     ProjectInt projectInt = new ProjectInt();
-    projectInt.setName("JJJ");
+    projectInt.setName("ADAAD");
     this.byIdOperationFacade.insert(projectInt);
   }
 
@@ -34,7 +34,7 @@ class DemoApplicationTests {
   void testUpdate() {
     ProjectInt projectInt = this.byIdOperationFacade.byId(new IntIdInterface() {
       @Override
-      public int id() {
+      public Integer id() {
         return 1;
       }
     });
@@ -42,7 +42,7 @@ class DemoApplicationTests {
     projectInt.setName("update");
     this.byIdOperationFacade.editor(new IntIdInterface() {
       @Override
-      public int id() {
+      public Integer id() {
         return projectInt.getId();
       }
     }, projectInt);
@@ -52,7 +52,7 @@ class DemoApplicationTests {
   void testDel() {
     this.byIdOperationFacade.del(new IntIdInterface() {
       @Override
-      public int id() {
+      public Integer id() {
         return 1;
       }
     });
@@ -62,7 +62,7 @@ class DemoApplicationTests {
   void testById() {
     ProjectInt projectInt = this.byIdOperationFacade.byId(new IntIdInterface() {
       @Override
-      public int id() {
+      public Integer id() {
         return 1;
       }
     });
