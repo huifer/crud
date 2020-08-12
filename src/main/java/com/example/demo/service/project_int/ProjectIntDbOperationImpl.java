@@ -26,7 +26,7 @@ public class ProjectIntDbOperationImpl extends
   }
 
   @Override
-  protected A<Integer, ProjectInt> getA() {
+  public A<Integer, ProjectInt> getA() {
     return super.getA();
   }
 

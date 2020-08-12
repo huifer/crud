@@ -5,7 +5,6 @@ import com.example.demo.service.facade.ByIdOperationFacade;
 import com.example.demo.service.facade.CommonByIdOperation;
 import com.example.demo.service.id.StrIdInterface;
 import com.example.demo.service.operation.DbOperation;
-import com.example.demo.service.operation.RedisOperation;
 import org.springframework.stereotype.Service;
 
 @Service("ProjectStrFacade")

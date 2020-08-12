@@ -4,7 +4,7 @@ import com.example.demo.entity.ProjectStr;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ProjectStrMapper extends A<String ,ProjectStr> {
+public interface ProjectStrMapper extends A<String, ProjectStr> {
 
   int deleteByPrimaryKey(String id);
 

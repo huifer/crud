@@ -12,6 +12,7 @@ public interface RedisOperation<T, I extends IdInterface> {
   void del(I i);
 
   T byId(I i);
+
   Class<?> type();
 
   String key();

@@ -1,23 +1,24 @@
 package com.example.demo.entity;
 
 public class ProjectInt {
-    private Integer id;
 
-    private String name;
+  private Integer id;
 
-    public Integer getId() {
-        return id;
-    }
+  private String name;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }

@@ -18,7 +18,7 @@ public class TestController {
   private ByIdOperationFacade<ProjectInt, IntIdInterface> byIdOperationFacade;
 
   @GetMapping("/int_1")
-  public void int1(){
+  public void int1() {
     ProjectInt projectInt = new ProjectInt();
     projectInt.setName("JJJ");
 
