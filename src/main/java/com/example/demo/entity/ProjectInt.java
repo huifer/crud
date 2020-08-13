@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-public class ProjectInt {
+public class ProjectInt implements BaseEntity{
 
   private Integer id;
 

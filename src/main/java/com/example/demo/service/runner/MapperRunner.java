@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class MapperRunner {
 
   public static Map<Class, A> om = new HashMap<>();
+  public static Map<A, Class> MO = new HashMap<>();
   @Autowired
   private ApplicationContext context;
   @Autowired
@@ -50,12 +51,13 @@ public class MapperRunner {
 
             Object mapper1 = sqlSession.getMapper(mapper);
             om.put(type, (A) mapper1);
+            MO.put((A) mapper1, type);
             System.out.println();
           }
         }
       }
     }
-
+    System.out.println();
   }
 
 

@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-public class ProjectStr {
+public class ProjectStr implements BaseEntity {
 
   private String id;
 
