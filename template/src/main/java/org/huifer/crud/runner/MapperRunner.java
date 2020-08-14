@@ -61,13 +61,18 @@ public class MapperRunner implements CommandLineRunner, Ordered {
 
         if (genericInterfaces.length > 0) {
 
+          Class<?> clazz = null;
+          String key = null;
+          A a = null;
+          Class<?> mapperClazz = mapper;
+          boolean isPlus = false;
+
           for (Type genericInterface : genericInterfaces) {
             ParameterizedType pt = (ParameterizedType) genericInterface;
             Class rawType = (Class) pt.getRawType();
-            MapperAndCacheInfo mapperAndCacheInfo = new MapperAndCacheInfo();
 
             if (rawType.equals(BaseMapper.class)) {
-              mapperAndCacheInfo.setPlus(true);
+              isPlus = true;
             }
 
             if (rawType.equals(A.class)) {
@@ -77,22 +82,19 @@ public class MapperRunner implements CommandLineRunner, Ordered {
                 // 获取接口泛型
                 Class id = (Class) r[0];
                 Class type = (Class) r[1];
-
+                clazz = type;
                 Object mapper1 = sqlSession.getMapper(mapper);
+                a = (A) mapper1;
                 om.put(type, (A) mapper1);
-                mapperAndCacheInfo.setA((A) mapper1);
-                mapperAndCacheInfo.setClazz(type);
-                mapperAndCacheInfo.setMapperClazz(mapper);
 
                 if (annotation != null) {
                   // 如果由缓存注解
-                  String key = annotation.key();
+                  String keyCk = annotation.key();
 
                   Class<?> typeC = annotation.type();
                   if (type.equals(typeC)) {
-                    if (!StringUtils.isEmpty(key)) {
-
-                      mapperAndCacheInfo.setKey(key);
+                    if (!StringUtils.isEmpty(keyCk)) {
+                      key = keyCk;
 
 
                     }
@@ -104,10 +106,20 @@ public class MapperRunner implements CommandLineRunner, Ordered {
                     throw new RuntimeException("缓存注解类型和mapper类型不匹配，class = " + mapper);
                   }
                 }
-                putData(mapperAndCacheInfo);
               }
             }
+
           }
+
+          MapperAndCacheInfo mapperAndCacheInfo = new MapperAndCacheInfo();
+          mapperAndCacheInfo.setClazz(clazz);
+          mapperAndCacheInfo.setKey(key);
+          mapperAndCacheInfo.setA(a);
+          mapperAndCacheInfo.setMapperClazz(mapperClazz);
+          mapperAndCacheInfo.setPlus(isPlus);
+
+          putData(mapperAndCacheInfo);
+
         }
       }
     }
