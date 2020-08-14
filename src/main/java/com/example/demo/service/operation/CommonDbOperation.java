@@ -9,6 +9,9 @@ public class CommonDbOperation<T, I extends com.example.demo.service.id.IdInterf
 
   Class<?> type;
 
+
+
+
   public A getA() {
     return MapperRunner.getA(type());
   }

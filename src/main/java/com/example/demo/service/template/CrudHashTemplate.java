@@ -1,8 +1,9 @@
 package com.example.demo.service.template;
 
 import com.example.demo.entity.BaseEntity;
-import com.example.demo.enums.CacheTable;
 import com.example.demo.service.id.IdInterface;
+import com.example.demo.service.runner.MapperAndCacheInfo;
+import com.example.demo.service.runner.MapperRunner;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -96,8 +97,8 @@ public class CrudHashTemplate<T extends BaseEntity, I extends IdInterface>
 
 
   public String key() {
-// TODO: 2020/8/13 key
-    return CacheTable.key(type());
+    MapperAndCacheInfo mapperAndCacheInfo = MapperRunner.getMapperAndCacheInfo(type());
+    return mapperAndCacheInfo.getKey();
   }
 
   @Override

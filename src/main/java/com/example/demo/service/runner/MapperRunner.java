@@ -1,5 +1,6 @@
 package com.example.demo.service.runner;
 
+import com.example.demo.ann.CacheKey;
 import com.example.demo.mapper.A;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -13,20 +14,27 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class MapperRunner {
 
   public static Map<Class, A> om = new HashMap<>();
   public static Map<A, Class> MO = new HashMap<>();
+  public static Map<Class, MapperAndCacheInfo> mapperAndCacheInfoMap = new HashMap<>();
+
   @Autowired
   private ApplicationContext context;
   @Autowired
   private SqlSession sqlSession;
 
   public static A getA(Class a) {
-
     return om.get(a);
+  }
+
+
+  public static MapperAndCacheInfo getMapperAndCacheInfo(Class clazz) {
+    return mapperAndCacheInfoMap.get(clazz);
   }
 
   @PostConstruct
@@ -38,26 +46,84 @@ public class MapperRunner {
     for (Class<?> mapper : mappers) {
       if (mapper.isInterface()) {
 
+        // 获取注解信息
+        CacheKey annotation = mapper.getAnnotation(CacheKey.class);
+
         Type[] genericInterfaces = mapper.getGenericInterfaces();
 
         if (genericInterfaces.length > 0) {
 
-          ParameterizedType genericInterface = (ParameterizedType) genericInterfaces[0];
-          Type[] r = genericInterface.getActualTypeArguments();
+          for (Type genericInterface : genericInterfaces) {
+            ParameterizedType pt = (ParameterizedType) genericInterface;
+            Class rawType = (Class) pt.getRawType();
+            if (rawType.equals(A.class)) {
+              Type[] r = pt.getActualTypeArguments();
+              if (r.length == 2) {
+                MapperAndCacheInfo mapperAndCacheInfo = new MapperAndCacheInfo();
 
-          if (r.length == 2) {
-            Class id = (Class) r[0];
-            Class type = (Class) r[1];
+                // 获取接口泛型
+                Class id = (Class) r[0];
+                Class type = (Class) r[1];
 
-            Object mapper1 = sqlSession.getMapper(mapper);
-            om.put(type, (A) mapper1);
-            MO.put((A) mapper1, type);
-            System.out.println();
+                Object mapper1 = sqlSession.getMapper(mapper);
+                om.put(type, (A) mapper1);
+                MO.put((A) mapper1, type);
+                mapperAndCacheInfo.setA((A) mapper1);
+                mapperAndCacheInfo.setClazz(type);
+                mapperAndCacheInfo.setMapperClazz(mapper);
+
+                if (annotation != null) {
+                  // 如果由缓存注解
+                  String key = annotation.key();
+
+                  Class<?> typeC = annotation.type();
+                  if (type.equals(typeC)) {
+                    if (!StringUtils.isEmpty(key)) {
+
+                      mapperAndCacheInfo.setKey(key);
+
+
+                    }
+                    else {
+                      throw new RuntimeException("缓存key不能为空, class+ " + mapper);
+                    }
+                  }
+                  else {
+                    throw new RuntimeException("缓存注解类型和mapper类型不匹配，class = " + mapper);
+                  }
+                }
+                putData(mapperAndCacheInfo);
+              }
+
+            }
           }
+
         }
       }
     }
-    System.out.println();
+  }
+
+  private void putData(MapperAndCacheInfo mapperAndCacheInfo) {
+    MapperAndCacheInfo cache = mapperAndCacheInfoMap
+        .get(mapperAndCacheInfo.getClazz());
+
+    if (cache != null) {
+      throw new RuntimeException("存在相同类型的" + mapperAndCacheInfo.getMapperClazz());
+    }
+
+    mapperAndCacheInfoMap.forEach(
+        (k, v) -> {
+          String key = v.getKey();
+          if (key.equals(mapperAndCacheInfo.getKey())) {
+            throw new RuntimeException(
+                "存在相同的缓存键值 " + v.getMapperClazz() + "\t" + mapperAndCacheInfo.getMapperClazz());
+          }
+        }
+
+    );
+
+    mapperAndCacheInfoMap.put(mapperAndCacheInfo.getClazz(), mapperAndCacheInfo);
+
   }
 
 

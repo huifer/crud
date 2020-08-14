@@ -3,6 +3,7 @@ package com.example.demo.curd;
 import com.example.demo.entity.ProjectInt;
 import com.example.demo.service.id.IdInterface;
 import com.example.demo.service.template.CrudHashTemplate;
+import com.example.demo.service.template.CrudTemplate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class Og {
 
   @Autowired
-  CrudHashTemplate<ProjectInt, IdInterface<Integer>> crudHashTemplate;
+  CrudTemplate<ProjectInt, IdInterface<Integer>> crudHashTemplate;
 
   @Test
   void tt() {
