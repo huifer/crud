@@ -1,4 +1,4 @@
-package org.huifer.crud.operation;
+package com.github.huifer.crud.operation;
 
 import com.google.gson.Gson;
 import org.springframework.data.redis.core.StringRedisTemplate;

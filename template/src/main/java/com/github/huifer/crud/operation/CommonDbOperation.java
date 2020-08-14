@@ -1,8 +1,8 @@
-package org.huifer.crud.operation;
+package com.github.huifer.crud.operation;
 
-import org.huifer.crud.interfaces.A;
-import org.huifer.crud.interfaces.id.IdInterface;
-import org.huifer.crud.runner.MapperRunner;
+import com.github.huifer.crud.interfaces.id.IdInterface;
+import com.github.huifer.crud.runner.MapperRunner;
+import com.github.huifer.crud.interfaces.A;
 
 public class CommonDbOperation<T, I extends IdInterface> {
 

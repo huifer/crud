@@ -1,7 +1,7 @@
-package org.huifer.crud.interfaces.operation;
+package com.github.huifer.crud.interfaces.operation;
 
 
-import org.huifer.crud.interfaces.id.IdInterface;
+import com.github.huifer.crud.interfaces.id.IdInterface;
 
 public interface DbOperation<T, I extends IdInterface> {
 

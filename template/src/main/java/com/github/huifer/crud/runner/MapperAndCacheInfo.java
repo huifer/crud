@@ -1,7 +1,7 @@
-package org.huifer.crud.runner;
+package com.github.huifer.crud.runner;
 
 
-import org.huifer.crud.interfaces.A;
+import com.github.huifer.crud.interfaces.A;
 
 public class MapperAndCacheInfo {
 

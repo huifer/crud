@@ -1,7 +1,7 @@
-package org.huifer.crud.interfaces;
+package com.github.huifer.crud.interfaces;
 
 
-import org.huifer.crud.interfaces.id.IdInterface;
+import com.github.huifer.crud.interfaces.id.IdInterface;
 
 public interface CrudTemplate<T, I extends IdInterface> {
 

@@ -1,4 +1,4 @@
-package org.huifer.crud.runner;
+package com.github.huifer.crud.runner;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -9,8 +9,8 @@ import javax.annotation.PostConstruct;
 import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
-import org.huifer.crud.annotation.CacheKey;
-import org.huifer.crud.interfaces.A;
+import com.github.huifer.crud.annotation.CacheKey;
+import com.github.huifer.crud.interfaces.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;

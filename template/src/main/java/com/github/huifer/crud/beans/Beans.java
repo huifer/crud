@@ -1,4 +1,4 @@
-package org.huifer.crud.beans;
+package com.github.huifer.crud.beans;
 
 import org.springframework.context.annotation.ComponentScan;
 

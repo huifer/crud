@@ -1,6 +1,6 @@
 package com.example.webdemo;
 
-import org.huifer.crud.beans.EnableCrudTemplate;
+import com.github.huifer.crud.beans.EnableCrudTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

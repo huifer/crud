@@ -1,11 +1,11 @@
-package org.huifer.crud.service;
+package com.github.huifer.crud.service;
 
+import com.github.huifer.crud.interfaces.id.IdInterface;
+import com.github.huifer.crud.runner.MapperAndCacheInfo;
+import com.github.huifer.crud.runner.MapperRunner;
 import com.google.gson.Gson;
-import org.huifer.crud.interfaces.BaseEntity;
-import org.huifer.crud.interfaces.CrudTemplate;
-import org.huifer.crud.interfaces.id.IdInterface;
-import org.huifer.crud.runner.MapperAndCacheInfo;
-import org.huifer.crud.runner.MapperRunner;
+import com.github.huifer.crud.interfaces.BaseEntity;
+import com.github.huifer.crud.interfaces.CrudTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,8 @@
-package org.huifer.crud.service;
+package com.github.huifer.crud.service;
 
-import org.huifer.crud.interfaces.CrudTemplate;
-import org.huifer.crud.interfaces.id.IdInterface;
-import org.huifer.crud.operation.CommonDbOperation;
-import org.springframework.stereotype.Service;
+import com.github.huifer.crud.interfaces.id.IdInterface;
+import com.github.huifer.crud.interfaces.CrudTemplate;
+import com.github.huifer.crud.operation.CommonDbOperation;
 
 public class CrudTemplateForMysql<T, I extends IdInterface>
     extends CommonDbOperation<T, I>

@@ -1,4 +1,4 @@
-package org.huifer.crud.interfaces.id;
+package com.github.huifer.crud.interfaces.id;
 
 public interface IdInterface<T> {
 

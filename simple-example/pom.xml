@@ -9,7 +9,7 @@
     <version>2.3.3.RELEASE</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.example</groupId>
+  <groupId>com.github.huifer</groupId>
   <artifactId>web-demo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>web-demo</name>
@@ -61,19 +61,11 @@
 
 
     <dependency>
-      <groupId>org.huifer</groupId>
+      <groupId>com.github.huifer</groupId>
       <artifactId>template</artifactId>
       <version>0.0.1</version>
     </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>

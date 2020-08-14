@@ -1,4 +1,4 @@
-package org.huifer.crud.beans;
+package com.github.huifer.crud.beans;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

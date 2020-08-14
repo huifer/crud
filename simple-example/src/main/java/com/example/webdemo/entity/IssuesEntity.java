@@ -1,7 +1,7 @@
 package com.example.webdemo.entity;
 
 
-import org.huifer.crud.interfaces.BaseEntity;
+import com.github.huifer.crud.interfaces.BaseEntity;
 
 public class IssuesEntity implements BaseEntity {
 

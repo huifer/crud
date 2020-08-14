@@ -7,7 +7,7 @@
   <modules>
     <module>template</module>
   </modules>
-  <groupId>org.huifer</groupId>
+  <groupId>com.github.huifer</groupId>
   <artifactId>crud</artifactId>
   <version>0.0.1</version>
   <name>demo</name>
