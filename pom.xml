@@ -9,7 +9,7 @@
   </modules>
   <groupId>org.huifer</groupId>
   <artifactId>crud</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>demo</name>
   <description>Demo project for Spring Boot</description>
 
@@ -19,17 +19,17 @@
     <maven.compiler.source>1.8</maven.compiler.source>
   </properties>
 
-
-
-
   <build>
     <plugins>
       <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
       </plugin>
     </plugins>
-
   </build>
-
 </project>

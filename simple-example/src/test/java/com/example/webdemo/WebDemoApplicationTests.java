@@ -19,7 +19,7 @@ class WebDemoApplicationTests {
   @Test
   void contextLoads() {
     IssuesEntity issuesEntity = new IssuesEntity();
-    issuesEntity.setNewTitle("asda");
+    issuesEntity.setNewTitle("test_issues");
 
     issueCrud.insert(issuesEntity);
   }
