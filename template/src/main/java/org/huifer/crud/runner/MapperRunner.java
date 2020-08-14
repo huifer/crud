@@ -1,5 +1,6 @@
 package org.huifer.crud.runner;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -55,10 +56,15 @@ public class MapperRunner {
           for (Type genericInterface : genericInterfaces) {
             ParameterizedType pt = (ParameterizedType) genericInterface;
             Class rawType = (Class) pt.getRawType();
+            MapperAndCacheInfo mapperAndCacheInfo = new MapperAndCacheInfo();
+
+            if (rawType.equals(BaseMapper.class)) {
+              mapperAndCacheInfo.setPlus(true);
+            }
+
             if (rawType.equals(A.class)) {
               Type[] r = pt.getActualTypeArguments();
               if (r.length == 2) {
-                MapperAndCacheInfo mapperAndCacheInfo = new MapperAndCacheInfo();
 
                 // 获取接口泛型
                 Class id = (Class) r[0];
@@ -92,10 +98,8 @@ public class MapperRunner {
                 }
                 putData(mapperAndCacheInfo);
               }
-
             }
           }
-
         }
       }
     }

@@ -21,6 +21,18 @@ public class MapperAndCacheInfo {
    * mapper 类型
    */
   private Class<?> mapperClazz;
+  /**
+   * 是否是 mybatis-plus
+   */
+  private boolean isPlus = false;
+
+  public boolean isPlus() {
+    return isPlus;
+  }
+
+  public void setPlus(boolean plus) {
+    isPlus = plus;
+  }
 
   public Class<?> getMapperClazz() {
     return mapperClazz;
