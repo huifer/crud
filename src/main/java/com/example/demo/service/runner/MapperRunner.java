@@ -101,6 +101,7 @@ public class MapperRunner {
         }
       }
     }
+    System.out.println();
   }
 
   private void putData(MapperAndCacheInfo mapperAndCacheInfo) {

@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 public class BeanCopy {
@@ -13,7 +12,6 @@ public class BeanCopy {
     BeanUtils.copyProperties(strId, cpId);
     System.out.println(cpId.getId());
   }
-  @Data
   static class CpId {
     private Object id;
 
@@ -26,7 +24,6 @@ public class BeanCopy {
     }
   }
 
-  @Data
   static class StrId {
 
     private String id;

@@ -17,7 +17,7 @@ public class ProjectStrDbOperationImpl implements DbOperation<ProjectStr, StrIdI
 
   @Override
   public boolean insert(ProjectStr projectInt) {
-    return getA().insert(projectInt) > 0;
+    return getA().insertSelective(projectInt) > 0;
   }
 
   @Override
@@ -36,7 +36,7 @@ public class ProjectStrDbOperationImpl implements DbOperation<ProjectStr, StrIdI
     ProjectStr projectInt1 = this.byId(interfaces);
     projectInt1.setName(projectInt.getName());
 
-    return this.getA().updateByPrimaryKey(projectInt1) > 0;
+    return this.getA().updateByPrimaryKeySelective(projectInt1) > 0;
   }
 
   @Override
