@@ -36,7 +36,6 @@ public class MapperRunner {
     return mapperAndCacheInfoMap.get(clazz);
   }
 
-  @PostConstruct
   public void hh() {
     Configuration configuration = sqlSession.getConfiguration();
     MapperRegistry mapperRegistry = configuration.getMapperRegistry();
