@@ -1,8 +1,9 @@
 package com.example.webdemo;
 
-import com.example.demo.service.id.IntIdInterface;
-import com.example.demo.service.template.CrudHashTemplate;
 import com.example.webdemo.entity.IssuesEntity;
+import org.huifer.crud.interfaces.CrudTemplate;
+import org.huifer.crud.interfaces.id.IntIdInterface;
+import org.huifer.crud.service.CrudHashTemplate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,8 +14,7 @@ class WebDemoApplicationTests {
 
 
   @Autowired
-  @Qualifier("crudHashTemplate")
-  private CrudHashTemplate<IssuesEntity, IntIdInterface<Integer>> issueCrud;
+  private CrudTemplate<IssuesEntity, IntIdInterface<Integer>> issueCrud;
 
   @Test
   void contextLoads() {
