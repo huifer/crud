@@ -6,23 +6,23 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.PostConstruct;
 import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.huifer.crud.annotation.CacheKey;
 import org.huifer.crud.interfaces.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
-public class MapperRunner {
+public class MapperRunner implements CommandLineRunner, Ordered {
 
   public static Map<Class, A> om = new HashMap<>();
   public static Map<Class, MapperAndCacheInfo> mapperAndCacheInfoMap = new HashMap<>();
-
   @Autowired
   private ApplicationContext context;
   @Autowired
@@ -32,12 +32,20 @@ public class MapperRunner {
     return om.get(a);
   }
 
-
   public static MapperAndCacheInfo getMapperAndCacheInfo(Class clazz) {
     return mapperAndCacheInfoMap.get(clazz);
   }
 
-  @PostConstruct
+  @Override
+  public int getOrder() {
+    return Ordered.LOWEST_PRECEDENCE;
+  }
+
+  @Override
+  public void run(String... args) throws Exception {
+    this.hh();
+  }
+
   public void hh() {
     Configuration configuration = sqlSession.getConfiguration();
     MapperRegistry mapperRegistry = configuration.getMapperRegistry();

@@ -44,7 +44,8 @@
           <artifactId>junit-vintage-engine</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>  </dependencies>
+    </dependency>
+  </dependencies>
 
   <build>
     <resources>

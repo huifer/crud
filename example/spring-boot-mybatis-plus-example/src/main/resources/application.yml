@@ -1,0 +1,24 @@
+server:
+  port: 9999
+
+
+
+spring:
+  datasource:
+    password: a12345
+    username: huifer
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.98.225.144:3306/scrum?useUnicode=true&characterEncoding=utf8&useSSL=false
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  redis:
+    database: 10
+    host: localhost
+    port: 6379
+    max-active: 4
+    max-wait: -1
+    max-idle: 4
+    min-idle: 0
+    timeout: 20s
