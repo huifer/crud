@@ -1,27 +1,27 @@
 package com.github.huifer.crud.runner;
 
+import com.github.huifer.crud.annotation.CacheKey;
+import com.github.huifer.crud.interfaces.A;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.PostConstruct;
 import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
-import com.github.huifer.crud.annotation.CacheKey;
-import com.github.huifer.crud.interfaces.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
-public class MapperRunner {
+public class MapperRunner implements CommandLineRunner, Ordered {
 
   public static Map<Class, A> om = new HashMap<>();
   public static Map<Class, MapperAndCacheInfo> mapperAndCacheInfoMap = new HashMap<>();
-
   @Autowired
   private ApplicationContext context;
   @Autowired
@@ -31,9 +31,18 @@ public class MapperRunner {
     return om.get(a);
   }
 
-
   public static MapperAndCacheInfo getMapperAndCacheInfo(Class clazz) {
     return mapperAndCacheInfoMap.get(clazz);
+  }
+
+  @Override
+  public void run(String... args) throws Exception {
+    this.hh();
+  }
+
+  @Override
+  public int getOrder() {
+    return Ordered.LOWEST_PRECEDENCE;
   }
 
   public void hh() {
@@ -44,7 +53,6 @@ public class MapperRunner {
     for (Class<?> mapper : mappers) {
       if (mapper.isInterface()) {
 
-        // 获取注解信息
         CacheKey annotation = mapper.getAnnotation(CacheKey.class);
 
         Type[] genericInterfaces = mapper.getGenericInterfaces();
@@ -70,7 +78,6 @@ public class MapperRunner {
                 mapperAndCacheInfo.setMapperClazz(mapper);
 
                 if (annotation != null) {
-                  // 如果由缓存注解
                   String key = annotation.key();
 
                   Class<?> typeC = annotation.type();
@@ -82,11 +89,11 @@ public class MapperRunner {
 
                     }
                     else {
-                      throw new RuntimeException("缓存key不能为空, class+ " + mapper);
+                      throw new RuntimeException("cache key not null , class+ " + mapper);
                     }
                   }
                   else {
-                    throw new RuntimeException("缓存注解类型和mapper类型不匹配，class = " + mapper);
+                    throw new RuntimeException("cache type not matching，class = " + mapper);
                   }
                 }
                 putData(mapperAndCacheInfo);
@@ -105,7 +112,7 @@ public class MapperRunner {
         .get(mapperAndCacheInfo.getClazz());
 
     if (cache != null) {
-      throw new RuntimeException("存在相同类型的" + mapperAndCacheInfo.getMapperClazz());
+      throw new RuntimeException("Type already exists" + mapperAndCacheInfo.getMapperClazz());
     }
 
     mapperAndCacheInfoMap.forEach(
@@ -113,7 +120,8 @@ public class MapperRunner {
           String key = v.getKey();
           if (key.equals(mapperAndCacheInfo.getKey())) {
             throw new RuntimeException(
-                "存在相同的缓存键值 " + v.getMapperClazz() + "\t" + mapperAndCacheInfo.getMapperClazz());
+                "The same cache key value exists " + v.getMapperClazz() + "\t" + mapperAndCacheInfo
+                    .getMapperClazz());
           }
         }
 
