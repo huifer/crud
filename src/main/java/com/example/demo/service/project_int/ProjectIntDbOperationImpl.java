@@ -41,7 +41,7 @@ public class ProjectIntDbOperationImpl extends
     ProjectInt projectInt1 = this.byId(interfaces);
     projectInt1.setName(projectInt.getName());
 
-    return this.getA().updateByPrimaryKey(projectInt1) > 0;
+    return this.getA().updateByPrimaryKeySelective(projectInt1) > 0;
   }
 
   @Override
