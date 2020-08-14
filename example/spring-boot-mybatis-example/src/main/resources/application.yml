@@ -1,7 +1,7 @@
-
-
 server:
-  port: 8080
+  port: 9999
+
+
 
 spring:
   datasource:
@@ -26,3 +26,4 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapperxml/*.xml
+  type-aliases-package: org.huifer.crud.template.model

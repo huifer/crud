@@ -6,6 +6,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>template</module>
+    <module>example</module>
   </modules>
   <groupId>org.huifer</groupId>
   <artifactId>crud</artifactId>

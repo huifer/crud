@@ -1,9 +1,6 @@
-package com.example.webdemo.entity;
+package org.huifer.crud.template.model;
 
-
-import org.huifer.crud.interfaces.BaseEntity;
-
-public class IssuesEntity implements BaseEntity {
+public class IssuesEntity {
 
 
   private Integer id;

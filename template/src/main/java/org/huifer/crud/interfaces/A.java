@@ -1,8 +1,6 @@
 package org.huifer.crud.interfaces;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-
-public interface A<Id, T> extends BaseMapper<T> {
+public interface A<Id, T> {
 
 
   int deleteByPrimaryKey(Id id);
