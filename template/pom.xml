@@ -15,6 +15,8 @@
   </properties>
 
   <artifactId>template</artifactId>
+  <packaging>jar</packaging>
+  <name>crud-template</name>
 
   <dependencies>
     <dependency>
@@ -33,6 +35,7 @@
       <version>3.5.4</version>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
