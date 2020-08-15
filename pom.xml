@@ -10,7 +10,7 @@
   <groupId>com.github.huifer</groupId>
   <artifactId>crud</artifactId>
   <version>0.0.1-Releases</version>
-  <name>curl-template</name>
+  <name>crud-template</name>
 
   <description>crud template for mybatis and redis</description>
   <url>https://github.com/huifer/crud</url>

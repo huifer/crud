@@ -10,9 +10,9 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.github.huifer</groupId>
-  <artifactId>web-demo</artifactId>
+  <artifactId>simple-example</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>web-demo</name>
+  <name>simple-example</name>
   <description>Demo project for Spring Boot</description>
 
   <properties>
