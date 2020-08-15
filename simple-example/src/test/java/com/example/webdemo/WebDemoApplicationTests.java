@@ -1,27 +1,30 @@
 package com.example.webdemo;
 
 import com.example.webdemo.entity.IssuesEntity;
-import com.github.huifer.crud.beans.EnableCrudTemplate;
-import com.github.huifer.crud.interfaces.CrudTemplate;
+import com.example.webdemo.mapper.IssuesMapper;
 import com.github.huifer.crud.interfaces.id.IntIdInterface;
+import com.github.huifer.crud.service.facade.CrudFacade;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@EnableCrudTemplate
 class WebDemoApplicationTests {
 
+  @Autowired
+  private CrudFacade<IssuesEntity, IntIdInterface<Integer>> issueCrud;
 
-    @Autowired
-    private CrudTemplate<IssuesEntity, IntIdInterface<Integer>> issueCrud;
 
-    @Test
-    void contextLoads() {
-        IssuesEntity issuesEntity = new IssuesEntity();
-        issuesEntity.setNewTitle("test_issues");
+  @Autowired
+  private IssuesMapper issuesMapper;
 
-        issueCrud.insert(issuesEntity);
-    }
+  @Test
+  void contextLoads() {
+    IssuesEntity issuesEntity = new IssuesEntity();
+    issuesEntity.setNewTitle("test_issues");
+
+//    issuesMapper.insertSelective(issuesEntity);
+    issueCrud.insert(issuesEntity);
+  }
 
 }

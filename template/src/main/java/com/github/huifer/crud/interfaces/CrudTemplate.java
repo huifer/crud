@@ -7,9 +7,9 @@ public interface CrudTemplate<T, I extends IdInterface> {
 
   boolean insert(T t);
 
-  T byId(I i, Class c);
+  T byId(I i, Class<?> c);
 
-  boolean del(I i, Class c);
+  boolean del(I i, Class<?> c);
 
   boolean editor(I i, T t);
 
