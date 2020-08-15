@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 /**
- * @param <T>
- * @param <I>
+ * @param <T> entity
+ * @param <I> id interface
  */
 @Service("crudHashTemplateForRedis")
 public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterface> implements RedisOperation<T, I> {
