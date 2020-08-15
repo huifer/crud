@@ -12,7 +12,7 @@
   <groupId>com.github.huifer</groupId>
   <artifactId>web-demo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>web-demo</name>
+  <name>simple-example</name>
   <description>Demo project for Spring Boot</description>
 
   <properties>
@@ -64,6 +64,12 @@
       <groupId>com.github.huifer</groupId>
       <artifactId>template</artifactId>
       <version>0.0.1-Releases</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.huifer</groupId>
+      <artifactId>template</artifactId>
+      <version>0.0.1-Releases</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 

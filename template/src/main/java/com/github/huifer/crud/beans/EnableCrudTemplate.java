@@ -1,16 +1,16 @@
 package com.github.huifer.crud.beans;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.github.huifer.crud.daotype.DaoType;
+import com.github.huifer.crud.importselector.CrudTemplateImportSelector;
 import org.springframework.context.annotation.Import;
+
+import java.lang.annotation.*;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(Beans.class)
+@Import(value = {Beans.class, CrudTemplateImportSelector.class})
 public @interface EnableCrudTemplate {
 
+    DaoType daoType() default DaoType.MYBATIS;
 }
