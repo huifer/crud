@@ -42,7 +42,7 @@ public class MapperRunner implements CommandLineRunner {
   public void run(String... args) throws Exception {
     DaoType daoType = DaoTypeThreadLocal.getDaoType();
     this.mybatis();
-    System.out.println();
+    System.out.println(daoType);
   }
 
 

@@ -23,7 +23,7 @@ class WebDemoApplicationTests {
     IssuesEntity issuesEntity = new IssuesEntity();
     issuesEntity.setNewTitle("test_issues");
 
-//    issuesMapper.insertSelective(issuesEntity);
+    issuesMapper.insert(issuesEntity);
     issueCrud.insert(issuesEntity);
   }
 

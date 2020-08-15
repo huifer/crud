@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Options;
 
 @Mapper
 @CacheKey(key = "issues", type = IssuesEntity.class)
-public interface IssuesMapper extends A<Integer, IssuesEntity> , BaseMapper<IssuesEntity> {
+public interface IssuesMapper extends BaseMapper<IssuesEntity>, A<Integer, IssuesEntity> {
 
   @Insert("   insert into issue(new_title)values(#{newTitle,jdbcType=VARCHAR})")
   @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")

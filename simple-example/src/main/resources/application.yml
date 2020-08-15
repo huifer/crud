@@ -27,3 +27,6 @@ spring:
 mybatis:
   mapper-locations: classpath:mapperxml/*.xml
   type-aliases-package: com.example.webdemo.entity
+
+mybatis-plus:
+  type-aliases-package: com.example.webdemo.entity

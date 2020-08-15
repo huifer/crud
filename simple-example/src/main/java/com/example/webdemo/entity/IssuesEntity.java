@@ -7,11 +7,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.github.huifer.crud.interfaces.BaseEntity;
 
-@TableName("issues")
+@TableName( value = "issue")
 public class IssuesEntity implements BaseEntity {
 
 
-  @TableId(type = IdType.AUTO)
+  @TableId(value = "id",type = IdType.AUTO)
   private Integer id;
   @TableField(value = "new_title")
   private String newTitle;

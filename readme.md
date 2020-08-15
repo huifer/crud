@@ -42,6 +42,17 @@ return user
 
 
 ## 如何使用
+
+- 添加依赖
+
+```xml
+<dependency>
+  <groupId>com.github.huifer</groupId>
+  <artifactId>template</artifactId>
+  <version>0.0.2-Releases</version>
+</dependency>
+```
+
 - 在启动类上添加`@EnableCrudTemplate`
 
 ```java
@@ -72,3 +83,24 @@ public interface IssuesMapper extends A<Integer, IssuesEntity> {
 
 - 测试用例: `com.example.webdemo.WebDemoApplicationTests`
 
+
+
+- 如果需要接入 Mybatis-Plus 将注解修改成乳香形式
+
+```
+@EnableCrudTemplate(daoType = DaoType.MYBATIS_PLUS)
+```
+
+- 并且注意, `A`接口一定要更在 `BaseMapper` 接口后面
+
+```java
+@Mapper
+@CacheKey(key = "issues", type = IssuesEntity.class)
+public interface IssuesMapper extends BaseMapper<IssuesEntity>, A<Integer, IssuesEntity> {
+
+  @Insert("   insert into issue(new_title)values(#{newTitle,jdbcType=VARCHAR})")
+  @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+  int insertSelective(IssuesEntity record);
+}
+
+```
