@@ -1,10 +1,11 @@
-package com.github.huifer.crud.service.mybatis;
+package com.github.huifer.crud.mybatis.service;
 
-import com.github.huifer.crud.daotype.DaoType;
-import com.github.huifer.crud.interfaces.CrudTemplate;
-import com.github.huifer.crud.interfaces.DaoTypeLabel;
-import com.github.huifer.crud.interfaces.id.IdInterface;
-import com.github.huifer.crud.operation.CommonDbOperation;
+
+import com.github.huifer.crud.common.daotype.DaoType;
+import com.github.huifer.crud.common.intefaces.CrudTemplate;
+import com.github.huifer.crud.common.intefaces.DaoTypeLabel;
+import com.github.huifer.crud.common.intefaces.id.IdInterface;
+import com.github.huifer.crud.common.operation.CommonDbOperation;
 import org.springframework.stereotype.Service;
 
 /**

@@ -1,4 +1,4 @@
-package com.github.huifer.crud.daotype;
+package com.github.huifer.crud.common.daotype;
 
 public enum DaoType {
     /**

@@ -1,11 +1,11 @@
-package com.github.huifer.crud.service.mybatis.plus;
+package com.github.huifer.crud.mybatis.plus.service;
 
-import com.github.huifer.crud.daotype.DaoType;
-import com.github.huifer.crud.interfaces.A;
-import com.github.huifer.crud.interfaces.CrudTemplate;
-import com.github.huifer.crud.interfaces.DaoTypeLabel;
-import com.github.huifer.crud.interfaces.id.IdInterface;
-import com.github.huifer.crud.operation.CommonDbOperation;
+import com.github.huifer.crud.common.daotype.DaoType;
+import com.github.huifer.crud.common.intefaces.CrudTemplate;
+import com.github.huifer.crud.common.intefaces.DaoTypeLabel;
+import com.github.huifer.crud.common.intefaces.id.IdInterface;
+import com.github.huifer.crud.common.operation.CommonDbOperation;
+import com.github.huifer.crud.mybatis.plus.interfaces.AforMybatisPlus;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -33,29 +33,33 @@ public class CrudTemplateForMybatisPlus<T, I extends IdInterface>
     return this.type;
   }
 
+
   @Override
   public boolean insert(T t) {
     type = t.getClass();
-    A a = super.getA();
+    AforMybatisPlus a = (AforMybatisPlus) super.getA();
     return a.insert(t) > 0;
   }
 
   @Override
   public T byId(I i, Class<?> c) {
     this.type = c;
-    A a = super.getA();
+    AforMybatisPlus a = (AforMybatisPlus) super.getA();
+
     return (T) a.selectById((Serializable) i.id());
   }
 
   @Override
   public boolean del(I i, Class<?> c) {
-    A a = super.getA();
+
+    AforMybatisPlus a = (AforMybatisPlus) super.getA();
+
     return a.deleteById((Serializable) i.id()) > 0;
   }
 
   @Override
   public boolean editor(I i, T t) {
-    A a = super.getA();
+    AforMybatisPlus a = (AforMybatisPlus) super.getA();
     return a.updateById(t) > 0;
   }
 
