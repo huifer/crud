@@ -5,7 +5,7 @@
   <parent>
     <artifactId>crud</artifactId>
     <groupId>com.github.huifer</groupId>
-    <version>0.0.3-Releases</version>
+    <version>0.0.4-Releases</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <modules>

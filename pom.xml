@@ -9,10 +9,10 @@
   </modules>
   <groupId>com.github.huifer</groupId>
   <artifactId>crud</artifactId>
-  <version>0.0.3-Releases</version>
-  <name>crud-template-parent</name>
+  <version>0.0.4-Releases</version>
+  <name>crud-template</name>
 
-  <description>crud template for com.github.huifer.mybatis.plus.mybatis and redis</description>
+  <description>crud template for mybatis and redis</description>
   <url>https://github.com/huifer/crud</url>
 
   <licenses>
