@@ -49,7 +49,7 @@ return user
 <dependency>
   <groupId>com.github.huifer</groupId>
   <artifactId>template</artifactId>
-  <version>0.0.3-Releases</version>
+  <version>0.0.4-Releases</version>
 </dependency>
 ```
 
