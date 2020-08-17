@@ -4,6 +4,11 @@ import com.github.huifer.crud.annotation.CacheKey;
 import com.github.huifer.crud.daotype.DaoType;
 import com.github.huifer.crud.daotype.DaoTypeThreadLocal;
 import com.github.huifer.crud.interfaces.A;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
@@ -13,12 +18,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 @Order
@@ -59,7 +58,6 @@ public class MapperRunner implements CommandLineRunner {
         Type[] genericInterfaces = mapper.getGenericInterfaces();
 
         if (genericInterfaces.length > 0) {
-
 
           Class<?> clazz = null;
           String key = null;
@@ -107,10 +105,12 @@ public class MapperRunner implements CommandLineRunner {
 
           key = annKey;
 
-        } else {
+        }
+        else {
           throw new RuntimeException("cache key not null , class+ " + mapper);
         }
-      } else {
+      }
+      else {
         throw new RuntimeException("cache type not matching，class = " + mapper);
       }
     }
@@ -130,23 +130,27 @@ public class MapperRunner implements CommandLineRunner {
     MapperAndCacheInfo cache = mapperAndCacheInfoMap
         .get(mapperAndCacheInfo.getClazz());
 
-    if (cache != null) {
-      throw new RuntimeException("Type already exists" + mapperAndCacheInfo.getMapperClazz());
-    }
+    if (cache == null) {
 
-    mapperAndCacheInfoMap.forEach(
-        (k, v) -> {
-          String key = v.getKey();
-          if (key.equals(mapperAndCacheInfo.getKey())) {
-            throw new RuntimeException(
-                "The same cache key value exists " + v.getMapperClazz() + "\t" + mapperAndCacheInfo
-                    .getMapperClazz());
+      mapperAndCacheInfoMap.forEach(
+          (k, v) -> {
+            String key = v.getKey();
+
+            if (!StringUtils.isEmpty(key)) {
+
+              if (key.equals(mapperAndCacheInfo.getKey())) {
+                throw new RuntimeException(
+                    "The same cache key value exists " + v.getMapperClazz() + "\t"
+                        + mapperAndCacheInfo
+                        .getMapperClazz());
+              }
+            }
           }
-        }
 
-    );
+      );
 
-    mapperAndCacheInfoMap.put(mapperAndCacheInfo.getClazz(), mapperAndCacheInfo);
+      mapperAndCacheInfoMap.put(mapperAndCacheInfo.getClazz(), mapperAndCacheInfo);
+    }
 
   }
 
