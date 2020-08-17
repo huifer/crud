@@ -6,7 +6,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>spring-boot-mybatis-example</module>
-    <module>spring-boot-jpa-example</module>
     <module>spring-boot-mybatis-plus-example</module>
   </modules>
   <parent>
