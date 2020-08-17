@@ -63,11 +63,6 @@
     <dependency>
       <groupId>com.github.huifer</groupId>
       <artifactId>template</artifactId>
-      <version>0.0.2-Releases</version>
-    </dependency>
-    <dependency>
-      <groupId>com.github.huifer</groupId>
-      <artifactId>template</artifactId>
       <version>0.0.4-Releases</version>
       <scope>compile</scope>
     </dependency>
