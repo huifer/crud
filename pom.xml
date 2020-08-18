@@ -9,7 +9,7 @@
   </modules>
   <groupId>com.github.huifer</groupId>
   <artifactId>crud</artifactId>
-  <version>0.0.4-Releases</version>
+  <version>0.0.4-SNAPSHOT</version>
   <name>crud-template</name>
 
   <description>crud template for mybatis and redis</description>

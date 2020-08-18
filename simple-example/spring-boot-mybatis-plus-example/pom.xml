@@ -45,7 +45,7 @@
     <dependency>
       <groupId>com.github.huifer</groupId>
       <artifactId>for-mybatis-plus</artifactId>
-      <version>0.0.4-Releases</version>
+      <version>0.0.4-SNAPSHOT</version>
     </dependency>
   </dependencies>
 

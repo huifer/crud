@@ -1,6 +1,7 @@
 package com.github.huifer.mybatis;
 
 import com.github.huifer.crud.common.intefaces.id.IntIdInterface;
+import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
 import com.github.huifer.crud.common.service.facade.CrudEntityFacade;
 import com.github.huifer.crud.common.service.facade.CrudFacade;
 import com.github.huifer.mybatis.entity.IssuesEntity;
