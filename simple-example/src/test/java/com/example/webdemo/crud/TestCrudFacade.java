@@ -28,6 +28,13 @@ class TestCrudFacade {
       }
     }, IssuesEntity.class);
 
+    issuesEntity.setNewTitle("asdasdasdsd");
+    issueCrud.editor(new IntIdInterface<Integer>() {
+      @Override
+      public Integer id() {
+        return 49;
+      }
+    }, issuesEntity);
   }
 
 }

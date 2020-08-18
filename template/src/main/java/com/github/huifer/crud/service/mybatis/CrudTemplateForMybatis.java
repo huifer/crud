@@ -44,12 +44,13 @@ public class CrudTemplateForMybatis<T, I extends IdInterface>
 
   @Override
   public boolean del(I i, Class<?> c) {
-
+    this.type = c;
     return super.del(i, c);
   }
 
   @Override
   public boolean editor(I i, T t) {
+    this.type = t.getClass();
     return super.update(t);
   }
 

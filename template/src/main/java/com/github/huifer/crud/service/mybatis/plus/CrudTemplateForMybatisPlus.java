@@ -6,9 +6,8 @@ import com.github.huifer.crud.interfaces.CrudTemplate;
 import com.github.huifer.crud.interfaces.DaoTypeLabel;
 import com.github.huifer.crud.interfaces.id.IdInterface;
 import com.github.huifer.crud.operation.CommonDbOperation;
-import org.springframework.stereotype.Service;
-
 import java.io.Serializable;
+import org.springframework.stereotype.Service;
 
 /**
  * mybatis-plus crud template
@@ -49,12 +48,14 @@ public class CrudTemplateForMybatisPlus<T, I extends IdInterface>
 
   @Override
   public boolean del(I i, Class<?> c) {
+    this.type = c;
     A a = super.getA();
     return a.deleteById((Serializable) i.id()) > 0;
   }
 
   @Override
   public boolean editor(I i, T t) {
+    this.type = t.getClass();
     A a = super.getA();
     return a.updateById(t) > 0;
   }
