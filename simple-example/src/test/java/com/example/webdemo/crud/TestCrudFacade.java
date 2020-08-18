@@ -1,4 +1,4 @@
-package com.example.webdemo;
+package com.example.webdemo.crud;
 
 import com.example.webdemo.entity.IssuesEntity;
 import com.example.webdemo.mapper.IssuesMapper;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WebDemoApplicationTests {
+class TestCrudFacade {
 
   @Autowired
   private CrudFacade<IssuesEntity, IntIdInterface<Integer>> issueCrud;

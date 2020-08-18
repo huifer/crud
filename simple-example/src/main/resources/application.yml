@@ -16,7 +16,7 @@ spring:
   redis:
     database: 0
     host: localhost
-    port: 32768
+    port: 6379
     max-active: 4
     max-wait: -1
     max-idle: 4

@@ -15,4 +15,7 @@ public interface IssuesMapper extends BaseMapper<IssuesEntity>, A<Integer, Issue
   @Insert("   insert into issue(new_title)values(#{newTitle,jdbcType=VARCHAR})")
   @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
   int insertSelective(IssuesEntity record);
+
+
+
 }

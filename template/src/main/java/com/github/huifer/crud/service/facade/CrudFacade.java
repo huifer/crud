@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CrudFacade<T extends BaseEntity, I extends IdInterface>
-    implements CrudTemplate<T, I>
-     {
+    implements CrudTemplate<T, I> {
+
   @Autowired
   @Qualifier("operationFactoryImpl")
   private OperationFactory factory;
@@ -47,18 +47,30 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
 
     RedisOperation redisOperation = factory.getRedisOperation();
 
+    boolean fromRedis = false;
+
+    T result = null;
+
     if (redisOperation != null) {
       redisOperation.setClass(c);
-      return (T) redisOperation.byId(i);
+      result = (T) redisOperation.byId(i);
+      if (result != null) {
+        fromRedis = true;
+      }
     }
 
     CrudTemplate dbOperation = factory.getDbOperation();
 
     if (dbOperation != null) {
-      return (T) dbOperation.byId(i, c);
+      result = (T) dbOperation.byId(i, c);
     }
 
-    return null;
+    if (redisOperation != null && result != null && !fromRedis) {
+      T finalResult = result;
+      redisOperation.insert(result, (StrIdInterface) () -> String.valueOf(finalResult.getId()));
+    }
+
+    return result;
   }
 
   public boolean del(I i, Class<?> c) {
@@ -76,7 +88,6 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
       redisOperation.setClass(c);
       del = dbOperation.del(i, c);
     }
-
 
     return del;
   }

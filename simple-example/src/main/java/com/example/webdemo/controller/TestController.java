@@ -1,33 +1,28 @@
-package com.example.webdemo;
+package com.example.webdemo.controller;
 
 import com.example.webdemo.entity.IssuesEntity;
-import com.example.webdemo.mapper.IssuesMapper;
 import com.github.huifer.crud.interfaces.id.IntIdInterface;
 import com.github.huifer.crud.service.facade.CrudFacade;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootTest
-class WebDemoApplicationTests {
+@RestController
+@RequestMapping
+public class TestController {
 
   @Autowired
   private CrudFacade<IssuesEntity, IntIdInterface<Integer>> issueCrud;
 
-
-  @Autowired
-  private IssuesMapper issuesMapper;
-
-  @Test
-  void contextLoads() {
-
+  @GetMapping("/test")
+  public Object test() {
     IssuesEntity issuesEntity = issueCrud.byId(new IntIdInterface<Integer>() {
       @Override
       public Integer id() {
         return 49;
       }
     }, IssuesEntity.class);
-
+    return issuesEntity;
   }
-
 }
