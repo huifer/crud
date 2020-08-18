@@ -53,8 +53,7 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
       e.printStackTrace();
     }
 
-    throw new NullPointerException("key is null");
-
+    return null;
   }
 
   private static String key(Object o, String filed, String method) {
