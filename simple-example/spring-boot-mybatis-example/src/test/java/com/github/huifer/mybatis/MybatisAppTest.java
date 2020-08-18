@@ -41,7 +41,7 @@ class MybatisAppTest {
   @Test
   void testEntity() {
     IssuesEntity issuesEntity = new IssuesEntity();
-    issuesEntity.setNewTitle("assda");
+    issuesEntity.setNewTitle("og");
 
     crudEntityFacade.insert(issuesEntity);
   }

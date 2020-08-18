@@ -75,6 +75,7 @@ public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
       cacheKeyEntity.setKey(annotation.key());
       cacheKeyEntity.setType(annotation.type());
       cacheKeyEntity.setIdFiled(annotation.idFiled());
+      cacheKeyEntity.setIdMethod(annotation.idMethod());
       put(cacheKeyEntity);
     }
   }

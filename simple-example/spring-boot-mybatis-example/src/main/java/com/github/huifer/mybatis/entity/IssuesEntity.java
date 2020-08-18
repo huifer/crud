@@ -3,14 +3,19 @@ package com.github.huifer.mybatis.entity;
 
 import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-@CacheKey(key = "tt", type = IssuesEntity.class, idFiled = "newTitle")
+@CacheKey(key = "tt", type = IssuesEntity.class, idFiled = "newTitle", idMethod = "ooo")
 public class IssuesEntity implements BaseEntity {
 
 
   private Integer id;
   private String newTitle;
 
+  private String ooo() {
+    return "OOO" + this.newTitle;
+  }
 
   public Integer getId() {
     return id;

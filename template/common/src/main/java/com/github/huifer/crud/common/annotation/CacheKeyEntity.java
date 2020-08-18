@@ -8,6 +8,15 @@ public class CacheKeyEntity {
   private String key;
   private Class<?> type;
   private String idFiled;
+  private String idMethod;
+
+  public String getIdMethod() {
+    return idMethod;
+  }
+
+  public void setIdMethod(String idMethod) {
+    this.idMethod = idMethod;
+  }
 
   public String getKey() {
     return key;

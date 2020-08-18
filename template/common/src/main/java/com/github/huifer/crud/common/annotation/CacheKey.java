@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.TYPE})
+@Target({ElementType.TYPE})
 public @interface CacheKey {
 
   String key();
@@ -21,4 +21,10 @@ public @interface CacheKey {
   Class<?> type();
 
   String idFiled() default "";
+
+
+  /**
+   * id 生成函数
+   */
+  String idMethod() default "";
 }
