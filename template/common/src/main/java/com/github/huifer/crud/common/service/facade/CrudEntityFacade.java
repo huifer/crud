@@ -61,14 +61,10 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
     String res = "";
     if (StringUtils.isEmpty(res)) {
       res = key(o, method);
-      return res;
     }
     Object k1 = getFiled(o, filed);
     res = String.valueOf(k1);
 
-    if (!StringUtils.isEmpty(res)) {
-      return res;
-    }
 
     if (StringUtils.isEmpty(res)) {
       throw new NullPointerException("key 不能为空");
