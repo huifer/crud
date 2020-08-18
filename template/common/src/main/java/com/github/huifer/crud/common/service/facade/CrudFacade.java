@@ -101,12 +101,7 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
 
     RedisOperation redisOperation = factory.getRedisOperation();
     if (redisOperation != null) {
-      redisOperation.del(new IdInterface() {
-        @Override
-        public Object id() {
-          return t.getId();
-        }
-      });
+      redisOperation.del(() -> t.getId());
     }
 
     CrudTemplate dbOperation = factory.getDbOperation();
@@ -117,12 +112,7 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
 
     if (redisOperation != null) {
       redisOperation.setClass(t.getClass());
-      redisOperation.update(new StrIdInterface() {
-        @Override
-        public String id() {
-          return String.valueOf(t.getId());
-        }
-      }, t);
+      redisOperation.update((StrIdInterface) () -> String.valueOf(t.getId()), t);
     }
 
     return editor;

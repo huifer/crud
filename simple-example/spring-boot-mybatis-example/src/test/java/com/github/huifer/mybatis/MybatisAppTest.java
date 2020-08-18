@@ -1,8 +1,10 @@
 package com.github.huifer.mybatis;
 
 import com.github.huifer.crud.common.intefaces.id.IntIdInterface;
+import com.github.huifer.crud.common.service.facade.CrudEntityFacade;
 import com.github.huifer.crud.common.service.facade.CrudFacade;
 import com.github.huifer.mybatis.entity.IssuesEntity;
+import org.hamcrest.core.Is;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,5 +32,16 @@ class MybatisAppTest {
     issuesEntity1.setNewTitle("update_test321312");
 
     crudFacade.editor(issuesEntity1);
+  }
+
+  @Autowired
+  private CrudEntityFacade<IssuesEntity> crudEntityFacade;
+
+  @Test
+  void testEntity() {
+    IssuesEntity issuesEntity = new IssuesEntity();
+    issuesEntity.setNewTitle("assda");
+
+    crudEntityFacade.insert(issuesEntity);
   }
 }

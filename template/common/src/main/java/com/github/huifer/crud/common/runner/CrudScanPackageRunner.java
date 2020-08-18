@@ -4,7 +4,6 @@ package com.github.huifer.crud.common.runner;
 import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.annotation.CacheKeyEntity;
 import com.github.huifer.crud.common.daotype.EnableCrudTemplateThreadLocal;
-import com.github.huifer.crud.common.runner.utils.ScanUtils;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +19,13 @@ public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
 
   public static Map<Class<?>, CacheKeyEntity> PACKAGE_CACHE_INFO = new HashMap<>();
 
+  public static String key(Class<?> clazz) {
+    return PACKAGE_CACHE_INFO.get(clazz).getKey();
+  }
+
+  public static CacheKeyEntity cacheKeyEntity(Class<?> clazz) {
+    return PACKAGE_CACHE_INFO.get(clazz);
+  }
 
   @Override
   public void run(String... args) throws Exception {
@@ -31,7 +37,9 @@ public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
     for (String pack : packages) {
       Set<Class<?>> classes = ScanUtils.getClasses(pack);
       for (Class<?> aClass : classes) {
-        keyEntity(aClass);
+        if (!aClass.isAnnotation() && !aClass.isEnum() && !aClass.isInterface()) {
+          keyEntity(aClass);
+        }
       }
     }
   }
@@ -47,7 +55,7 @@ public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
       Class<?> type = cacheKeyEntity.getType();
       CacheKeyEntity ck = PACKAGE_CACHE_INFO.get(type);
       if (ck != null) {
-        throw new RuntimeException("has a cache");
+        throw new RuntimeException("has a cache" + type);
       } else {
         PACKAGE_CACHE_INFO.put(cacheKeyEntity.getType(), cacheKeyEntity);
       }

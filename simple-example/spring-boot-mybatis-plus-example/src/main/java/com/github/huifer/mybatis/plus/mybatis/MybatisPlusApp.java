@@ -6,7 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableCrudTemplate(daoType = DaoType.MYBATIS_PLUS)
+@EnableCrudTemplate(daoType = DaoType.MYBATIS_PLUS, scanPackages = {
+    "com.github.huifer.mybatis.plus.mybatis"})
 public class MybatisPlusApp {
 
   public static void main(String[] args) {

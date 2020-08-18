@@ -1,4 +1,4 @@
-package com.github.huifer.crud.common.runner.utils;
+package com.github.huifer.crud.common.runner;
 
 import java.io.File;
 import java.io.IOException;
