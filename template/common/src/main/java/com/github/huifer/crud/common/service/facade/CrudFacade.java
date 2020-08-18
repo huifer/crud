@@ -1,7 +1,7 @@
 package com.github.huifer.crud.common.service.facade;
 
 
-import com.github.huifer.crud.common.daotype.DaoTypeThreadLocal;
+import com.github.huifer.crud.common.daotype.EnableCrudTemplateThreadLocal;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.CrudTemplate;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CrudFacade<T extends BaseEntity, I extends IdInterface>
-    implements CrudTemplate<T, I>
-     {
+    implements CrudTemplate<T, I> {
+
   @Autowired
   @Qualifier("operationFactoryImpl")
   private OperationFactory factory;
@@ -26,7 +26,7 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
 
     boolean insert = false;
 
-    OperationCollection factory = this.factory.factory(DaoTypeThreadLocal.getDaoType());
+    OperationCollection factory = this.factory.factory(EnableCrudTemplateThreadLocal.getDaoType());
     CrudTemplate dbOperation = factory.getDbOperation();
     if (dbOperation != null) {
       insert = dbOperation.insert(t);
@@ -43,27 +43,41 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
   }
 
   public T byId(I i, Class<?> c) {
-    OperationCollection factory = this.factory.factory(DaoTypeThreadLocal.getDaoType());
+    OperationCollection factory = this.factory.factory(EnableCrudTemplateThreadLocal.getDaoType());
 
     RedisOperation redisOperation = factory.getRedisOperation();
 
+    T result = null;
+
     if (redisOperation != null) {
       redisOperation.setClass(c);
-      return (T) redisOperation.byId(i);
+      result = (T) redisOperation.byId(i);
     }
 
     CrudTemplate dbOperation = factory.getDbOperation();
 
-    if (dbOperation != null) {
-      return (T) dbOperation.byId(i, c);
+    if (result == null) {
+
+      if (dbOperation != null) {
+        result = (T) dbOperation.byId(i, c);
+
+        if (result != null) {
+          if (redisOperation != null) {
+            redisOperation.setClass(c);
+            T finalResult = result;
+            redisOperation.insert(result,
+                (StrIdInterface) () -> String.valueOf(finalResult.getId()));
+          }
+        }
+      }
     }
 
-    return null;
+    return result;
   }
 
   public boolean del(I i, Class<?> c) {
     boolean del = false;
-    OperationCollection factory = this.factory.factory(DaoTypeThreadLocal.getDaoType());
+    OperationCollection factory = this.factory.factory(EnableCrudTemplateThreadLocal.getDaoType());
     RedisOperation redisOperation = factory.getRedisOperation();
     if (redisOperation != null) {
       redisOperation.setClass(c);
@@ -77,29 +91,38 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
       del = dbOperation.del(i, c);
     }
 
-
     return del;
   }
 
-  public boolean editor(I i, T t) {
+  public boolean editor(T t) {
 
     boolean editor = false;
-    OperationCollection factory = this.factory.factory(DaoTypeThreadLocal.getDaoType());
+    OperationCollection factory = this.factory.factory(EnableCrudTemplateThreadLocal.getDaoType());
 
     RedisOperation redisOperation = factory.getRedisOperation();
     if (redisOperation != null) {
-      redisOperation.del(i);
+      redisOperation.del(new IdInterface() {
+        @Override
+        public Object id() {
+          return t.getId();
+        }
+      });
     }
 
     CrudTemplate dbOperation = factory.getDbOperation();
 
     if (dbOperation != null) {
-      editor = dbOperation.editor(i, t);
+      editor = dbOperation.editor(t);
     }
 
     if (redisOperation != null) {
       redisOperation.setClass(t.getClass());
-      redisOperation.update(i, t);
+      redisOperation.update(new StrIdInterface() {
+        @Override
+        public String id() {
+          return String.valueOf(t.getId());
+        }
+      }, t);
     }
 
     return editor;

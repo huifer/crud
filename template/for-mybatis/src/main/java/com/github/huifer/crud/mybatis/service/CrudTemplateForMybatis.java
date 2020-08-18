@@ -50,7 +50,7 @@ public class CrudTemplateForMybatis<T, I extends IdInterface>
   }
 
   @Override
-  public boolean editor(I i, T t) {
+  public boolean editor( T t) {
     return super.update(t);
   }
 

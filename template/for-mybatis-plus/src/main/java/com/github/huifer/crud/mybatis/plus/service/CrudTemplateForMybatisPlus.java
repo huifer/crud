@@ -6,9 +6,8 @@ import com.github.huifer.crud.common.intefaces.DaoTypeLabel;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.operation.CommonDbOperation;
 import com.github.huifer.crud.mybatis.plus.interfaces.AforMybatisPlus;
-import org.springframework.stereotype.Service;
-
 import java.io.Serializable;
+import org.springframework.stereotype.Service;
 
 /**
  * com.github.huifer.mybatis.plus.mybatis-plus crud template
@@ -58,7 +57,7 @@ public class CrudTemplateForMybatisPlus<T, I extends IdInterface>
   }
 
   @Override
-  public boolean editor(I i, T t) {
+  public boolean editor( T t) {
     AforMybatisPlus a = (AforMybatisPlus) super.getA();
     return a.updateById(t) > 0;
   }

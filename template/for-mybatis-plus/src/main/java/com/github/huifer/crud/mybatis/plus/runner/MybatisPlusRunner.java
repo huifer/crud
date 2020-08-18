@@ -2,11 +2,14 @@ package com.github.huifer.crud.mybatis.plus.runner;
 
 import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.daotype.DaoType;
-import com.github.huifer.crud.common.daotype.DaoTypeThreadLocal;
+import com.github.huifer.crud.common.daotype.EnableCrudTemplateThreadLocal;
 import com.github.huifer.crud.common.intefaces.A;
 import com.github.huifer.crud.common.runner.CrudTemplateRunner;
 import com.github.huifer.crud.common.runner.MapperAndCacheInfo;
 import com.github.huifer.crud.mybatis.plus.interfaces.AforMybatisPlus;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Collection;
 import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
@@ -15,10 +18,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Collection;
 
 @Component
 @Order
@@ -29,7 +28,7 @@ public class MybatisPlusRunner extends CrudTemplateRunner implements CommandLine
 
   @Override
   public void run(String... args) throws Exception {
-    DaoType daoType = DaoTypeThreadLocal.getDaoType();
+    DaoType daoType = EnableCrudTemplateThreadLocal.getDaoType();
     this.afterRunner();
   }
 
@@ -51,7 +50,6 @@ public class MybatisPlusRunner extends CrudTemplateRunner implements CommandLine
         Type[] genericInterfaces = mapper.getGenericInterfaces();
 
         if (genericInterfaces.length > 0) {
-
 
           Class<?> clazz = null;
           String key = null;

@@ -4,6 +4,7 @@ import com.github.huifer.crud.common.runner.MapperAndCacheInfo;
 import com.github.huifer.crud.mybatis.plus.interfaces.AforMybatisPlus;
 
 public class MapperAndCacheInfoForMybatisPlus extends MapperAndCacheInfo {
+
   private AforMybatisPlus forMybatisPlus;
 
   public AforMybatisPlus getForMybatisPlus() {

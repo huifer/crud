@@ -22,6 +22,19 @@ public class MapperAndCacheInfo {
    */
   private Class<?> mapperClazz;
 
+  /**
+   * id 字段
+   */
+  private String idField;
+
+  public String getIdField() {
+    return idField;
+  }
+
+  public void setIdField(String idField) {
+    this.idField = idField;
+  }
+
   public Class<?> getMapperClazz() {
     return mapperClazz;
   }

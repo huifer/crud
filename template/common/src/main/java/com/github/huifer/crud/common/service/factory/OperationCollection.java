@@ -5,6 +5,7 @@ import com.github.huifer.crud.common.intefaces.CrudTemplate;
 import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
 
 public class OperationCollection {
+
   private CrudTemplate dbOperation;
   private RedisOperation redisOperation;
 

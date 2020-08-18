@@ -16,7 +16,9 @@ import org.springframework.util.StringUtils;
  * @param <I> id interface
  */
 @Service("crudHashTemplateForRedis")
-public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterface> implements RedisOperation<T, I> {
+public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterface> implements
+    RedisOperation<T, I> {
+
   Gson gson = new Gson();
   Class<?> type;
   @Autowired

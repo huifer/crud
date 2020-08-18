@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 @CacheKey(key = "issues", type = IssuesEntity.class)
-public interface IssuesMapper extends BaseMapper<IssuesEntity> , AforMybatisPlus<Integer,IssuesEntity> {
+public interface IssuesMapper extends BaseMapper<IssuesEntity>,
+    AforMybatisPlus<Integer, IssuesEntity> {
 
 }

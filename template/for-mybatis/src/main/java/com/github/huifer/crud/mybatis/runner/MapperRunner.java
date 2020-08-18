@@ -1,9 +1,11 @@
-package com.github.huifer.crud.runner;
+package com.github.huifer.crud.mybatis.runner;
 
-import com.github.huifer.crud.annotation.CacheKey;
-import com.github.huifer.crud.daotype.DaoType;
-import com.github.huifer.crud.daotype.DaoTypeThreadLocal;
-import com.github.huifer.crud.interfaces.A;
+import com.github.huifer.crud.common.annotation.CacheKey;
+import com.github.huifer.crud.common.daotype.DaoType;
+import com.github.huifer.crud.common.daotype.EnableCrudTemplateThreadLocal;
+import com.github.huifer.crud.common.intefaces.A;
+import com.github.huifer.crud.common.runner.CrudTemplateRunner;
+import com.github.huifer.crud.common.runner.MapperAndCacheInfo;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -21,9 +23,8 @@ import org.springframework.util.StringUtils;
 
 @Component
 @Order
-public class MapperRunner implements CommandLineRunner {
+public class MapperRunner extends CrudTemplateRunner implements CommandLineRunner {
 
-  public static final Map<Class<?>, MapperAndCacheInfo> mapperAndCacheInfoMap = new HashMap<>();
   @Autowired
   private ApplicationContext context;
   @Autowired
@@ -39,7 +40,7 @@ public class MapperRunner implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    DaoType daoType = DaoTypeThreadLocal.getDaoType();
+    DaoType daoType = EnableCrudTemplateThreadLocal.getDaoType();
     this.mybatis();
     System.out.println(daoType);
   }
@@ -94,7 +95,7 @@ public class MapperRunner implements CommandLineRunner {
    * @param cacheKey cacheKey
    * @param key      key
    * @param type     type
-   * @return key from {@link com.github.huifer.crud.annotation.CacheKey#key()}
+   * @return key
    */
   private String cacheKeyInfo(Class<?> mapper, CacheKey cacheKey, String key, Class<?> type) {
     if (cacheKey != null) {
@@ -105,12 +106,10 @@ public class MapperRunner implements CommandLineRunner {
 
           key = annKey;
 
-        }
-        else {
+        } else {
           throw new RuntimeException("cache key not null , class+ " + mapper);
         }
-      }
-      else {
+      } else {
         throw new RuntimeException("cache type not matching，class = " + mapper);
       }
     }
