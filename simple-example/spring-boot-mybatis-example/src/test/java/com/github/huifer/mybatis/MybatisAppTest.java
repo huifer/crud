@@ -26,8 +26,8 @@ class MybatisAppTest {
         return 63;
       }
     }, IssuesEntity.class);
-
-    issuesEntity1.setNewTitle("update_test");
+    System.out.println();
+    issuesEntity1.setNewTitle("update_test321312");
 
     crudFacade.editor(issuesEntity1);
   }

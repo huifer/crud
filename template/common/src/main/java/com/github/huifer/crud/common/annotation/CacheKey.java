@@ -20,5 +20,5 @@ public @interface CacheKey {
 
   Class<?> type();
 
-//  String idFiled();
+  String idFiled() default "";
 }
