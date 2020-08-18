@@ -66,7 +66,7 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
     Object k1 = getFiled(o, filed);
     res = String.valueOf(k1);
 
-    if (StringUtils.isEmpty(res)) {
+    if (!StringUtils.isEmpty(res)) {
       return res;
     }
 
