@@ -1,6 +1,6 @@
 package com.github.huifer.crud.common.service.facade;
 
-import com.github.huifer.crud.common.annotation.CacheKeyEntity;
+import com.github.huifer.crud.common.annotation.entity.CacheKeyEntity;
 import com.github.huifer.crud.common.intefaces.CrudTemplate;
 import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
 import com.github.huifer.crud.common.runner.CrudScanPackageRunner;

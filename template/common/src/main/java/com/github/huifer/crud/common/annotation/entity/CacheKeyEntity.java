@@ -1,4 +1,6 @@
-package com.github.huifer.crud.common.annotation;
+package com.github.huifer.crud.common.annotation.entity;
+
+import com.github.huifer.crud.common.annotation.CacheKey;
 
 /**
  * @see CacheKey

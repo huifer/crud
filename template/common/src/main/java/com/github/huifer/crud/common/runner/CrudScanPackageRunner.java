@@ -2,7 +2,7 @@ package com.github.huifer.crud.common.runner;
 
 
 import com.github.huifer.crud.common.annotation.CacheKey;
-import com.github.huifer.crud.common.annotation.CacheKeyEntity;
+import com.github.huifer.crud.common.annotation.entity.CacheKeyEntity;
 import com.github.huifer.crud.common.daotype.EnableCrudTemplateThreadLocal;
 import java.io.IOException;
 import java.util.HashMap;
