@@ -4,6 +4,7 @@ import com.github.huifer.crud.common.beans.EnableCrudTemplate;
 import com.github.huifer.crud.common.daotype.DaoType;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 @EnableCrudTemplate(daoType = DaoType.MYBATIS_PLUS, scanPackages = {
