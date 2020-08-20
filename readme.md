@@ -7,6 +7,7 @@
 - 单个表的数据库增删改查操作
 - 单个表的数据库+缓存的增删改查操作
 - 单个实体的缓存增删改查操作
+- [对象比较](./doc/object-compare.md)
 
 ## 如何使用
 - 在启动类上添加如下代码
@@ -98,6 +99,7 @@ public class IssuesEntity  {
   }
 }
 ```
+
 
 
 ## Contributers
