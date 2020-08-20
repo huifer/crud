@@ -23,7 +23,7 @@
   <parent>
     <artifactId>template</artifactId>
     <groupId>com.github.huifer</groupId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.5-Releases</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -32,7 +32,7 @@
     <dependency>
       <groupId>com.github.huifer</groupId>
       <artifactId>common</artifactId>
-      <version>0.0.4-SNAPSHOT</version>
+      <version>0.0.5-Releases</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
