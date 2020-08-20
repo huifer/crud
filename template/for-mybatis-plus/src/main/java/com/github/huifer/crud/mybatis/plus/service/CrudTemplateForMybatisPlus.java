@@ -19,6 +19,7 @@
 package com.github.huifer.crud.mybatis.plus.service;
 
 import com.github.huifer.crud.common.daotype.DaoType;
+import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.CrudTemplate;
 import com.github.huifer.crud.common.intefaces.DaoTypeLabel;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
@@ -28,8 +29,8 @@ import java.io.Serializable;
 import org.springframework.stereotype.Service;
 
 @Service("crudTemplateForMybatisPlus")
-public class CrudTemplateForMybatisPlus<T, I extends IdInterface>
-    extends CommonDbOperation<T, I>
+public class CrudTemplateForMybatisPlus<T extends BaseEntity, I extends IdInterface>
+    extends CommonDbOperation<T , I>
     implements CrudTemplate<T, I>, DaoTypeLabel {
 
   Class<?> type;
