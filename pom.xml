@@ -124,6 +124,7 @@
 <!--        <gpg.executable>D:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe</gpg.executable>-->
 <!--      </properties>-->
       <activation>
+        <jdk>[1.8,)</jdk>
         <property>
           <name>performRelease</name>
           <value>true</value>

@@ -23,6 +23,7 @@ import com.github.huifer.crud.common.daotype.DaoType;
 import com.github.huifer.crud.common.intefaces.A;
 import com.github.huifer.crud.common.runner.CrudTemplateRunner;
 import com.github.huifer.crud.common.runner.MapperAndCacheInfo;
+import com.github.huifer.crud.common.utils.EnableAttrManager;
 import com.github.huifer.crud.mybatis.plus.interfaces.AforMybatisPlus;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -45,7 +46,7 @@ public class MybatisPlusRunner extends CrudTemplateRunner implements CommandLine
 
   @Override
   public void run(String... args) throws Exception {
-    DaoType daoType = EnableCrudTemplateThreadLocal.getDaoType();
+    DaoType daoType = EnableAttrManager.getDaoType();
     this.afterRunner();
   }
 
