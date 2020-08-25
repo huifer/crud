@@ -21,17 +21,15 @@ package com.github.huifer.crud.common.runner;
 import com.github.huifer.crud.common.annotation.DiffAnnotation;
 import com.github.huifer.crud.common.annotation.HavingDiff;
 import com.github.huifer.crud.common.annotation.entity.DiffAnnotationEntity;
-import com.github.huifer.crud.common.utils.DiffThreadLocalHelper;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.github.huifer.crud.common.utils.EnableAttrManager;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+
+import java.lang.reflect.Field;
+import java.util.*;
 
 @Component
 public class DiffRunner implements CommandLineRunner, Ordered {
@@ -48,17 +46,21 @@ public class DiffRunner implements CommandLineRunner, Ordered {
 
   @Override
   public void run(String... args) throws Exception {
-    List<String> scan = DiffThreadLocalHelper.getScan();
-    if (!CollectionUtils.isEmpty(scan)) {
-      for (String packageStr : scan) {
-        if (!StringUtils.isEmpty(packageStr)) {
-          Set<Class<?>> classes = ScanUtils.getClasses(packageStr);
-          for (Class<?> aClass : classes) {
+    String[] scanPackageDiff = EnableAttrManager.getScanPackageDiff();
+    if (scanPackageDiff != null) {
 
-            Map<String, DiffAnnotationEntity> diffEntityMap = clazzWork(aClass);
-            if (!CollectionUtils.isEmpty(diffEntityMap)) {
+      List<String> scan = Arrays.asList(scanPackageDiff.clone());
+      if (!CollectionUtils.isEmpty(scan)) {
+        for (String packageStr : scan) {
+          if (!StringUtils.isEmpty(packageStr)) {
+            Set<Class<?>> classes = ScanUtils.getClasses(packageStr);
+            for (Class<?> aClass : classes) {
 
-              cache.put(aClass, diffEntityMap);
+              Map<String, DiffAnnotationEntity> diffEntityMap = clazzWork(aClass);
+              if (!CollectionUtils.isEmpty(diffEntityMap)) {
+
+                cache.put(aClass, diffEntityMap);
+              }
             }
           }
         }

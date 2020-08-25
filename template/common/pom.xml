@@ -23,7 +23,7 @@
   <parent>
     <artifactId>template</artifactId>
     <groupId>com.github.huifer</groupId>
-    <version>0.0.5-Releases</version>
+    <version>0.0.5-Releases-hot-fix</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 

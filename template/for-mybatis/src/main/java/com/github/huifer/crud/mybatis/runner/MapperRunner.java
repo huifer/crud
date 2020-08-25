@@ -20,15 +20,14 @@ package com.github.huifer.crud.mybatis.runner;
 
 import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.daotype.DaoType;
-import com.github.huifer.crud.common.daotype.EnableCrudTemplateThreadLocal;
 import com.github.huifer.crud.common.intefaces.A;
 import com.github.huifer.crud.common.runner.CrudTemplateRunner;
 import com.github.huifer.crud.common.runner.MapperAndCacheInfo;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+
+import com.github.huifer.crud.common.utils.EnableAttrManager;
 import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
@@ -58,7 +57,7 @@ public class MapperRunner extends CrudTemplateRunner implements CommandLineRunne
 
   @Override
   public void run(String... args) throws Exception {
-    DaoType daoType = EnableCrudTemplateThreadLocal.getDaoType();
+    DaoType daoType = EnableAttrManager.getDaoType();
     this.mybatis();
     System.out.println(daoType);
   }

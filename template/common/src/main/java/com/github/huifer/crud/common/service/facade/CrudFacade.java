@@ -19,7 +19,6 @@
 package com.github.huifer.crud.common.service.facade;
 
 
-import com.github.huifer.crud.common.daotype.EnableCrudTemplateThreadLocal;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.CrudTemplate;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
@@ -27,6 +26,7 @@ import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
 import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
 import com.github.huifer.crud.common.service.factory.OperationCollection;
 import com.github.huifer.crud.common.service.factory.OperationFactory;
+import com.github.huifer.crud.common.utils.EnableAttrManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,7 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
 
     boolean insert = false;
 
-    OperationCollection factory = this.factory.factory(EnableCrudTemplateThreadLocal.getDaoType());
+    OperationCollection factory = this.factory.factory(EnableAttrManager.getDaoType());
     CrudTemplate dbOperation = factory.getDbOperation();
     if (dbOperation != null) {
       insert = dbOperation.insert(t);
@@ -61,7 +61,7 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
   }
 
   public T byId(I i, Class<?> c) {
-    OperationCollection factory = this.factory.factory(EnableCrudTemplateThreadLocal.getDaoType());
+    OperationCollection factory = this.factory.factory(EnableAttrManager.getDaoType());
 
     RedisOperation redisOperation = factory.getRedisOperation();
 
@@ -95,7 +95,7 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
 
   public boolean del(I i, Class<?> c) {
     boolean del = false;
-    OperationCollection factory = this.factory.factory(EnableCrudTemplateThreadLocal.getDaoType());
+    OperationCollection factory = this.factory.factory(EnableAttrManager.getDaoType());
     RedisOperation redisOperation = factory.getRedisOperation();
     if (redisOperation != null) {
       redisOperation.setClass(c);
@@ -115,7 +115,7 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
   public boolean editor(T t) {
 
     boolean editor = false;
-    OperationCollection factory = this.factory.factory(EnableCrudTemplateThreadLocal.getDaoType());
+    OperationCollection factory = this.factory.factory(EnableAttrManager.getDaoType());
 
     RedisOperation redisOperation = factory.getRedisOperation();
     if (redisOperation != null) {

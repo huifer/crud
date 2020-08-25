@@ -20,8 +20,10 @@ package com.github.huifer.crud.common.importselector;
 
 import com.github.huifer.crud.common.beans.EnableCrudTemplate;
 import com.github.huifer.crud.common.daotype.DaoType;
-import com.github.huifer.crud.common.daotype.EnableCrudTemplateThreadLocal;
+
 import java.util.Map;
+
+import com.github.huifer.crud.common.utils.EnableAttrManager;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -38,9 +40,10 @@ public class CrudTemplateImportSelector implements ImportSelector {
       throw new NullPointerException("dao_type property cannot be empty!");
     }
     // setting dao type
-    EnableCrudTemplateThreadLocal.setDaoType(daoType);
+
+    EnableAttrManager.setDaoType(daoType);
     String[] scanPackages = (String[]) annotationAttributes.get("scanPackages");
-    EnableCrudTemplateThreadLocal.setScanPackages(scanPackages);
+    EnableAttrManager.setScanPackageDao(scanPackages);
 
     return new String[0];
   }

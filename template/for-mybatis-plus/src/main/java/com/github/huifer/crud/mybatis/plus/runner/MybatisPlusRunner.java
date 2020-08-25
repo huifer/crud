@@ -20,7 +20,6 @@ package com.github.huifer.crud.mybatis.plus.runner;
 
 import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.daotype.DaoType;
-import com.github.huifer.crud.common.daotype.EnableCrudTemplateThreadLocal;
 import com.github.huifer.crud.common.intefaces.A;
 import com.github.huifer.crud.common.runner.CrudTemplateRunner;
 import com.github.huifer.crud.common.runner.MapperAndCacheInfo;

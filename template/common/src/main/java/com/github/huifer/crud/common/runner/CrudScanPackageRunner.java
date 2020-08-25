@@ -21,15 +21,13 @@ package com.github.huifer.crud.common.runner;
 
 import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.annotation.entity.CacheKeyEntity;
-import com.github.huifer.crud.common.daotype.EnableCrudTemplateThreadLocal;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.github.huifer.crud.common.utils.EnableAttrManager;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.*;
 
 @Component
 public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
@@ -51,12 +49,16 @@ public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
   }
 
   private void scanPackages() throws IOException {
-    List<String> packages = EnableCrudTemplateThreadLocal.getPackages();
-    for (String pack : packages) {
-      Set<Class<?>> classes = ScanUtils.getClasses(pack);
-      for (Class<?> aClass : classes) {
-        if (!aClass.isAnnotation() && !aClass.isEnum() && !aClass.isInterface()) {
-          keyEntity(aClass);
+    String[] scanPackageDao = EnableAttrManager.getScanPackageDao();
+    if (scanPackageDao != null) {
+
+      String[] packages = scanPackageDao.clone();
+      for (String pack : packages) {
+        Set<Class<?>> classes = ScanUtils.getClasses(pack);
+        for (Class<?> aClass : classes) {
+          if (!aClass.isAnnotation() && !aClass.isEnum() && !aClass.isInterface()) {
+            keyEntity(aClass);
+          }
         }
       }
     }
