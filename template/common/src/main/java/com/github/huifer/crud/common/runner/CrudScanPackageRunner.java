@@ -35,6 +35,11 @@ import org.springframework.stereotype.Component;
 public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
 
 
+  /**
+   * key: 类型
+   * value: 注解 {@link CacheKey } 的实体对象
+   * 用来对普通实体进行缓存使用
+   */
   public static Map<Class<?>, CacheKeyEntity> PACKAGE_CACHE_INFO = new HashMap<>();
 
   public static String key(Class<?> clazz) {

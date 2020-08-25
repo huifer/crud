@@ -70,7 +70,7 @@ class MybatisAppTest {
 
     }, IssuesEntity.class);
 
-    issuesEntity66.setNewTitle("mybatis_editor_test");
+    issuesEntity66.setNewTitle("asfasf");
 
     crudFacade.editor(issuesEntity66);
   }

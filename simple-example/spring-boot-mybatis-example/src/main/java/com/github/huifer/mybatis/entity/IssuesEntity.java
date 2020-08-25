@@ -24,7 +24,7 @@ import com.github.huifer.crud.common.intefaces.BaseEntity;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-@CacheKey(key = "tt", type = IssuesEntity.class, idFiled = "newTitle")
+@CacheKey(key = "tt", type = IssuesEntity.class, idMethod = "newTitle")
 public class IssuesEntity implements BaseEntity {
 
 
