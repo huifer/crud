@@ -27,7 +27,7 @@
   </modules>
   <groupId>com.github.huifer</groupId>
   <artifactId>crud</artifactId>
-  <version>0.0.5-Releases</version>
+  <version>0.0.5-Releases-hot-fix</version>
   <name>crud-template</name>
 
   <description>crud template for mybatis and redis</description>
@@ -120,7 +120,11 @@
   <profiles>
     <profile>
       <id>release</id>
+<!--      <properties>-->
+<!--        <gpg.executable>D:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe</gpg.executable>-->
+<!--      </properties>-->
       <activation>
+        <jdk>[1.8,)</jdk>
         <property>
           <name>performRelease</name>
           <value>true</value>

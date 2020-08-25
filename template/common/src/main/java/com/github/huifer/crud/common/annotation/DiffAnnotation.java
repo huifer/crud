@@ -32,27 +32,32 @@ public @interface DiffAnnotation {
 
   /**
    * 字段中文名称
+   * @return 字段中文名称
    */
   String name() default "";
 
   /**
    * 消息,在这里使用[old]和[new]进行替换
+   * @return 消息
    */
   String msg() default "";
 
   /**
    * mapper class
+   * @return mapper.class
    */
   Class<?> mapper() default Object.class;
 
   /**
    * 链接对象
+   * @return object
    */
   Class<?> outJoin() default Object.class;
 
 
   /**
    * 外联对象需要显示的字符串属性,用来展示的连接字段
+   * @return out-field
    */
   String outField() default "";
 

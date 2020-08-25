@@ -22,7 +22,7 @@ import com.github.huifer.crud.common.annotation.entity.DiffAnnotationEntity;
 import com.github.huifer.crud.common.intefaces.diff.IDiffInterface;
 import com.github.huifer.crud.common.model.diff.DiffInfoEntity;
 import com.github.huifer.crud.common.runner.DiffRunner;
-import com.github.huifer.crud.common.utils.DiffThreadLocalHelper;
+import com.github.huifer.crud.common.utils.EnableAttrManager;
 import com.google.gson.Gson;
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -130,7 +130,7 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
                                                 new Target(sqlSession.getMapper(mapper))
       );
       Method selectById = mapperObj.getClass()
-          .getMethod(DiffThreadLocalHelper.getIdMethod(), Serializable.class);
+          .getMethod(EnableAttrManager.getByIdMethod(), Serializable.class);
       Object invoke = selectById.invoke(mapperObj, serializable);
       return getValue(invoke, filed, "");
     } catch (Exception e) {

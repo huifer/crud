@@ -35,11 +35,13 @@ public @interface EnableCrudTemplate {
 
   /**
    * DAO 的支持
+   * @return dao-type
    */
   DaoType daoType() default DaoType.MYBATIS;
 
   /**
    * 包扫描路径
+   * @return 包扫描路径
    */
   String[] scanPackages() default {};
 

@@ -35,6 +35,7 @@ public interface IDiffInterface<T> {
    * @param source  原始对象
    * @param target  修改后的对象
    * @param logTxId 日志id
+   * @return 比较结果
    */
   List<DiffInfoEntity> diff(T source, T target, String logTxId);
 }

@@ -25,7 +25,7 @@
     <dependency>
       <groupId>com.github.huifer</groupId>
       <artifactId>for-mybatis</artifactId>
-      <version>0.0.4-SNAPSHOT</version>
+      <version>0.0.5-Releases</version>
     </dependency>
 ```
 
@@ -50,7 +50,7 @@ public class IssuesEntity implements BaseEntity {}
     <dependency>
       <groupId>com.github.huifer</groupId>
       <artifactId>for-mybatis-plus</artifactId>
-      <version>0.0.4-SNAPSHOT</version>
+      <version>0.0.5-Releases</version>
     </dependency>
 ```
 

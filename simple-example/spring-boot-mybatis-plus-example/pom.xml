@@ -63,7 +63,7 @@
     <dependency>
       <groupId>com.github.huifer</groupId>
       <artifactId>for-mybatis-plus</artifactId>
-      <version>0.0.5-Releases</version>
+      <version>0.0.5-Releases-hot-fix</version>
     </dependency>
   </dependencies>
 
