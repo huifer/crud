@@ -89,11 +89,12 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
 
             String changeLog = changeData(oldValue, newValue, fromFiled.getMsg());
             DiffInfoEntity diffInfoEntity = genDiffInfoEntity(logTxId, nameCn, oldValue, newValue,
-                                                              changeLog);
+                changeLog);
             res.add(diffInfoEntity);
 
           }
-        } else {
+        }
+        else {
           String ov = mapper(mapper, oldValue, outField);
           String nv = mapper(mapper, newValue, outField);
           if (ov.equals(nv)) {
@@ -111,7 +112,7 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
   }
 
   private DiffInfoEntity genDiffInfoEntity(String logTxId, String nameCn, String ov, String nv,
-                                           String changeLog) {
+      String changeLog) {
     DiffInfoEntity diffInfoEntity = new DiffInfoEntity();
     diffInfoEntity.setField(nameCn);
     diffInfoEntity.setMsg(changeLog);
@@ -126,8 +127,8 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
     try {
       Class<?> aClass = Class.forName(mapper.getName());
       Object mapperObj = Proxy.newProxyInstance(aClass.getClassLoader(),
-                                                new Class[]{mapper},
-                                                new Target(sqlSession.getMapper(mapper))
+          new Class[]{mapper},
+          new Target(sqlSession.getMapper(mapper))
       );
       Method selectById = mapperObj.getClass()
           .getMethod(EnableAttrManager.getByIdMethod(), Serializable.class);

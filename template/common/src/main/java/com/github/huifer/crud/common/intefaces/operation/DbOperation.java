@@ -25,6 +25,7 @@ import com.github.huifer.crud.common.intefaces.id.IdInterface;
 
 /**
  * 数据库操作
+ *
  * @param <T> 实体
  * @param <I> id接口
  */

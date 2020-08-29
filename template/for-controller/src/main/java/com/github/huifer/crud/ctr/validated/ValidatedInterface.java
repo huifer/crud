@@ -28,8 +28,11 @@ public interface ValidatedInterface<T> {
   Class<?> entityClass();
 
   void validateDelete(T t);
+
   void validateAdd(T t);
+
   void validateById(T t);
+
   void validateEditor(T t);
 
 }

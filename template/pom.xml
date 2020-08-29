@@ -18,13 +18,22 @@
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>crud</artifactId>
-    <groupId>com.github.huifer</groupId>
-    <version>0.0.5-Releases-hot-fix</version>
-  </parent>
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>template</artifactId>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.8.1</version>
+      </plugin>
+    </plugins>
+  </build>
   <modelVersion>4.0.0</modelVersion>
   <modules>
     <module>common</module>
@@ -32,28 +41,19 @@
     <module>for-mybatis</module>
     <module>for-controller</module>
   </modules>
+
+  <name>crud-template</name>
+  <packaging>pom</packaging>
+  <parent>
+    <artifactId>crud</artifactId>
+    <groupId>com.github.huifer</groupId>
+    <version>0.0.5-Releases-hot-fix</version>
+  </parent>
+
+
   <properties>
     <java.version>8</java.version>
-    <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
-
-  <artifactId>template</artifactId>
-  <packaging>pom</packaging>
-  <name>crud-template</name>
-
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

@@ -35,12 +35,14 @@ public @interface EnableDiff {
 
   /**
    * 包扫描路径
+   *
    * @return 包扫描路径
    */
   String[] scanPackages() default {};
 
   /**
    * mapper根据id查询的函数名称
+   *
    * @return mapper根据id查询的函数名称
    */
   String byIdMethod() default "selectById";

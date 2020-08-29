@@ -33,24 +33,28 @@ public @interface CacheKey {
 
   /**
    * redis-hash-key
+   *
    * @return redis-hash-key
    */
   String key();
 
   /**
    * 实体对象.class
+   *
    * @return entity.class
    */
   Class<?> type();
 
   /**
    * id字段(从实体对象中获取)
+   *
    * @return idFiled
    */
   String idFiled() default "";
 
   /**
    * id方法(从实体对象中获取)
+   *
    * @return id-method
    */
   String idMethod() default "";

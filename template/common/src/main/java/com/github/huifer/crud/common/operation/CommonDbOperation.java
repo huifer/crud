@@ -26,7 +26,8 @@ import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.operation.DbOperation;
 import com.github.huifer.crud.common.runner.CrudTemplateRunner;
 
-public class CommonDbOperation<T extends BaseEntity, I extends IdInterface> implements DbOperation<T, I> {
+public class CommonDbOperation<T extends BaseEntity, I extends IdInterface> implements
+    DbOperation<T, I> {
 
   Class<?> type;
 

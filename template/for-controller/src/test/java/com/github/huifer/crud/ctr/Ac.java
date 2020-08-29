@@ -21,6 +21,4 @@ package com.github.huifer.crud.ctr;
 public class Ac {
 
 
-
-
 }

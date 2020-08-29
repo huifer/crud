@@ -51,7 +51,8 @@ public class ScanUtils {
           String filePath = URLDecoder.decode(url.getFile(), "UTF-8");
           findAndAddClassesInPackageByFile(packageName, filePath,
               recursive, classes);
-        } else if ("jar".equals(protocol)) {
+        }
+        else if ("jar".equals(protocol)) {
           JarFile jar;
           try {
             jar = ((JarURLConnection) url.openConnection())
@@ -110,7 +111,8 @@ public class ScanUtils {
           findAndAddClassesInPackageByFile(packageName + "."
                   + file.getName(), file.getAbsolutePath(), recursive,
               classes);
-        } else {
+        }
+        else {
           String className = file.getName().substring(0,
               file.getName().length() - 6);
           try {

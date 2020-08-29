@@ -115,10 +115,12 @@ public class MybatisPlusRunner extends CrudTemplateRunner implements CommandLine
 
           key = annKey;
 
-        } else {
+        }
+        else {
           throw new RuntimeException("cache key not null , class+ " + mapper);
         }
-      } else {
+      }
+      else {
         throw new RuntimeException("cache type not matching，class = " + mapper);
       }
     }
@@ -146,13 +148,14 @@ public class MybatisPlusRunner extends CrudTemplateRunner implements CommandLine
     mapperAndCacheInfoMap.forEach(
         (k, v) -> {
           String key = v.getKey();
-            if (!StringUtils.isEmpty(key)) {
-                if (key.equals(mapperAndCacheInfo.getKey())) {
-                    throw new RuntimeException(
-                            "The same cache key value exists " + v.getMapperClazz() + "\t" + mapperAndCacheInfo
-                                    .getMapperClazz());
-                }
+          if (!StringUtils.isEmpty(key)) {
+            if (key.equals(mapperAndCacheInfo.getKey())) {
+              throw new RuntimeException(
+                  "The same cache key value exists " + v.getMapperClazz() + "\t"
+                      + mapperAndCacheInfo
+                      .getMapperClazz());
             }
+          }
         }
 
     );

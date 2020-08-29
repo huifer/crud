@@ -22,21 +22,20 @@ package com.github.huifer.crud.common.runner;
 import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.annotation.entity.CacheKeyEntity;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.util.*;
 
 @Component
 public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
 
 
   /**
-   * key: 类型
-   * value: 注解 {@link CacheKey } 的实体对象
-   * 用来对普通实体进行缓存使用
+   * key: 类型 value: 注解 {@link CacheKey } 的实体对象 用来对普通实体进行缓存使用
    */
   public static Map<Class<?>, CacheKeyEntity> PACKAGE_CACHE_INFO = new HashMap<>();
 
@@ -81,7 +80,8 @@ public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
       CacheKeyEntity ck = PACKAGE_CACHE_INFO.get(type);
       if (ck != null) {
         throw new RuntimeException("has a cache" + type);
-      } else {
+      }
+      else {
         PACKAGE_CACHE_INFO.put(cacheKeyEntity.getType(), cacheKeyEntity);
       }
     }
