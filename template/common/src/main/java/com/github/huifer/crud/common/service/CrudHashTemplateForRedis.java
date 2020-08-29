@@ -82,7 +82,11 @@ public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterfac
 
 
   public String key() {
-    MapperAndCacheInfo mapperAndCacheInfo = CrudTemplateRunner.getMapperAndCacheInfo(type());
+    Class type = type();
+    if (type == null) {
+      return "";
+    }
+    MapperAndCacheInfo mapperAndCacheInfo = CrudTemplateRunner.getMapperAndCacheInfo(type);
     return mapperAndCacheInfo.getKey();
   }
 
