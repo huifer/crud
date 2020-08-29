@@ -120,9 +120,9 @@
   <profiles>
     <profile>
       <id>release</id>
-<!--      <properties>-->
-<!--        <gpg.executable>D:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe</gpg.executable>-->
-<!--      </properties>-->
+      <properties>
+        <gpg.executable>D:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe</gpg.executable>
+      </properties>
       <activation>
         <jdk>[1.8,)</jdk>
         <property>

@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
 
 @Service("crudTemplateForMybatisPlus")
 public class CrudTemplateForMybatisPlus<T extends BaseEntity, I extends IdInterface>
-    extends CommonDbOperation<T , I>
+    extends CommonDbOperation<T, I>
     implements CrudTemplate<T, I>, DaoTypeLabel {
 
   Class<?> type;
@@ -63,14 +63,15 @@ public class CrudTemplateForMybatisPlus<T extends BaseEntity, I extends IdInterf
 
   @Override
   public boolean del(I i, Class<?> c) {
-
+    this.type = c;
     AforMybatisPlus a = (AforMybatisPlus) super.getA();
 
     return a.deleteById((Serializable) i.id()) > 0;
   }
 
   @Override
-  public boolean editor( T t) {
+  public boolean editor(T t) {
+    this.type = t.getClass();
     AforMybatisPlus a = (AforMybatisPlus) super.getA();
     return a.updateById(t) > 0;
   }

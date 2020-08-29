@@ -146,11 +146,13 @@ public class MybatisPlusRunner extends CrudTemplateRunner implements CommandLine
     mapperAndCacheInfoMap.forEach(
         (k, v) -> {
           String key = v.getKey();
-          if (key.equals(mapperAndCacheInfo.getKey())) {
-            throw new RuntimeException(
-                "The same cache key value exists " + v.getMapperClazz() + "\t" + mapperAndCacheInfo
-                    .getMapperClazz());
-          }
+            if (!StringUtils.isEmpty(key)) {
+                if (key.equals(mapperAndCacheInfo.getKey())) {
+                    throw new RuntimeException(
+                            "The same cache key value exists " + v.getMapperClazz() + "\t" + mapperAndCacheInfo
+                                    .getMapperClazz());
+                }
+            }
         }
 
     );
