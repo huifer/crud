@@ -22,6 +22,7 @@ import com.github.huifer.crud.ctr.annotation.CrudController;
 import com.github.huifer.crud.ctr.entity.AbsEntity;
 import java.io.Serializable;
 
+// /rest/project/asdasda + 4 个方法
 @CrudController(uri = "/project/asdasda", idType = Integer.class)
 public class ProjectInt extends AbsEntity implements Serializable {
 

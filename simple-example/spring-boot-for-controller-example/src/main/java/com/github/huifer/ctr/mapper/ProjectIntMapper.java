@@ -18,20 +18,18 @@
 
 package com.github.huifer.ctr.mapper;
 
+import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.intefaces.A;
 import com.github.huifer.ctr.entity.ProjectInt;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
+@CacheKey(type = ProjectInt.class,key = "asdc")
 public interface ProjectIntMapper extends A<Integer, ProjectInt> {
 
   @Override
   @Insert("INSERT INTO `project_int`(`name`) VALUES (#{name} ) ")
+  @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
   int insertSelective(ProjectInt record);
 
   @Override

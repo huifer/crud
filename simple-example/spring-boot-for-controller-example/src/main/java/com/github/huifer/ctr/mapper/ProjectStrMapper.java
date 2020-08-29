@@ -30,7 +30,7 @@ import org.apache.ibatis.annotations.Update;
 public interface ProjectStrMapper extends A<String, ProjectStr> {
 
   @Override
-  @Insert("INSERT INTO `dest`.`project_str`(`name`) VALUES (#{name} ) ")
+  @Insert("INSERT INTO `dest`.`project_str`(`name`,`id`) VALUES (#{name},#{id} ) ")
   int insertSelective(ProjectStr record);
 
   @Override
