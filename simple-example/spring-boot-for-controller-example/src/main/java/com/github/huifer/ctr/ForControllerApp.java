@@ -23,11 +23,10 @@ import com.github.huifer.crud.common.daotype.DaoType;
 import com.github.huifer.crud.ctr.beans.EnableCrudController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @EnableCrudController(scanPackages = {"com.github.huifer.ctr"})
-@EnableCrudTemplate(daoType= DaoType.MYBATIS)
+@EnableCrudTemplate(daoType = DaoType.MYBATIS)
 public class ForControllerApp {
 
   public static void main(String[] args) {

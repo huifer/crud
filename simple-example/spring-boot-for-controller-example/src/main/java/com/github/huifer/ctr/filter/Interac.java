@@ -16,22 +16,18 @@
  *
  */
 
-package com.github.huifer.ctr.entity;
+package com.github.huifer.ctr.filter;
 
-import com.github.huifer.crud.ctr.annotation.CrudController;
-import com.github.huifer.crud.ctr.entity.AbsEntity;
-import java.io.Serializable;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.servlet.HandlerInterceptor;
 
-@CrudController(uri = "/project/asdasda", idType = Integer.class)
-public class ProjectInt extends AbsEntity implements Serializable {
 
-  private String name;
+public class Interac implements HandlerInterceptor {
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
+  @Override
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+      throws Exception {
+    return true;
   }
 }

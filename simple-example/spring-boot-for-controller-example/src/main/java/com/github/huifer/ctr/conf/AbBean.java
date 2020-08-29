@@ -16,22 +16,18 @@
  *
  */
 
-package com.github.huifer.ctr.entity;
+package com.github.huifer.ctr.conf;
 
-import com.github.huifer.crud.ctr.annotation.CrudController;
-import com.github.huifer.crud.ctr.entity.AbsEntity;
-import java.io.Serializable;
+import com.github.huifer.ctr.filter.Interac;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@CrudController(uri = "/project/asdasda", idType = Integer.class)
-public class ProjectInt extends AbsEntity implements Serializable {
+@Configuration
+public class AbBean implements WebMvcConfigurer {
 
-  private String name;
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new Interac()).addPathPatterns("/**");
   }
 }
