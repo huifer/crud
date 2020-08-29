@@ -39,8 +39,8 @@ public interface ProjectIntMapper extends A<Integer, ProjectInt> {
   ProjectInt selectByPrimaryKey(@Param("id") Integer integer);
 
   @Override
-  @Delete("DELETE FROM `dest`.`project_int` WHERE `id` = #{integer} ")
-  int deleteByPrimaryKey(Integer integer);
+  @Delete("DELETE FROM `dest`.`project_int` WHERE `id` = #{id} ")
+  int deleteByPrimaryKey(@Param("id") Integer integer);
 
   @Override
   @Update("UPDATE `dest`.`project_int` SET `name` = #{name}  WHERE `id`= #{id}  ")

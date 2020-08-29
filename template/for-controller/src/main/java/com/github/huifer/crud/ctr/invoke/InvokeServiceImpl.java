@@ -95,7 +95,7 @@ public class InvokeServiceImpl implements
       return OpEnums.BY_ID;
 
     }
-    else if (url.endsWith("delete")) {
+    else if (url.endsWith("del")) {
       return OpEnums.DELETE;
 
     }
