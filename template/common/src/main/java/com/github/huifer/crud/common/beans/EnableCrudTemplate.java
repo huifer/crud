@@ -20,6 +20,7 @@ package com.github.huifer.crud.common.beans;
 
 import com.github.huifer.crud.common.daotype.DaoType;
 import com.github.huifer.crud.common.importselector.CrudTemplateImportSelector;
+import com.github.huifer.crud.common.model.enums.JsonEnums;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -35,14 +36,18 @@ public @interface EnableCrudTemplate {
 
   /**
    * DAO 的支持
+   *
    * @return dao-type
    */
   DaoType daoType() default DaoType.MYBATIS;
 
   /**
    * 包扫描路径
+   *
    * @return 包扫描路径
    */
   String[] scanPackages() default {};
+
+  JsonEnums jsonEnums() default JsonEnums.GSON;
 
 }

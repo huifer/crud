@@ -43,7 +43,6 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
 
   private static final String OLD_PLACEHOLDER = "old";
   private static final String NEW_PLACEHOLDER = "new";
-  Gson gson = new Gson();
   @Autowired
   private ApplicationContext context;
   @Autowired

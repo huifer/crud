@@ -20,10 +20,9 @@ package com.github.huifer.crud.common.importselector;
 
 import com.github.huifer.crud.common.beans.EnableCrudTemplate;
 import com.github.huifer.crud.common.daotype.DaoType;
-
-import java.util.Map;
-
+import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
+import java.util.Map;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -45,6 +44,8 @@ public class CrudTemplateImportSelector implements ImportSelector {
     String[] scanPackages = (String[]) annotationAttributes.get("scanPackages");
     EnableAttrManager.setScanPackageDao(scanPackages);
 
+    JsonEnums jsonEnums = (JsonEnums) annotationAttributes.get("jsonEnums");
+    EnableAttrManager.setJsonEnums(jsonEnums);
     return new String[0];
   }
 }

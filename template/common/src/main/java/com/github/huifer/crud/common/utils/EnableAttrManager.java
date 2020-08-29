@@ -1,9 +1,11 @@
 package com.github.huifer.crud.common.utils;
 
 import com.github.huifer.crud.common.daotype.DaoType;
+import com.github.huifer.crud.common.model.enums.JsonEnums;
 
 public class EnableAttrManager {
 
+  private static JsonEnums jsonEnums = null;
   private static DaoType daoType = null;
   private static String[] scanPackageDao = null;
   private static String byIdMethod = null;
@@ -11,6 +13,14 @@ public class EnableAttrManager {
 
   private EnableAttrManager() {
 
+  }
+
+  public static JsonEnums getJsonEnums() {
+    return jsonEnums;
+  }
+
+  public static void setJsonEnums(JsonEnums jsonEnums) {
+    EnableAttrManager.jsonEnums = jsonEnums;
   }
 
   public static String[] getScanPackageDao() {

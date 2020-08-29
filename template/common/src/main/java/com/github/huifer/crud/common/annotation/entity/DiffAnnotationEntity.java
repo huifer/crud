@@ -18,8 +18,9 @@
 
 package com.github.huifer.crud.common.annotation.entity;
 
-import com.github.huifer.crud.common.annotation.DiffAnnotation;
-
+/**
+ * entity for {@link com.github.huifer.crud.common.annotation.DiffAnnotation}
+ */
 public class DiffAnnotationEntity {
 
   /**

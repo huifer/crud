@@ -29,7 +29,7 @@ public class InvokeServiceImpl implements
     }
     //  验证器 com.github.huifer.crud.ctr.validated.ValidatedInterface
     OpEnums opEnums = conv(url);
-    validatedScanService.invoke(param, resType,opEnums);
+    validatedScanService.invoke(param, resType, opEnums);
     boolean operation = false;
     Object returnString = null;
     if (url.endsWith("add")) {

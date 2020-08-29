@@ -19,6 +19,9 @@
 package com.github.huifer.crud.common.annotation.entity;
 
 
+/**
+ * entity for {@link com.github.huifer.crud.common.annotation.CacheKey}
+ */
 public class CacheKeyEntity {
 
   /**
