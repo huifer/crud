@@ -16,20 +16,38 @@
  *
  */
 
-package com.github.huifer.crud.common.beans;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+package com.github.huifer.crud.ctr.annotation.entity;
 
 /**
- * bean for ComponentScan
+ * @see com.github.huifer.crud.ctr.annotation.CrudController
  */
-@ComponentScan(basePackages = {"com.github.huifer.*"})
-public class Beans {
+public class CrudControllerEntity {
 
-  @Autowired
-  private ApplicationContext context;
+  private String uri;
+  private Class<?> type;
+  private Class<?> idType;
 
+  public Class<?> getIdType() {
+    return idType;
+  }
 
+  public void setIdType(Class<?> idType) {
+    this.idType = idType;
+  }
+
+  public String getUri() {
+    return uri;
+  }
+
+  public void setUri(String uri) {
+    this.uri = uri;
+  }
+
+  public Class<?> getType() {
+    return type;
+  }
+
+  public void setType(Class<?> type) {
+    this.type = type;
+  }
 }

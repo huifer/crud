@@ -30,6 +30,7 @@
     <module>common</module>
     <module>for-mybatis-plus</module>
     <module>for-mybatis</module>
+    <module>for-controller</module>
   </modules>
   <properties>
     <java.version>8</java.version>

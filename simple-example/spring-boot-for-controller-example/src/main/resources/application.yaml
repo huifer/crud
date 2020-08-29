@@ -1,0 +1,8 @@
+server:
+  port: 9123
+spring:
+  datasource:
+    password: a12345
+    username: huifer
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.98.225.144:3306/dest?useUnicode=true&characterEncoding=utf8&useSSL=false

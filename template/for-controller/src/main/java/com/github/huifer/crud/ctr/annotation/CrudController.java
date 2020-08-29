@@ -16,20 +16,22 @@
  *
  */
 
-package com.github.huifer.crud.common.beans;
+package com.github.huifer.crud.ctr.annotation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-/**
- * bean for ComponentScan
- */
-@ComponentScan(basePackages = {"com.github.huifer.*"})
-public class Beans {
+@Documented
+@Inherited
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
+public @interface CrudController {
 
-  @Autowired
-  private ApplicationContext context;
+  String uri();
 
-
+  Class<?> idType();
 }

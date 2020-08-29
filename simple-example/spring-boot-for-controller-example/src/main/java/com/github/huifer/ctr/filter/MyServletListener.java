@@ -16,20 +16,20 @@
  *
  */
 
-package com.github.huifer.crud.common.beans;
+package com.github.huifer.ctr.filter;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
-/**
- * bean for ComponentScan
- */
-@ComponentScan(basePackages = {"com.github.huifer.*"})
-public class Beans {
+public class MyServletListener implements ServletContextListener {
+    
+    @Override
+    public void contextInitialized (ServletContextEvent sce) {
+        System.out.println("from ServletContextListener: " +
+                                     " context initialized");
+    }
 
-  @Autowired
-  private ApplicationContext context;
-
-
+    @Override
+    public void contextDestroyed (ServletContextEvent sce) {
+    }
 }

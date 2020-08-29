@@ -23,24 +23,22 @@ import com.github.huifer.crud.common.daotype.DaoType;
 import com.github.huifer.crud.common.intefaces.A;
 import com.github.huifer.crud.common.runner.CrudTemplateRunner;
 import com.github.huifer.crud.common.runner.MapperAndCacheInfo;
+import com.github.huifer.crud.common.utils.EnableAttrManager;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
-
-import com.github.huifer.crud.common.utils.EnableAttrManager;
 import org.apache.ibatis.binding.MapperRegistry;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.annotation.Order;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 @Component
-@Order
-public class MapperRunner extends CrudTemplateRunner implements CommandLineRunner {
+public class MapperRunner extends CrudTemplateRunner implements CommandLineRunner, Ordered {
 
   @Autowired
   private ApplicationContext context;
@@ -53,6 +51,11 @@ public class MapperRunner extends CrudTemplateRunner implements CommandLineRunne
 
   public static MapperAndCacheInfo getMapperAndCacheInfo(Class clazz) {
     return mapperAndCacheInfoMap.get(clazz);
+  }
+
+  @Override
+  public int getOrder() {
+    return Ordered.LOWEST_PRECEDENCE;
   }
 
   @Override
@@ -123,10 +126,12 @@ public class MapperRunner extends CrudTemplateRunner implements CommandLineRunne
 
           key = annKey;
 
-        } else {
+        }
+        else {
           throw new RuntimeException("cache key not null , class+ " + mapper);
         }
-      } else {
+      }
+      else {
         throw new RuntimeException("cache type not matching，class = " + mapper);
       }
     }

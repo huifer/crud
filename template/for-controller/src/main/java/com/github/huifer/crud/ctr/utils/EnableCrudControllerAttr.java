@@ -16,20 +16,17 @@
  *
  */
 
-package com.github.huifer.crud.common.beans;
+package com.github.huifer.crud.ctr.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+public class EnableCrudControllerAttr {
 
-/**
- * bean for ComponentScan
- */
-@ComponentScan(basePackages = {"com.github.huifer.*"})
-public class Beans {
+  private static String[] scanPackageCrud = null;
 
-  @Autowired
-  private ApplicationContext context;
+  public static String[] getScanPackageCrud() {
+    return scanPackageCrud;
+  }
 
-
+  public static void setScanPackageCrud(String[] scanPackageCrud) {
+    EnableCrudControllerAttr.scanPackageCrud = scanPackageCrud;
+  }
 }

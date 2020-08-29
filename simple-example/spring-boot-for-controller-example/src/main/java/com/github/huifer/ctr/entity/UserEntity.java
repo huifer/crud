@@ -16,20 +16,32 @@
  *
  */
 
-package com.github.huifer.crud.common.beans;
+package com.github.huifer.ctr.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+import com.github.huifer.crud.ctr.annotation.CrudController;
+import com.github.huifer.crud.ctr.entity.AbsEntity;
+import java.io.Serializable;
 
-/**
- * bean for ComponentScan
- */
-@ComponentScan(basePackages = {"com.github.huifer.*"})
-public class Beans {
+@CrudController(uri = "/user", idType = Integer.class)
+public class UserEntity extends AbsEntity implements Serializable {
 
-  @Autowired
-  private ApplicationContext context;
+  private String name;
+  private Integer age;
 
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Integer getAge() {
+    return age;
+  }
+
+  public void setAge(Integer age) {
+    this.age = age;
+  }
 }
