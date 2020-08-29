@@ -6,5 +6,5 @@ import java.io.PrintWriter;
 public interface InvokeService {
 
   void invoke(PrintWriter writer, String url, AbsEntity param, Class<?> resType,
-      Class<?> idType);
+      Class<?> idType) throws Exception;
 }

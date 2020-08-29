@@ -48,7 +48,11 @@ public class OcaServlet extends HttpServlet {
 
     ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
     InvokeService bean = applicationContext.getBean(InvokeService.class);
-    bean.invoke(writer, requestURI, (AbsEntity) requestBody, resType,idType);
+    try {
+      bean.invoke(writer, requestURI, (AbsEntity) requestBody, resType, idType);
+    } catch (Exception e) {
+      writer.write(gson.toJson(ResultVO.failed(e.getMessage())));
+    }
 
   }
 
