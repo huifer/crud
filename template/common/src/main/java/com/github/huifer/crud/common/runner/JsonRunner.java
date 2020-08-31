@@ -18,11 +18,14 @@
 
 package com.github.huifer.crud.common.runner;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.huifer.crud.common.conf.json.GsonConfigSetting;
+import com.github.huifer.crud.common.conf.json.JackJsonConfigSetting;
 import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.utils.Constant;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
 import com.github.huifer.crud.common.utils.GsonSingleManager;
+import com.github.huifer.crud.common.utils.JackJsonSingleManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
@@ -55,11 +58,31 @@ public class JsonRunner implements CommandLineRunner, Ordered {
       case GSON:
         settingGson();
         break;
+      case JACK_JSON:
+        settingJackJson();
+        break;
       default:
         throw new RuntimeException("json type is null");
     }
 
 
+  }
+
+  private void settingJackJson() {
+    Map<String, JackJsonConfigSetting> beansOfType = context
+        .getBeansOfType(JackJsonConfigSetting.class);
+    if (beansOfType.size() == 1) {
+      for (Entry<String, JackJsonConfigSetting> entry : beansOfType.entrySet()) {
+        JackJsonConfigSetting v = entry.getValue();
+        ObjectMapper objectMapper = v.setObjectMapper();
+        JackJsonSingleManager.setObjectMapper(objectMapper);
+      }
+    }
+    else {
+      beansOfType.remove(Constant.JACK_SERIALIZATION_BEAN_NAME);
+      JackJsonConfigSetting jackJsonConfigSetting = new ArrayList<>(beansOfType.values()).get(0);
+      JackJsonSingleManager.setObjectMapper(jackJsonConfigSetting.setObjectMapper());
+    }
   }
 
   private void settingGson() {

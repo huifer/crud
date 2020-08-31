@@ -16,11 +16,26 @@
  *
  */
 
-package com.github.huifer.crud.common.conf.json;
+package com.github.huifer.mybatis;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.huifer.mybatis.entity.IssuesEntity;
 
-public interface JackJsonConfigSetting {
+public class FastJsonConfigTest {
 
-  ObjectMapper setObjectMapper();
+  public static void main(String[] args) throws JsonProcessingException {
+
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    objectMapper.setSerializationInclusion(Include.ALWAYS);
+
+    IssuesEntity issuesEntity = new IssuesEntity();
+    issuesEntity.setNewTitle("mybatis_test");
+
+    System.out.println(objectMapper.writeValueAsString(issuesEntity));
+
+  }
+
 }

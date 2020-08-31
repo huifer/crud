@@ -16,11 +16,19 @@
  *
  */
 
-package com.github.huifer.crud.common.conf.json;
+package com.github.huifer.crud.common.conf.json.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.huifer.crud.common.conf.json.JackJsonConfigSetting;
+import com.github.huifer.crud.common.utils.Constant;
+import org.springframework.stereotype.Service;
 
-public interface JackJsonConfigSetting {
+@Service(Constant.JACK_SERIALIZATION_BEAN_NAME)
+public class JackJsonConfigSettingImpl implements
+    JackJsonConfigSetting {
 
-  ObjectMapper setObjectMapper();
+  @Override
+  public ObjectMapper setObjectMapper() {
+    return new ObjectMapper();
+  }
 }

@@ -24,8 +24,10 @@ import static com.github.huifer.crud.common.utils.Constant.SERIALIZATION_BEAN_NA
 import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.serialize.Serialization;
 import com.github.huifer.crud.common.serialize.SerializationFactory;
-import java.util.ArrayList;
+import com.github.huifer.crud.common.utils.EnableAttrManager;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -41,21 +43,47 @@ public class SerializationFactoryImpl implements SerializationFactory {
   public Serialization factory(JsonEnums jsonEnums) {
     Map<String, Serialization> beansOfType = context.getBeansOfType(Serialization.class);
     AtomicReference<Serialization> result = new AtomicReference<>();
-    if (beansOfType.size() == 1) {
-      beansOfType.forEach(
-          (k, v) -> {
-            result.set(v);
-          }
-      );
-    }
 
+    removeOtherJsonSerialization(jsonEnums, beansOfType);
+
+    if (beansOfType.size() == 1) {
+      setSerialization(beansOfType, result);
+    }
     else {
       for (String serializationBeanName : SERIALIZATION_BEAN_NAMES) {
         beansOfType.remove(serializationBeanName);
       }
-      result.set(new ArrayList<>(beansOfType.values()).get(0));
+
+      setSerialization(beansOfType, result);
     }
 
     return result.get();
+  }
+
+  private void removeOtherJsonSerialization(JsonEnums jsonEnums,
+      Map<String, Serialization> beansOfType) {
+    // 删除 类型不匹配的对象
+
+    Iterator<Entry<String, Serialization>> iterator = beansOfType.entrySet().iterator();
+
+    while (iterator.hasNext()) {
+      Entry<String, Serialization> next = iterator.next();
+
+      Serialization value = next.getValue();
+      if (!value.jsonType().equals(jsonEnums)) {
+        iterator.remove();
+      }
+    }
+  }
+
+  private void setSerialization(Map<String, Serialization> beansOfType,
+      AtomicReference<Serialization> result) {
+    for (Entry<String, Serialization> entry : beansOfType.entrySet()) {
+      Serialization v = entry.getValue();
+      if (v.jsonType().equals(EnableAttrManager.getJsonEnums())) {
+        result.set(v);
+        break;
+      }
+    }
   }
 }

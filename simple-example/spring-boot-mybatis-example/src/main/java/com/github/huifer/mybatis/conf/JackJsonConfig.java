@@ -16,8 +16,21 @@
  *
  */
 
-package com.github.huifer.crud.common.conf.json;
+package com.github.huifer.mybatis.conf;
 
-public interface FastJsonConfigSetting {
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.huifer.crud.common.conf.json.JackJsonConfigSetting;
+import java.text.SimpleDateFormat;
+import org.springframework.stereotype.Service;
 
+@Service
+public class JackJsonConfig implements JackJsonConfigSetting {
+
+  @Override
+  public ObjectMapper setObjectMapper() {
+    System.out.println("自定义jack json");
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+    return objectMapper;
+  }
 }

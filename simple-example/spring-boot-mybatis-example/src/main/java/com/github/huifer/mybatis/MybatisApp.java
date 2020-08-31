@@ -20,11 +20,16 @@ package com.github.huifer.mybatis;
 
 import com.github.huifer.crud.common.beans.EnableCrudTemplate;
 import com.github.huifer.crud.common.daotype.DaoType;
+import com.github.huifer.crud.common.model.enums.JsonEnums;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableCrudTemplate(daoType = DaoType.MYBATIS,scanPackages = {"com.github.huifer.mybatis"})
+@EnableCrudTemplate(
+    daoType = DaoType.MYBATIS,
+    scanPackages = {"com.github.huifer.mybatis"},
+    jsonEnums = JsonEnums.JACK_JSON
+)
 public class MybatisApp {
 
   public static void main(String[] args) {

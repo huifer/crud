@@ -16,11 +16,24 @@
  *
  */
 
-package com.github.huifer.crud.common.conf.json;
+package com.github.huifer.crud.common.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public interface JackJsonConfigSetting {
+public class JackJsonSingleManager {
 
-  ObjectMapper setObjectMapper();
+  private static ObjectMapper objectMapper = new ObjectMapper();
+
+  private JackJsonSingleManager() {
+
+  }
+
+  public static ObjectMapper getObjectMapper() {
+    return objectMapper;
+  }
+
+  public static void setObjectMapper(ObjectMapper objectMapper) {
+    JackJsonSingleManager.objectMapper = objectMapper;
+  }
+
 }

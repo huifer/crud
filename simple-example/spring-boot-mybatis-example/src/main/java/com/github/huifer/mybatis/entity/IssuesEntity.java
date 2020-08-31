@@ -21,8 +21,8 @@ package com.github.huifer.mybatis.entity;
 
 import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @CacheKey(key = "tt", type = IssuesEntity.class, idMethod = "ooo")
 public class IssuesEntity implements BaseEntity {
@@ -30,6 +30,15 @@ public class IssuesEntity implements BaseEntity {
 
   private Integer id;
   private String newTitle;
+  private Date date;
+
+  public Date getDate() {
+    return date;
+  }
+
+  public void setDate(Date date) {
+    this.date = date;
+  }
 
   private String ooo() {
     return "OOO" + this.newTitle;

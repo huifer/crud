@@ -21,14 +21,12 @@ package com.github.huifer.mybatis;
 import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
 import com.github.huifer.crud.common.service.facade.CrudEntityFacade;
 import com.github.huifer.mybatis.entity.IssuesEntity;
+import java.util.Date;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
 public class EntityCrudTest {
 
   @Autowired
@@ -38,6 +36,7 @@ public class EntityCrudTest {
   void testInsert() {
     IssuesEntity issuesEntity = new IssuesEntity();
     issuesEntity.setNewTitle("insert");
+    issuesEntity.setDate(new Date());
     crudEntityFacade.insert(issuesEntity);
   }
 
@@ -47,7 +46,7 @@ public class EntityCrudTest {
     IssuesEntity issuesEntity = crudEntityFacade.byId(new StrIdInterface<String>() {
       @Override
       public String id() {
-        return "insert";
+        return "OOOinsert";
       }
     }, IssuesEntity.class);
     System.out.println();
