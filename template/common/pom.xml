@@ -50,6 +50,6 @@
   <parent>
     <artifactId>template</artifactId>
     <groupId>com.github.huifer</groupId>
-    <version>0.0.5-Releases-hot-fix</version>
+    <version>0.0.6-SNAPSHOT</version>
   </parent>
 </project>

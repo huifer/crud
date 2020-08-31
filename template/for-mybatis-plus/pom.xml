@@ -26,7 +26,7 @@
       <artifactId>common</artifactId>
       <groupId>com.github.huifer</groupId>
       <scope>compile</scope>
-      <version>0.0.5-Releases-hot-fix</version>
+      <version>0.0.6-SNAPSHOT</version>
     </dependency>
     <dependency>
       <artifactId>mybatis-plus</artifactId>
@@ -39,7 +39,7 @@
   <parent>
     <artifactId>template</artifactId>
     <groupId>com.github.huifer</groupId>
-    <version>0.0.5-Releases-hot-fix</version>
+    <version>0.0.6-SNAPSHOT</version>
   </parent>
 
 
