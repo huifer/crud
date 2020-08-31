@@ -16,23 +16,26 @@
  *
  */
 
-package com.github.huifer.crud.common.utils;
+package com.github.huifer.crud.common.conf.json.impl;
 
+import com.github.huifer.crud.common.conf.json.GsonConfigSetting;
+import com.github.huifer.crud.common.utils.Constant;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.springframework.stereotype.Service;
 
-public class SingleManager {
+@Service(Constant.GSON_SETTING_BEAN_NAME)
+public class GsonConfigSettingImpl implements GsonConfigSetting {
 
-  private static Gson gson = null;
 
-  private SingleManager() {
-
+  @Override
+  public GsonBuilder gsonBuild() {
+    return new GsonBuilder();
   }
 
-  public static Gson getGson() {
-    return gson;
+  @Override
+  public Gson gson() {
+    return new Gson();
   }
 
-  public static void setGson(Gson gson) {
-    SingleManager.gson = gson;
-  }
 }

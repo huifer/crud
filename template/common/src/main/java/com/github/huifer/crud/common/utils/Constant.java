@@ -20,6 +20,7 @@ package com.github.huifer.crud.common.utils;
 
 public class Constant {
 
+
   /**
    * gson 序列化的bean name
    */
@@ -29,4 +30,12 @@ public class Constant {
    * 序列化的所有名字列表
    */
   public static final String[] SERIALIZATION_BEAN_NAMES = {GSON_SERIALIZATION_BEAN_NAME};
+
+
+  /**
+   * gson 配置类
+   */
+  public static final String GSON_SETTING_BEAN_NAME = "crudGsonConfigSetting";
+
+
 }

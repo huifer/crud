@@ -16,24 +16,34 @@
  *
  */
 
-package com.github.huifer.crud.common.conf.json;
+package com.github.huifer.crud.common.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public interface GsonConfigSetting {
+public class GsonSingleManager {
 
-  /**
-   * gson builder 配置
-   *
-   * @return gson builder
-   */
-  GsonBuilder gsonBuild();
+  private static Gson gson = new Gson();
 
-  /**
-   * gson
-   *
-   * @return gson
-   */
-  Gson gson();
+  private static GsonBuilder gsonBuilder = new GsonBuilder();
+
+  private GsonSingleManager() {
+
+  }
+
+  public static GsonBuilder getGsonBuilder() {
+    return gsonBuilder;
+  }
+
+  public static void setGsonBuilder(GsonBuilder gsonBuilder) {
+    GsonSingleManager.gsonBuilder = gsonBuilder;
+  }
+
+  public static Gson getGson() {
+    return gson;
+  }
+
+  public static void setGson(Gson gson) {
+    GsonSingleManager.gson = gson;
+  }
 }

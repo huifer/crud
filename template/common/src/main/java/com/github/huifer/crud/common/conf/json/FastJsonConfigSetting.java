@@ -16,27 +16,8 @@
  *
  */
 
-package com.github.huifer.ctr.seri;
+package com.github.huifer.crud.common.conf.json;
 
-import com.github.huifer.crud.common.model.enums.JsonEnums;
-import com.github.huifer.crud.common.serialize.Serialization;
-import org.springframework.stereotype.Service;
+public interface FastJsonConfigSetting {
 
-@Service("sss1")
-public class S1 implements Serialization {
-
-  @Override
-  public JsonEnums jsonType() {
-    return JsonEnums.GSON;
-  }
-
-  @Override
-  public String serialize(Object object) {
-    return null;
-  }
-
-  @Override
-  public Object deserialize(String json, Class<?> type) {
-    return null;
-  }
 }

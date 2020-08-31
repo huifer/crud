@@ -16,24 +16,27 @@
  *
  */
 
-package com.github.huifer.crud.common.conf.json;
+package com.github.huifer.mybatis.conf;
 
+import com.github.huifer.crud.common.conf.json.GsonConfigSetting;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.text.DateFormat;
+import org.springframework.stereotype.Service;
 
-public interface GsonConfigSetting {
+@Service("gsonConfig")
+public class GsonConfig implements GsonConfigSetting {
 
-  /**
-   * gson builder 配置
-   *
-   * @return gson builder
-   */
-  GsonBuilder gsonBuild();
+  @Override
+  public GsonBuilder gsonBuild() {
+    GsonBuilder gsonBuilder = new GsonBuilder();
+    gsonBuilder.setDateFormat(DateFormat.LONG).serializeNulls();
+    return gsonBuilder;
+  }
 
-  /**
-   * gson
-   *
-   * @return gson
-   */
-  Gson gson();
+  @Override
+  public Gson gson() {
+    return this.gsonBuild().create();
+  }
+
 }

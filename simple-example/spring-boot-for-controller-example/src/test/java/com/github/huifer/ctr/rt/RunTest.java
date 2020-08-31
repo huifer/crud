@@ -21,6 +21,7 @@ package com.github.huifer.ctr.rt;
 import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.serialize.Serialization;
 import com.github.huifer.crud.common.serialize.SerializationFactory;
+import com.github.huifer.ctr.entity.ProjectInt;
 import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,12 +38,22 @@ public class RunTest {
   private ApplicationContext context;
   @Autowired
   private SerializationFactory serializationFactory;
+
+
   @Test
   public void hh() {
     Map<String, Serialization> beansOfType = context.getBeansOfType(Serialization.class);
 
     Serialization factory = serializationFactory.factory(JsonEnums.GSON);
     System.out.println();
+  }
+
+
+  @Test
+  public void gsonString() {
+    ProjectInt projectInt = new ProjectInt();
+    projectInt.setName("ad");
+    System.out.println(serializationFactory.factory(JsonEnums.GSON).serialize(projectInt));
   }
 
 

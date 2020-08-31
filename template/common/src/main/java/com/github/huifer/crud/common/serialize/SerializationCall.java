@@ -16,24 +16,12 @@
  *
  */
 
-package com.github.huifer.crud.common.conf.json;
+package com.github.huifer.crud.common.serialize;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+public interface SerializationCall {
 
-public interface GsonConfigSetting {
+  String toJson(Object object);
 
-  /**
-   * gson builder 配置
-   *
-   * @return gson builder
-   */
-  GsonBuilder gsonBuild();
 
-  /**
-   * gson
-   *
-   * @return gson
-   */
-  Gson gson();
+  Object fromJson(String json, Class<?> clazz);
 }

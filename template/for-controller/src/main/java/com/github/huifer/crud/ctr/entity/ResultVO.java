@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 /**
  * rest接口返回对象 success
- *
- * @author zst
  */
 public class ResultVO implements Serializable {
 

@@ -18,9 +18,92 @@
 
 package com.github.huifer.crud.common.runner;
 
+import com.github.huifer.crud.common.conf.json.GsonConfigSetting;
+import com.github.huifer.crud.common.model.enums.JsonEnums;
+import com.github.huifer.crud.common.utils.Constant;
+import com.github.huifer.crud.common.utils.EnableAttrManager;
+import com.github.huifer.crud.common.utils.GsonSingleManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
+
 /**
  * // todo: 2020/8/29 json 启动配置
  */
-public class JsonRunner {
+@Component
+public class JsonRunner implements CommandLineRunner, Ordered {
 
+  @Autowired
+  private ApplicationContext context;
+
+  @Override
+  public void run(String... args) throws Exception {
+    jsonConfig();
+  }
+
+  private void jsonConfig() {
+
+    JsonEnums jsonEnums = EnableAttrManager.getJsonEnums();
+    switch (jsonEnums) {
+      case GSON:
+        settingGson();
+        break;
+      default:
+        throw new RuntimeException("json type is null");
+    }
+
+
+  }
+
+  private void settingGson() {
+    Map<String, GsonConfigSetting> beansOfType = context.getBeansOfType(GsonConfigSetting.class);
+
+    if (beansOfType.size() == 1) {
+      for (Entry<String, GsonConfigSetting> entry : beansOfType.entrySet()) {
+        GsonConfigSetting v = entry.getValue();
+        if (settingGsonManager(v)) {
+          break;
+        }
+      }
+    }
+
+    else {
+      beansOfType.remove(Constant.GSON_SETTING_BEAN_NAME);
+      settingGsonManager(new ArrayList<>(beansOfType.values()).get(0));
+    }
+
+
+  }
+
+  private boolean settingGsonManager(GsonConfigSetting v) {
+    GsonBuilder gsonBuilder = v.gsonBuild();
+    // 如果 gson builder 不等价于 new GsonBuilder
+    if (!gsonBuilder.equals(GsonSingleManager.getGsonBuilder())) {
+      // 设置 gsonBuilder
+      GsonSingleManager.setGsonBuilder(gsonBuilder);
+      // 设置 gson
+      Gson gson = gsonBuilder.create();
+      GsonSingleManager.setGson(gson);
+      return true;
+    }
+
+    // 设置 gson
+    Gson gson = v.gson();
+    if (!gson.equals(GsonSingleManager.getGson())) {
+      GsonSingleManager.setGson(gson);
+    }
+    return false;
+  }
+
+  @Override
+  public int getOrder() {
+    return Ordered.LOWEST_PRECEDENCE;
+  }
 }

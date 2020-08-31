@@ -22,7 +22,7 @@ import static com.github.huifer.crud.common.utils.Constant.GSON_SERIALIZATION_BE
 
 import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.serialize.Serialization;
-import com.github.huifer.crud.common.utils.SingleManager;
+import com.github.huifer.crud.common.utils.GsonSingleManager;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class GsonSerializationImpl implements Serialization {
 
   @Override
   public String serialize(Object object) {
-    Gson gson = SingleManager.getGson();
+    Gson gson = GsonSingleManager.getGson();
     if (gson == null) {
       throw new RuntimeException("gson is null");
     }
@@ -46,7 +46,7 @@ public class GsonSerializationImpl implements Serialization {
 
   @Override
   public Object deserialize(String json, Class<?> type) {
-    Gson gson = SingleManager.getGson();
+    Gson gson = GsonSingleManager.getGson();
     return gson.fromJson(json, type);
   }
 }

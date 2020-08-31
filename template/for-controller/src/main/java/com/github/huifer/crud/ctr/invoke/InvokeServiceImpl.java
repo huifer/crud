@@ -1,12 +1,12 @@
 package com.github.huifer.crud.ctr.invoke;
 
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
+import com.github.huifer.crud.common.serialize.SerializationCall;
 import com.github.huifer.crud.common.service.facade.CrudFacade;
 import com.github.huifer.crud.ctr.entity.AbsEntity;
 import com.github.huifer.crud.ctr.entity.OpEnums;
 import com.github.huifer.crud.ctr.entity.ResultVO;
 import com.github.huifer.crud.ctr.validated.ValidatedScanService;
-import com.google.gson.Gson;
 import java.io.PrintWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,13 @@ import org.springframework.stereotype.Service;
 public class InvokeServiceImpl implements
     InvokeService {
 
-  Gson gson = new Gson();
   @Autowired
   private CrudFacade crudFacade;
   @Autowired
   private ValidatedScanService validatedScanService;
+
+  @Autowired
+  private SerializationCall serializationCall;
 
   @Override
   public void invoke(PrintWriter writer, String url, AbsEntity param, Class<?> resType,
@@ -80,7 +82,11 @@ public class InvokeServiceImpl implements
     else {
       res = ResultVO.failed();
     }
-    writer.write(gson.toJson(res));
+    writer.write(toJson(res));
+  }
+
+  private String toJson(ResultVO res) {
+    return serializationCall.toJson(res);
   }
 
   private OpEnums conv(String url) {
