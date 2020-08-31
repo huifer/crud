@@ -18,15 +18,9 @@
 
 package com.github.huifer.ctr.entity;
 
-import com.github.huifer.crud.ctr.annotation.CrudController;
-import com.github.huifer.crud.ctr.entity.AbsEntity;
-import java.io.Serializable;
-
-// /rest/project/asdasda + 4 个方法
-@CrudController(uri = "/project/demo", idType = Integer.class)
-public class ProjectInt extends AbsEntity implements Serializable {
-
+public class ProjectDemo {
   private String name;
+  private Integer id;
 
   public String getName() {
     return name;
@@ -34,5 +28,13 @@ public class ProjectInt extends AbsEntity implements Serializable {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 }

@@ -21,12 +21,13 @@ package com.github.huifer.crud.common.serialize.impl;
 import com.github.huifer.crud.common.serialize.Serialization;
 import com.github.huifer.crud.common.serialize.SerializationCall;
 import com.github.huifer.crud.common.serialize.SerializationFactory;
+import com.github.huifer.crud.common.utils.Constant;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service("serializationCallImpl")
+@Service(Constant.SERIALIZATION_CALL_IMPL)
 public class SerializationCallImpl implements
     SerializationCall {
 

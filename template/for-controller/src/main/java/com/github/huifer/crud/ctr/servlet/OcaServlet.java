@@ -1,6 +1,7 @@
 package com.github.huifer.crud.ctr.servlet;
 
 import com.github.huifer.crud.common.serialize.SerializationCall;
+import com.github.huifer.crud.common.utils.Constant;
 import com.github.huifer.crud.ctr.annotation.entity.CrudControllerEntity;
 import com.github.huifer.crud.ctr.entity.AbsEntity;
 import com.github.huifer.crud.ctr.entity.ResultVO;
@@ -14,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class OcaServlet extends HttpServlet {
 
-
-  @Autowired
-  private SerializationCall serializationCall;
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -59,10 +56,16 @@ public class OcaServlet extends HttpServlet {
   }
 
   private Object fromJson(String wholeStr, Class<?> resType) {
+    ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
+    SerializationCall serializationCall = applicationContext.getBean(SerializationCall.class,
+        Constant.SERIALIZATION_CALL_IMPL);
     return serializationCall.fromJson(wholeStr, resType);
   }
 
   private String toJson(ResultVO failed) {
+    ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
+    SerializationCall serializationCall = applicationContext
+        .getBean(SerializationCall.class, Constant.SERIALIZATION_CALL_IMPL);
     return serializationCall.toJson(failed);
   }
 

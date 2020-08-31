@@ -45,4 +45,6 @@ public class Constant {
    * jack json config bean name
    */
   public static final String JACK_SERIALIZATION_BEAN_NAME = "jackJsonSetting";
+
+  public static final String SERIALIZATION_CALL_IMPL = "serializationCallImpl";
 }

@@ -36,7 +36,7 @@ public class ForControllerConfig {
   FilterRegistrationBean myFilterRegistration() {
     FilterRegistrationBean frb = new FilterRegistrationBean();
     frb.setFilter(new MyFilter());
-    frb.setUrlPatterns(Arrays.asList("/*"));
+    frb.setUrlPatterns(Arrays.asList("/rest/*"));
     return frb;
   }
 
