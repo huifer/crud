@@ -34,21 +34,21 @@ public class OcaServlet extends HttpServlet {
     System.out.println("当前请求地址" + requestURI);
 
     Object requestBody = null;
-    Class<?> resType = null;
+    Class<?> paramType = null;
 
     CrudControllerEntity crudControllerEntity = CrudControllerRunner.get(requestURI);
     if (crudControllerEntity == null) {
       writer.write(toJson(ResultVO.failed()));
     }
-    resType = crudControllerEntity.getType();
+    paramType = crudControllerEntity.getType();
 
-    requestBody = fromJson(wholeStr, resType);
+    requestBody = fromJson(wholeStr, paramType);
     Class<?> idType = crudControllerEntity.getIdType();
 
     ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
     InvokeService bean = applicationContext.getBean(InvokeService.class);
     try {
-      bean.invoke(writer, requestURI, (AbsEntity) requestBody, resType, idType);
+      bean.invoke(writer, requestURI, (AbsEntity) requestBody, paramType, idType);
     } catch (Exception e) {
       writer.write(toJson(ResultVO.failed(e.getMessage())));
     }
