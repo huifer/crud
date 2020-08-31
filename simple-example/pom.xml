@@ -26,6 +26,7 @@
     <module>spring-boot-mybatis-example</module>
     <module>spring-boot-mybatis-plus-example</module>
     <module>spring-boot-for-controller-example</module>
+    <module>spring-cloud-crud-example</module>
   </modules>
   <groupId>com.github.huifer</groupId>
   <artifactId>simple-example</artifactId>
