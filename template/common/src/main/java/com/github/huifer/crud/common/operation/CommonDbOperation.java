@@ -19,56 +19,127 @@
 package com.github.huifer.crud.common.operation;
 
 
-import com.github.huifer.crud.common.daotype.DaoType;
-import com.github.huifer.crud.common.intefaces.A;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.operation.DbOperation;
+import com.github.huifer.crud.common.proxy.MapperTarget;
+import com.github.huifer.crud.common.proxy.MethodUtils;
 import com.github.huifer.crud.common.runner.CrudTemplateRunner;
+import com.github.huifer.crud.common.utils.EnableAttrManager;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service("commonDbOperation")
 public class CommonDbOperation<T extends BaseEntity, I extends IdInterface> implements
     DbOperation<T, I> {
 
   Class<?> type;
+  @Autowired
+  private SqlSession sqlSession;
 
-  @Override
-  public DaoType DAO_TYPE() {
-    return null;
-  }
-
-  public A getA() {
-    return CrudTemplateRunner.getA(type());
+  public Class<?> getMapperClazz() {
+    return CrudTemplateRunner.mapper(type());
   }
 
   @Override
   public boolean del(I interfaces) {
-    return getA().deleteByPrimaryKey(interfaces.id()) > 0;
+    boolean del = false;
+    Class<?> mapperClazz = getMapperClazz();
+
+    Object mapperObj = Proxy.newProxyInstance(mapperClazz.getClassLoader(),
+        new Class[]{mapperClazz},
+        new MapperTarget(sqlSession.getMapper(mapperClazz))
+    );
+
+    Method method = MethodUtils.getMethod(mapperClazz, EnableAttrManager.getDeleteByIdMethodName());
+    if (method != null) {
+
+      Object invoke = MethodUtils.invoke(mapperObj, method, interfaces.id());
+      if (invoke != null) {
+        if (invoke instanceof Integer) {
+          int res = (int) invoke;
+          del = res > 0;
+        }
+      }
+    }
+    return del;
   }
 
   @Override
   public boolean editor(I interfaces, T t) {
-    return this.update(t);
+    this.type = t.getClass();
+    boolean editor = false;
+    Class<?> mapperClazz = getMapperClazz();
+
+    Object mapperObj = Proxy.newProxyInstance(mapperClazz.getClassLoader(),
+        new Class[]{mapperClazz},
+        new MapperTarget(sqlSession.getMapper(mapperClazz))
+    );
+
+    Method method = MethodUtils.getMethod(mapperClazz, EnableAttrManager.getUpdateByIdMethodName());
+    if (method != null) {
+
+      Object invoke = MethodUtils.invoke(mapperObj, method, t);
+      if (invoke != null) {
+        if (invoke instanceof Integer) {
+          int res = (int) invoke;
+          editor = res > 0;
+        }
+      }
+    }
+    return editor;
   }
 
   public boolean insert(T o, Class<?> c) {
-    this.type = o.getClass();
-    return getA().insertSelective(o) > 0;
+    this.type = c;
+    boolean insert = false;
+    Class<?> mapperClazz = getMapperClazz();
+
+    Object mapperObj = Proxy.newProxyInstance(mapperClazz.getClassLoader(),
+        new Class[]{mapperClazz},
+        new MapperTarget(sqlSession.getMapper(mapperClazz))
+    );
+
+    Method method = MethodUtils.getMethod(mapperClazz, EnableAttrManager.getInsertMethodName());
+    if (method != null) {
+
+      Object invoke = MethodUtils.invoke(mapperObj, method, o);
+      if (invoke != null) {
+        if (invoke instanceof Integer) {
+          int res = (int) invoke;
+          insert = res > 0;
+        }
+      }
+    }
+    return insert;
+
   }
 
   public T byId(I idInterface, Class<?> c) {
     this.type = c;
-    return (T) getA().selectByPrimaryKey(idInterface.id());
+
+    Class<?> mapperClazz = getMapperClazz();
+
+    Object mapperObj = Proxy.newProxyInstance(mapperClazz.getClassLoader(),
+        new Class[]{mapperClazz},
+        new MapperTarget(sqlSession.getMapper(mapperClazz))
+    );
+
+    Method method = MethodUtils.getMethod(mapperClazz, EnableAttrManager.getSelectByIdMethodName());
+    if (method != null) {
+
+      Object invoke = MethodUtils.invoke(mapperObj, method, idInterface.id());
+      if (invoke != null) {
+        return (T) invoke;
+      }
+    }
+
+    return null;
   }
 
-  public boolean del(I id, Class<?> c) {
-    this.type = c;
-    return getA().deleteByPrimaryKey(id.id()) > 0;
-  }
-
-  public boolean update(T t) {
-    this.type = t.getClass();
-    return getA().updateByPrimaryKeySelective(t) > 0;
-  }
 
   public Class type() {
     return this.type;

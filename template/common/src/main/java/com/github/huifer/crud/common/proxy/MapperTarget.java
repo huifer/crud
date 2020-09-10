@@ -16,29 +16,21 @@
  *
  */
 
-package com.github.huifer.crud.common.intefaces.operation;
+package com.github.huifer.crud.common.proxy;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 
-import com.github.huifer.crud.common.intefaces.BaseEntity;
-import com.github.huifer.crud.common.intefaces.id.IdInterface;
+public class MapperTarget implements InvocationHandler {
 
-/**
- * 数据库操作
- *
- * @param <T> 实体
- * @param <I> id接口
- */
-public interface DbOperation<T extends BaseEntity, I extends IdInterface> {
+  private final Object target;
 
-  boolean insert(T t, Class<?> c);
+  public MapperTarget(Object target) {
+    this.target = target;
+  }
 
-  T byId(I interfaces, Class<?> c);
-
-
-  boolean del(I interfaces);
-
-  boolean editor(I interfaces, T t);
-
-  Class<?> type();
-
+  @Override
+  public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    return method.invoke(target, args);
+  }
 }

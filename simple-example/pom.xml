@@ -23,16 +23,13 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
   <modules>
-    <module>spring-boot-mybatis-example</module>
-    <module>spring-boot-mybatis-plus-example</module>
-    <module>spring-boot-for-controller-example</module>
-    <module>spring-cloud-crud-example</module>
+    <module>spring-boot-demo</module>
   </modules>
   <groupId>com.github.huifer</groupId>
   <artifactId>simple-example</artifactId>
   <version>0.0.1</version>
   <name>simple-example</name>
-  <description>example for crud template </description>
+  <description>example for crud template</description>
 
   <properties>
     <java.version>8</java.version>

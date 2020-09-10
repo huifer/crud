@@ -18,7 +18,6 @@
 
 package com.github.huifer.crud.common.beans;
 
-import com.github.huifer.crud.common.daotype.DaoType;
 import com.github.huifer.crud.common.importselector.CrudTemplateImportSelector;
 import com.github.huifer.crud.common.model.enums.JsonEnums;
 import java.lang.annotation.Documented;
@@ -35,13 +34,6 @@ import org.springframework.context.annotation.Import;
 public @interface EnableCrudTemplate {
 
   /**
-   * DAO 的支持
-   *
-   * @return dao-type
-   */
-  DaoType daoType() default DaoType.MYBATIS;
-
-  /**
    * 包扫描路径
    *
    * @return 包扫描路径
@@ -49,5 +41,13 @@ public @interface EnableCrudTemplate {
   String[] scanPackages() default {};
 
   JsonEnums jsonEnums() default JsonEnums.GSON;
+
+  String selectByIdMethodName();
+
+  String deleteByIdMethodName();
+
+  String updateByIdMethodName();
+
+  String insertMethodName();
 
 }

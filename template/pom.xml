@@ -37,8 +37,6 @@
   <modelVersion>4.0.0</modelVersion>
   <modules>
     <module>common</module>
-    <module>for-mybatis-plus</module>
-    <module>for-mybatis</module>
     <module>for-controller</module>
   </modules>
 

@@ -16,29 +16,37 @@
  *
  */
 
-package com.github.huifer.crud.common.intefaces.operation;
+package com.github.huifer.example.model;
 
-
+import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
-import com.github.huifer.crud.common.intefaces.id.IdInterface;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-/**
- * 数据库操作
- *
- * @param <T> 实体
- * @param <I> id接口
- */
-public interface DbOperation<T extends BaseEntity, I extends IdInterface> {
-
-  boolean insert(T t, Class<?> c);
-
-  T byId(I interfaces, Class<?> c);
+@CacheKey(key = "tt", type = IssuesEntity.class, idFiled = "newTitle")
+public class IssuesEntity implements BaseEntity {
 
 
-  boolean del(I interfaces);
+  private Integer id;
+  private String newTitle;
 
-  boolean editor(I interfaces, T t);
+  private String ooo() {
+    return "OOO" + this.newTitle;
+  }
 
-  Class<?> type();
+  public Integer getId() {
+    return id;
+  }
 
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public String getNewTitle() {
+    return newTitle;
+  }
+
+  public void setNewTitle(String newTitle) {
+    this.newTitle = newTitle;
+  }
 }
