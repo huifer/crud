@@ -25,7 +25,6 @@ public class SecondModel {
 
   private Integer id;
   private String name;
-
   private Integer firstId;
   @ByIdEnhance(foreignKey = "firstId", mapper = FirstModelMapper.class, queryMethod = "selectById")
   private FirstModel firstModel;

@@ -21,7 +21,9 @@ package com.github.huifer.example;
 import com.github.huifer.crud.common.annotation.ByIdEnhance;
 import com.github.huifer.crud.common.intefaces.enhance.EnhanceService;
 import com.github.huifer.crud.common.proxy.MapperTarget;
+import com.github.huifer.example.mapper.SecondModelMapper;
 import com.github.huifer.example.mapper.TotalModelMapper;
+import com.github.huifer.example.model.SecondModel;
 import com.github.huifer.example.model.TotalEnhance;
 import com.github.huifer.example.model.TotalModel;
 import java.lang.reflect.Field;
@@ -51,6 +53,19 @@ public class ByIdEnhanceTest {
   @Autowired
   @Qualifier("enhanceServiceImpl")
   private EnhanceService enhanceService;
+
+  @Autowired
+  private SecondModelMapper secondModelMapper;
+
+
+  @Test
+  void t1()
+      throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    SecondModel byId = secondModelMapper.findById(1);
+    SecondModel byId1 = (SecondModel) enhanceService.enhance(byId);
+    System.out.println();
+
+  }
 
   @Test
   void t2()

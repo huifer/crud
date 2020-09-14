@@ -40,7 +40,15 @@ public @interface ByIdEnhance {
    */
   String queryMethod() default "";
 
+  /**
+   * mapper
+   * @return mapper class
+   */
   Class<?> mapper();
 
+  /**
+   * 外键类型
+   * @return 外键类型
+   */
   Class<?> idType() default Integer.class;
 }
