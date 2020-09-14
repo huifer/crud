@@ -19,11 +19,9 @@
 package com.github.huifer.crud.common.importselector;
 
 import com.github.huifer.crud.common.beans.EnableCrudTemplate;
-import com.github.huifer.crud.common.daotype.DaoType;
-
-import java.util.Map;
-
+import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
+import java.util.Map;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -35,15 +33,20 @@ public class CrudTemplateImportSelector implements ImportSelector {
     // read attributes for EnableCrudTemplate
     Map<String, Object> annotationAttributes = annotationMetadata
         .getAnnotationAttributes(EnableCrudTemplate.class.getName());
-    DaoType daoType = (DaoType) annotationAttributes.get("daoType");
-    if (daoType == null) {
-      throw new NullPointerException("dao_type property cannot be empty!");
-    }
-    // setting dao type
-
-    EnableAttrManager.setDaoType(daoType);
     String[] scanPackages = (String[]) annotationAttributes.get("scanPackages");
     EnableAttrManager.setScanPackageDao(scanPackages);
+
+    JsonEnums jsonEnums = (JsonEnums) annotationAttributes.get("jsonEnums");
+    EnableAttrManager.setJsonEnums(jsonEnums);
+
+    String selectByIdMethodName = (String) annotationAttributes.get("selectByIdMethodName");
+    EnableAttrManager.setSelectByIdMethodName(selectByIdMethodName);
+    String deleteByIdMethodName = (String) annotationAttributes.get("deleteByIdMethodName");
+    EnableAttrManager.setDeleteByIdMethodName(deleteByIdMethodName);
+    String updateByIdMethodName = (String) annotationAttributes.get("updateByIdMethodName");
+    EnableAttrManager.setUpdateByIdMethodName(updateByIdMethodName);
+    String insertMethodName = (String) annotationAttributes.get("insertMethodName");
+    EnableAttrManager.setInsertMethodName(insertMethodName);
 
     return new String[0];
   }

@@ -29,6 +29,10 @@ public class CrudTemplateRunner {
   public static final Map<Class<?>, MapperAndCacheInfo> mapperAndCacheInfoMap = new HashMap<>();
 
 
+  public static Class<?> mapper(Class<?> a) {
+    return mapperAndCacheInfoMap.get(a).getMapperClazz();
+  }
+
   public static A getA(Class<?> a) {
     return mapperAndCacheInfoMap.get(a).getA();
   }

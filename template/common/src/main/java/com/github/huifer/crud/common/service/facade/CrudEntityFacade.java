@@ -22,6 +22,7 @@ import com.github.huifer.crud.common.annotation.entity.CacheKeyEntity;
 import com.github.huifer.crud.common.intefaces.CrudTemplate;
 import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
 import com.github.huifer.crud.common.runner.CrudScanPackageRunner;
+import com.github.huifer.crud.common.serialize.SerializationCall;
 import com.google.gson.Gson;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -37,6 +38,8 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
   Gson gson = new Gson();
   @Autowired
   private StringRedisTemplate redisTemplate;
+  @Autowired
+  private SerializationCall serializationCall;
 
   private static Object getFiled(Object o, String filed) {
     Class<?> aClass = o.getClass();
@@ -54,7 +57,6 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
     }
     return res;
   }
-
 
   private static String key(Object o, String method) {
 
@@ -105,9 +107,13 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
     redisTemplate.opsForHash()
         .put(cacheKeyEntity.getKey(),
             String.valueOf(key(t, cacheKeyEntity.getIdFiled(), cacheKeyEntity.getIdMethod())),
-            gson.toJson(t));
+            toJson(t));
 
     return true;
+  }
+
+  private String toJson(T t) {
+    return serializationCall.toJson(t);
   }
 
   @Override
@@ -116,7 +122,11 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
 
     String o = (String) redisTemplate.opsForHash()
         .get(cacheKeyEntity.getKey(), stringStrIdInterface.id());
-    return (T) gson.fromJson(o, c);
+    return (T) fromJson(c, o);
+  }
+
+  private Object fromJson(Class<?> c, String o) {
+    return serializationCall.fromJson(o, c);
   }
 
   @Override
@@ -134,7 +144,7 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
     redisTemplate.opsForHash()
         .put(cacheKeyEntity.getKey(),
             key(t, cacheKeyEntity.getIdFiled(), cacheKeyEntity.getIdMethod()),
-            gson.toJson(t));
+            toJson(t));
     return true;
   }
 }

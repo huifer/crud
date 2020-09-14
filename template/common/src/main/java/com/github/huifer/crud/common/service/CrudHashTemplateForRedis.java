@@ -23,8 +23,9 @@ import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
 import com.github.huifer.crud.common.runner.CrudTemplateRunner;
 import com.github.huifer.crud.common.runner.MapperAndCacheInfo;
-import com.google.gson.Gson;
+import com.github.huifer.crud.common.serialize.SerializationCall;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -37,11 +38,12 @@ import org.springframework.util.StringUtils;
 public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterface> implements
     RedisOperation<T, I> {
 
-  Gson gson = new Gson();
   Class<?> type;
   @Autowired
+  @Qualifier("serializationCallImpl")
+  SerializationCall serializationCall;
+  @Autowired
   private StringRedisTemplate redisTemplate;
-
 
   @Override
   public void update(I id, T t) {
@@ -54,8 +56,13 @@ public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterfac
       return;
     }
 
-    redisTemplate.opsForHash().put(key, String.valueOf(id.id()), gson.toJson(t));
+    redisTemplate.opsForHash().put(key, String.valueOf(id.id()), objToJson(t));
   }
+
+  private String objToJson(T t) {
+    return serializationCall.toJson(t);
+  }
+
 
   public T byId(I id) {
     String key = key();
@@ -65,9 +72,13 @@ public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterfac
 
     if (redisTemplate != null) {
       String o = (String) redisTemplate.opsForHash().get(key(), String.valueOf(id.id()));
-      return (T) gson.fromJson(o, type());
+      return (T) toObj(o);
     }
     return null;
+  }
+
+  private Object toObj(String o) {
+    return serializationCall.fromJson(o, type());
   }
 
   public void del(I id) {
@@ -87,6 +98,9 @@ public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterfac
       return "";
     }
     MapperAndCacheInfo mapperAndCacheInfo = CrudTemplateRunner.getMapperAndCacheInfo(type);
+    if (mapperAndCacheInfo == null) {
+      return "";
+    }
     return mapperAndCacheInfo.getKey();
   }
 

@@ -18,13 +18,15 @@
 
 package com.github.huifer.crud.common.operation;
 
-import com.google.gson.Gson;
+import com.github.huifer.crud.common.serialize.SerializationCall;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 public abstract class RedisHashKeyOperation<T> {
 
-  Gson gson = new Gson();
   private StringRedisTemplate redisTemplate;
+  @Autowired
+  private SerializationCall serializationCall;
 
   protected void update(String id, T t) {
 
@@ -39,12 +41,20 @@ public abstract class RedisHashKeyOperation<T> {
   }
 
   protected void insert(String id, T t) {
-    redisTemplate.opsForHash().put(key(), id, gson.toJson(t));
+    redisTemplate.opsForHash().put(key(), id, toJson(t));
+  }
+
+  private String toJson(T t) {
+    return serializationCall.toJson(t);
   }
 
   protected T byId(String id) {
     String o = (String) redisTemplate.opsForHash().get(key(), id);
-    return (T) gson.fromJson(o, type());
+    return (T) fromJson(o);
+  }
+
+  private Object fromJson(String o) {
+    return serializationCall.fromJson(o, type());
   }
 
   protected void delete(String id) {

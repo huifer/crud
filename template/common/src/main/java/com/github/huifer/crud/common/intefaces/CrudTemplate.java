@@ -29,6 +29,6 @@ public interface CrudTemplate<T, I extends IdInterface> {
 
   boolean del(I i, Class<?> c);
 
-  boolean editor( T t);
+  boolean editor(T t);
 
 }

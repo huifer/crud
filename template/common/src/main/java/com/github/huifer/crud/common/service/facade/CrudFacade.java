@@ -23,10 +23,8 @@ import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.CrudTemplate;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
+import com.github.huifer.crud.common.intefaces.operation.DbOperation;
 import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
-import com.github.huifer.crud.common.service.factory.OperationCollection;
-import com.github.huifer.crud.common.service.factory.OperationFactory;
-import com.github.huifer.crud.common.utils.EnableAttrManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -35,102 +33,60 @@ import org.springframework.stereotype.Service;
 public class CrudFacade<T extends BaseEntity, I extends IdInterface>
     implements CrudTemplate<T, I> {
 
+
   @Autowired
-  @Qualifier("operationFactoryImpl")
-  private OperationFactory factory;
+  @Qualifier("commonDbOperation")
+  private DbOperation dbOperation;
+
+  @Autowired
+  @Qualifier("crudHashTemplateForRedis")
+  private RedisOperation redisOperation;
 
 
   public boolean insert(T t) {
-
-    boolean insert = false;
-
-    OperationCollection factory = this.factory.factory(EnableAttrManager.getDaoType());
-    CrudTemplate dbOperation = factory.getDbOperation();
-    if (dbOperation != null) {
-      insert = dbOperation.insert(t);
-    }
-
-    RedisOperation redisOperation = factory.getRedisOperation();
-
-    if (redisOperation != null) {
-      redisOperation.setClass(t.getClass());
-      redisOperation.insert(t, (StrIdInterface) () -> String.valueOf(t.getId()));
+    boolean insert = dbOperation.insert(t, t.getClass());
+    redisOperation.setClass(t.getClass());
+    if (insert) {
+      redisOperation.insert(t, (StrIdInterface) () -> t.getId().toString());
     }
 
     return insert;
   }
 
   public T byId(I i, Class<?> c) {
-    OperationCollection factory = this.factory.factory(EnableAttrManager.getDaoType());
+    redisOperation.setClass(c);
 
-    RedisOperation redisOperation = factory.getRedisOperation();
+    Object o = redisOperation.byId(i);
+    if (o != null) {
+      return (T) o;
+    }
+    // select by db
+    Object db = dbOperation.byId(i, c);
+    if (db != null) {
 
-    T result = null;
-
-    if (redisOperation != null) {
-      redisOperation.setClass(c);
-      result = (T) redisOperation.byId(i);
+      // insert redis
+      redisOperation.insert(db, (StrIdInterface) () -> i.id().toString());
+      return (T) db;
     }
 
-    CrudTemplate dbOperation = factory.getDbOperation();
-
-    if (result == null) {
-
-      if (dbOperation != null) {
-        result = (T) dbOperation.byId(i, c);
-
-        if (result != null) {
-          if (redisOperation != null) {
-            redisOperation.setClass(c);
-            T finalResult = result;
-            redisOperation.insert(result,
-                (StrIdInterface) () -> String.valueOf(finalResult.getId()));
-          }
-        }
-      }
-    }
-
-    return result;
+    return null;
   }
 
   public boolean del(I i, Class<?> c) {
-    boolean del = false;
-    OperationCollection factory = this.factory.factory(EnableAttrManager.getDaoType());
-    RedisOperation redisOperation = factory.getRedisOperation();
-    if (redisOperation != null) {
-      redisOperation.setClass(c);
-      redisOperation.del(i);
-    }
 
-    CrudTemplate dbOperation = factory.getDbOperation();
-
-    if (dbOperation != null) {
-      redisOperation.setClass(c);
-      del = dbOperation.del(i, c);
-    }
-
-    return del;
+    // remove redis value
+    redisOperation.setClass(c);
+    redisOperation.del(i);
+    return dbOperation.del(i);
   }
 
   public boolean editor(T t) {
+    redisOperation.setClass(t.getClass());
+    redisOperation.del((StrIdInterface) () -> t.getId().toString());
 
-    boolean editor = false;
-    OperationCollection factory = this.factory.factory(EnableAttrManager.getDaoType());
-
-    RedisOperation redisOperation = factory.getRedisOperation();
-    if (redisOperation != null) {
-      redisOperation.del(() -> t.getId());
-    }
-
-    CrudTemplate dbOperation = factory.getDbOperation();
-
-    if (dbOperation != null) {
-      editor = dbOperation.editor(t);
-    }
-
-    if (redisOperation != null) {
-      redisOperation.setClass(t.getClass());
-      redisOperation.update((StrIdInterface) () -> String.valueOf(t.getId()), t);
+    boolean editor = dbOperation.editor(() -> t.getId(), t);
+    if (editor) {
+      redisOperation.insert(t, (StrIdInterface) () -> t.getId().toString());
     }
 
     return editor;

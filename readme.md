@@ -11,11 +11,17 @@
 
 ## 如何使用
 - 在启动类上添加如下代码
-    - daoType 可选项有 mybatis 和 mybatis-plus
     - scanPackages 用来填写需要扫描的实体包路径,支持多个
+    - 填写相关mapper方法名称. 
 ```java
-@EnableCrudTemplate(daoType = DaoType.MYBATIS_PLUS, scanPackages = {
-    "com.github.huifer.mybatis.plus.mybatis"})
+@EnableCrudTemplate(
+    scanPackages = {
+        "com.github.huifer.mybatis"},
+    selectByIdMethodName = "selectByPrimaryKey",
+    deleteByIdMethodName = "deleteByPrimaryKey",
+    updateByIdMethodName = "updateByPrimaryKeySelective",
+    insertMethodName = "insertSelective")
+
 ```
 
 ### mybatis 支持
@@ -24,8 +30,8 @@
 ```xml
     <dependency>
       <groupId>com.github.huifer</groupId>
-      <artifactId>for-mybatis</artifactId>
-      <version>0.0.5-Releases</version>
+      <artifactId>common</artifactId>
+      <version>LAST_VERSION</version>
     </dependency>
 ```
 
@@ -42,17 +48,6 @@ public class IssuesEntity implements BaseEntity {}
 ```
 
 
-### mybatis plus 支持
-
-- 添加依赖
-
-```xml
-    <dependency>
-      <groupId>com.github.huifer</groupId>
-      <artifactId>for-mybatis-plus</artifactId>
-      <version>0.0.5-Releases</version>
-    </dependency>
-```
 
 - 对mapper进行修改
 

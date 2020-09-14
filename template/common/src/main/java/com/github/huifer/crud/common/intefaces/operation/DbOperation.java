@@ -19,12 +19,12 @@
 package com.github.huifer.crud.common.intefaces.operation;
 
 
-import com.github.huifer.crud.common.daotype.DaoType;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 
 /**
  * 数据库操作
+ *
  * @param <T> 实体
  * @param <I> id接口
  */
@@ -41,5 +41,4 @@ public interface DbOperation<T extends BaseEntity, I extends IdInterface> {
 
   Class<?> type();
 
-  DaoType DAO_TYPE();
 }

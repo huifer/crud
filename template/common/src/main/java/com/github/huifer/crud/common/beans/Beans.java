@@ -25,7 +25,7 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * bean for ComponentScan
  */
-@ComponentScan(basePackages = {"com.github.huifer.crud.*"})
+@ComponentScan(basePackages = {"com.github.huifer.*"})
 public class Beans {
 
   @Autowired

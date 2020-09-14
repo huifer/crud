@@ -22,14 +22,17 @@ import com.github.huifer.crud.common.annotation.DiffAnnotation;
 import com.github.huifer.crud.common.annotation.HavingDiff;
 import com.github.huifer.crud.common.annotation.entity.DiffAnnotationEntity;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-
-import java.lang.reflect.Field;
-import java.util.*;
 
 @Component
 public class DiffRunner implements CommandLineRunner, Ordered {

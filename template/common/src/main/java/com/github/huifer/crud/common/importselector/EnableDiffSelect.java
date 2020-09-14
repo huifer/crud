@@ -19,10 +19,8 @@
 package com.github.huifer.crud.common.importselector;
 
 import com.github.huifer.crud.common.beans.EnableDiff;
-
-import java.util.Map;
-
 import com.github.huifer.crud.common.utils.EnableAttrManager;
+import java.util.Map;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
