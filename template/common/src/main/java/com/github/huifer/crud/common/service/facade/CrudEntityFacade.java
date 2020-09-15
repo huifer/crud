@@ -23,7 +23,6 @@ import com.github.huifer.crud.common.intefaces.CrudTemplate;
 import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
 import com.github.huifer.crud.common.runner.CrudScanPackageRunner;
 import com.github.huifer.crud.common.serialize.SerializationCall;
-import com.google.gson.Gson;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +31,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
-public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<String>> {
+public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface> {
 
 
-  Gson gson = new Gson();
   @Autowired
   private StringRedisTemplate redisTemplate;
   @Autowired
@@ -79,21 +77,20 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
   private static String key(Object o, String filed, String method) {
 
     String res = "";
-    // 1. 执行method函数
+    // 1. execute method
     if (StringUtils.isEmpty(res)) {
       res = key(o, method);
     }
-    // 如果函数存在结果直接返回
     if (!StringUtils.isEmpty(res)) {
       return res;
     }
 
-    // 2. 从 filed 获取
+    // 2. from filed get value
     Object k1 = getFiled(o, filed);
     res = String.valueOf(k1);
 
     if (StringUtils.isEmpty(res)) {
-      throw new NullPointerException("key 不能为空");
+      throw new NullPointerException("key is not null");
     }
     return res;
 
@@ -117,7 +114,7 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
   }
 
   @Override
-  public T byId(StrIdInterface<String> stringStrIdInterface, Class<?> c) {
+  public T byId(StrIdInterface stringStrIdInterface, Class<?> c) {
     CacheKeyEntity cacheKeyEntity = CrudScanPackageRunner.cacheKeyEntity(c);
 
     String o = (String) redisTemplate.opsForHash()
@@ -130,7 +127,7 @@ public class CrudEntityFacade<T> implements CrudTemplate<T, StrIdInterface<Strin
   }
 
   @Override
-  public boolean del(StrIdInterface<String> stringStrIdInterface, Class<?> c) {
+  public boolean del(StrIdInterface stringStrIdInterface, Class<?> c) {
     CacheKeyEntity cacheKeyEntity = CrudScanPackageRunner.cacheKeyEntity(c);
 
     redisTemplate.opsForHash().delete(cacheKeyEntity.getKey(), stringStrIdInterface.id());

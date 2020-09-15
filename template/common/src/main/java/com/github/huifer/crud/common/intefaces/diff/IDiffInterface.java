@@ -22,20 +22,20 @@ import com.github.huifer.crud.common.model.diff.DiffInfoEntity;
 import java.util.List;
 
 /**
- * 对象比较接口
+ * Object compare interface
  *
- * @param <T> 对象
+ * @param <T> entity
  */
 public interface IDiffInterface<T> {
 
 
   /**
-   * 对比方法
+   * object compare.
    *
-   * @param source  原始对象
-   * @param target  修改后的对象
-   * @param logTxId 日志id
-   * @return 比较结果
+   * @param source  source object
+   * @param target  target object
+   * @param logTxId log id
+   * @return object compare result
    */
   List<DiffInfoEntity> diff(T source, T target, String logTxId);
 }

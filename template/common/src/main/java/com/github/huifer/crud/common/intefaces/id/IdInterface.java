@@ -19,9 +19,9 @@
 package com.github.huifer.crud.common.intefaces.id;
 
 /**
- * id 获取接口
+ * id interface
  *
- * @param <T> 对象
+ * @param <T> id type
  */
 public interface IdInterface<T> {
 

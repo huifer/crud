@@ -22,7 +22,7 @@ public class Constant {
 
 
   /**
-   * gson 序列化的bean name
+   * gson serialization bean name
    */
   public static final String GSON_SERIALIZATION_BEAN_NAME = "crudGsoSerialization";
   /**
@@ -30,14 +30,14 @@ public class Constant {
    */
   public static final String JACK_JSON_SERIALIZATION_BEAN_NAME = "crudJackJsonSerialization";
   /**
-   * 序列化的所有名字列表
+   * serialization bean names.
    */
   public static final String[] SERIALIZATION_BEAN_NAMES = {GSON_SERIALIZATION_BEAN_NAME,
       JACK_JSON_SERIALIZATION_BEAN_NAME};
 
 
   /**
-   * gson 配置类
+   * gson config bean name
    */
   public static final String GSON_SETTING_BEAN_NAME = "crudGsonConfigSetting";
 

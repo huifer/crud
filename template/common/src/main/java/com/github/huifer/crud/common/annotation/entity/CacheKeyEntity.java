@@ -19,8 +19,9 @@
 package com.github.huifer.crud.common.annotation.entity;
 
 
-/**
- * entity for {@link com.github.huifer.crud.common.annotation.CacheKey}
+/***
+ * cache key annotation entity
+ * @see com.github.huifer.crud.common.annotation.CacheKey
  */
 public class CacheKeyEntity {
 
@@ -29,15 +30,15 @@ public class CacheKeyEntity {
    */
   private String key;
   /**
-   * 实体对象.class
+   * entity class
    */
   private Class<?> type;
   /**
-   * id字段(从实体对象中获取)
+   * id filed name (form entity )
    */
   private String idFiled;
   /**
-   * id方法(从实体对象中获取)
+   * id generator method name (form entity)
    */
   private String idMethod;
 

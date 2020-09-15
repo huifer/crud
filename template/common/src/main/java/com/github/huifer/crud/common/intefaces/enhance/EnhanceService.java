@@ -18,11 +18,20 @@
 
 package com.github.huifer.crud.common.intefaces.enhance;
 
-import java.lang.reflect.InvocationTargetException;
-
+/**
+ * byId query enhance
+ *
+ * @param <T> entity
+ */
 public interface EnhanceService<T> {
 
-  T enhance(T t)
-      throws IllegalAccessException, NoSuchMethodException, ClassNotFoundException, InvocationTargetException;
+  /**
+   * byId query enhance
+   *
+   * @param t enhance entity
+   * @return enhance entity
+   * @throws Exception ex
+   */
+  T enhance(T t) throws Exception;
 
 }

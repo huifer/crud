@@ -31,16 +31,17 @@ public @interface DiffAnnotation {
 
 
   /**
-   * 字段中文名称
+   * filed name
    *
-   * @return 字段中文名称
+   * @return filed name
    */
   String name() default "";
 
   /**
-   * 消息,在这里使用[old]和[new]进行替换
+   * change message
+   * <p>Keywords to be replaced: [old] and [new]</p>
    *
-   * @return 消息
+   * @return change message
    */
   String msg() default "";
 
@@ -52,7 +53,7 @@ public @interface DiffAnnotation {
   Class<?> mapper() default Object.class;
 
   /**
-   * 链接对象
+   * foreign type
    *
    * @return object
    */
@@ -60,7 +61,7 @@ public @interface DiffAnnotation {
 
 
   /**
-   * 外联对象需要显示的字符串属性,用来展示的连接字段
+   * foreign type filed name
    *
    * @return out-field
    */

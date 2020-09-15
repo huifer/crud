@@ -32,8 +32,6 @@ public abstract class RedisHashKeyOperation<T> {
 
     T redisObj = this.byId(id);
     if (redisObj != null) {
-
-      // 如果是redis中的类型和当前传入的类型相同
       if (redisObj.getClass().equals(t.getClass())) {
         this.insert(id, t);
       }

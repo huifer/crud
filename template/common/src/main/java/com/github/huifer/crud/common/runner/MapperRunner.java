@@ -78,7 +78,6 @@ public class MapperRunner extends CrudTemplateRunner implements CommandLineRunne
             if (rawType.equals(A.class)) {
               Type[] r = pt.getActualTypeArguments();
               if (r.length == 2) {
-                // 获取接口泛型
                 Class<?> type = (Class<?>) r[1];
                 Object mapper1 = sqlSession.getMapper(mapper);
                 clazz = type;

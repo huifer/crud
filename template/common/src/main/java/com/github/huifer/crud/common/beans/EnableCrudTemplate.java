@@ -27,6 +27,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.springframework.context.annotation.Import;
 
+
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -34,20 +35,45 @@ import org.springframework.context.annotation.Import;
 public @interface EnableCrudTemplate {
 
   /**
-   * 包扫描路径
+   * scan package list
    *
-   * @return 包扫描路径
+   * @return scan package list
    */
   String[] scanPackages() default {};
 
+  /**
+   * json type
+   *
+   * @return json enums
+   */
   JsonEnums jsonEnums() default JsonEnums.GSON;
 
+  /**
+   * by id method in mapper
+   *
+   * @return byId method name
+   */
   String selectByIdMethodName();
 
+  /**
+   * delete by id method in mapper
+   *
+   * @return deleteById method name
+   */
   String deleteByIdMethodName();
 
+  /**
+   * update by id method in mapper
+   *
+   * @return updateById method name
+   */
   String updateByIdMethodName();
 
+  /**
+   * insert method in mapper
+   *
+   * @return insert method name
+   */
   String insertMethodName();
 
 }

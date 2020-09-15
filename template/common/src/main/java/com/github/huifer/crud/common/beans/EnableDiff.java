@@ -34,16 +34,16 @@ import org.springframework.context.annotation.Import;
 public @interface EnableDiff {
 
   /**
-   * 包扫描路径
+   * scan package list
    *
-   * @return 包扫描路径
+   * @return scan package list
    */
   String[] scanPackages() default {};
 
   /**
-   * mapper根据id查询的函数名称
+   * query by id method name
    *
-   * @return mapper根据id查询的函数名称
+   * @return query by id method name
    */
   String byIdMethod() default "selectById";
 }

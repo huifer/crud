@@ -39,16 +39,13 @@ public class EnhanceServiceImpl<T> implements EnhanceService<T> {
 
   @Override
   public T enhance(T t)
-      throws IllegalAccessException, NoSuchMethodException, ClassNotFoundException, InvocationTargetException {
-
+      throws Exception {
     Class<?> enhanceClass = t.getClass();
-
-    aaaaa(t, enhanceClass);
-
+    calcData(t, enhanceClass);
     return t;
   }
 
-  private void aaaaa(T t, Class<?> enhanceClass)
+  private void calcData(T t, Class<?> enhanceClass)
       throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException {
     List<Field> allFields = ClassUtils.getAllFields(enhanceClass);
     Object q = null;
@@ -64,14 +61,14 @@ public class EnhanceServiceImpl<T> implements EnhanceService<T> {
         if (foreignKeyValue != null) {
           q = q(mapper, queryMethod, annotation.idType(), foreignKeyValue);
         }
-        // 需要处理的字段
+        // Fields to be processed
         Class<?> type = field.getType();
         if (q != null) {
           if (q.getClass().equals(type)) {
             field.set(t, q);
           }
         }
-        aaaaa((T) q, type);
+        calcData((T) q, type);
       }
 
     }

@@ -19,16 +19,16 @@
 package com.github.huifer.crud.common.annotation.entity;
 
 /**
- * entity for {@link com.github.huifer.crud.common.annotation.DiffAnnotation}
+ * diff annotation entity
  */
 public class DiffAnnotationEntity {
 
   /**
-   * 字段中文名称
+   * filed name (alias name )
    */
   String name;
   /**
-   * 消息
+   * change message
    */
   String msg;
 
@@ -38,11 +38,11 @@ public class DiffAnnotationEntity {
   Class<?> mapper;
 
   /**
-   * 外联对象
+   * foreign type
    */
   Class<?> outJoin;
   /**
-   * 外联对象的某个字段
+   * foreign type filed name
    */
   String outField;
 

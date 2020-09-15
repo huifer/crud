@@ -27,7 +27,6 @@ import com.github.huifer.example.model.SecondModel;
 import com.github.huifer.example.model.TotalEnhance;
 import com.github.huifer.example.model.TotalModel;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class ByIdEnhanceTest {
 
   @Test
   void t1()
-      throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+      throws Exception {
     SecondModel byId = secondModelMapper.findById(1);
     SecondModel byId1 = (SecondModel) enhanceService.enhance(byId);
     System.out.println();
@@ -69,7 +68,7 @@ public class ByIdEnhanceTest {
 
   @Test
   void t2()
-      throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+      throws Exception {
     TotalModel totalModel = totalModelMapper.findById(1);
     TotalEnhance totalEnhance = new TotalEnhance();
     BeanUtils.copyProperties(totalModel, totalEnhance);
@@ -85,8 +84,6 @@ public class ByIdEnhanceTest {
     TotalEnhance totalEnhance = new TotalEnhance();
     BeanUtils.copyProperties(totalModel, totalEnhance);
 
-    // 找注解
-
     Class<?> enhanceClass = totalEnhance.getClass();
 
     for (Field declaredField : enhanceClass.getDeclaredFields()) {
@@ -100,7 +97,6 @@ public class ByIdEnhanceTest {
         Object foreignKeyValue = getField(totalEnhance, enhanceClass, foreignKey);
         Object q = q(mapper, queryMethod, annotation.idType(), foreignKeyValue);
 
-        // 需要处理的字段
         Class<?> type = declaredField.getType();
         if (q.getClass().equals(type)) {
           declaredField.set(totalEnhance, q);
@@ -127,7 +123,7 @@ public class ByIdEnhanceTest {
     List<Field> fieldList = new ArrayList<>();
     while (input != null && !input.getName().toLowerCase().equals("java.lang.object")) {
       fieldList.addAll(Arrays.asList(input.getDeclaredFields()));
-      input = input.getSuperclass(); //得到父类,然后赋给自己
+      input = input.getSuperclass();
     }
     return fieldList;
   }

@@ -18,8 +18,18 @@
 
 package com.github.huifer.crud.common.annotation;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
+/**
+ * byId enhance annotation
+ *
+ * @see com.github.huifer.crud.common.annotation.entity.ByIdEnhanceEntity
+ */
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
@@ -27,28 +37,30 @@ import java.lang.annotation.*;
 public @interface ByIdEnhance {
 
   /**
-   * 外键
+   * foreign key filed name
    *
-   * @return 外键字段名称
+   * @return foreign key filed name
    */
   String foreignKey();
 
   /**
-   * 查询函数,在mapper上. 如果不填则使用selectById
+   * mapper query name
    *
-   * @return 查询实体的函数
+   * @return queryById  method name
    */
-  String queryMethod() default "";
+  String queryMethod();
 
   /**
    * mapper
+   *
    * @return mapper class
    */
   Class<?> mapper();
 
   /**
-   * 外键类型
-   * @return 外键类型
+   * foreign key type
+   *
+   * @return foreign key type
    */
   Class<?> idType() default Integer.class;
 }

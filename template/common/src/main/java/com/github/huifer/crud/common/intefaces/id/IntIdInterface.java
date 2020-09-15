@@ -21,7 +21,7 @@ package com.github.huifer.crud.common.intefaces.id;
 /**
  * int id
  */
-public interface IntIdInterface<Integer> extends IdInterface<Integer> {
+public interface IntIdInterface extends IdInterface<Integer> {
 
   Integer id();
 }

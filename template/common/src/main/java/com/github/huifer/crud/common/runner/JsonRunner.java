@@ -37,9 +37,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
-/**
- * // todo: 2020/8/29 json 启动配置
- */
 @Component
 public class JsonRunner implements CommandLineRunner, Ordered {
 
@@ -107,17 +104,13 @@ public class JsonRunner implements CommandLineRunner, Ordered {
 
   private boolean settingGsonManager(GsonConfigSetting v) {
     GsonBuilder gsonBuilder = v.gsonBuild();
-    // 如果 gson builder 不等价于 new GsonBuilder
     if (!gsonBuilder.equals(GsonSingleManager.getGsonBuilder())) {
-      // 设置 gsonBuilder
       GsonSingleManager.setGsonBuilder(gsonBuilder);
-      // 设置 gson
       Gson gson = gsonBuilder.create();
       GsonSingleManager.setGson(gson);
       return true;
     }
 
-    // 设置 gson
     Gson gson = v.gson();
     if (!gson.equals(GsonSingleManager.getGson())) {
       GsonSingleManager.setGson(gson);

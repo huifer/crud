@@ -25,6 +25,9 @@ import java.util.Map;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
+/**
+ * import selector for {@link EnableCrudTemplate}
+ */
 public class CrudTemplateImportSelector implements ImportSelector {
 
 

@@ -39,21 +39,21 @@ public @interface CacheKey {
   String key();
 
   /**
-   * 实体对象.class
+   * entity.class
    *
    * @return entity.class
    */
   Class<?> type();
 
   /**
-   * id字段(从实体对象中获取)
+   * id filed name (form entity )
    *
    * @return idFiled
    */
   String idFiled() default "";
 
   /**
-   * id方法(从实体对象中获取)
+   * id generator method name (form entity)
    *
    * @return id-method
    */

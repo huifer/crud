@@ -24,24 +24,24 @@ import com.github.huifer.crud.common.intefaces.A;
 public class MapperAndCacheInfo {
 
   /**
-   * 类型
+   * entity class
    */
   private Class<?> clazz;
   /**
-   * 缓存key
+   * cache key
    */
   private String key;
   /**
-   * 接口 MapperLabel
+   * {@link A}
    */
   private A a;
   /**
-   * mapper 类型
+   * mapper.class
    */
   private Class<?> mapperClazz;
 
   /**
-   * id 字段
+   * id filed name
    */
   private String idField;
 

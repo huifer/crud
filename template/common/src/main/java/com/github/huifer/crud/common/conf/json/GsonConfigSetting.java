@@ -21,10 +21,13 @@ package com.github.huifer.crud.common.conf.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * gson config
+ */
 public interface GsonConfigSetting {
 
   /**
-   * gson builder 配置
+   * gson builder setting
    *
    * @return gson builder
    */

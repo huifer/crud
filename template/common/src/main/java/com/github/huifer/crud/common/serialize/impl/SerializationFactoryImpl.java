@@ -62,8 +62,7 @@ public class SerializationFactoryImpl implements SerializationFactory {
 
   private void removeOtherJsonSerialization(JsonEnums jsonEnums,
       Map<String, Serialization> beansOfType) {
-    // 删除 类型不匹配的对象
-
+    // remove not match class
     Iterator<Entry<String, Serialization>> iterator = beansOfType.entrySet().iterator();
 
     while (iterator.hasNext()) {
