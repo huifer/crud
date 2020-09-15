@@ -49,13 +49,6 @@ public class IssuesEntity implements BaseEntity {}
 
 
 
-- 对mapper进行修改
-
-```java
-@CacheKey(key = "issues", type = IssuesEntity.class)
-public interface IssuesMapper extends BaseMapper<IssuesEntity>,
-    AforMybatisPlus<Integer, IssuesEntity> 
-```
 
 - 对实体进行修改
 
