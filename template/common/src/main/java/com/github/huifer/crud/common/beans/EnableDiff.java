@@ -19,12 +19,14 @@
 package com.github.huifer.crud.common.beans;
 
 
-import com.github.huifer.crud.common.importselector.EnableDiffSelect;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import com.github.huifer.crud.common.importselector.EnableDiffSelect;
+
 import org.springframework.context.annotation.Import;
 
 @Target(ElementType.TYPE)
@@ -33,17 +35,17 @@ import org.springframework.context.annotation.Import;
 @Import(value = {EnableDiffSelect.class})
 public @interface EnableDiff {
 
-  /**
-   * scan package list
-   *
-   * @return scan package list
-   */
-  String[] scanPackages() default {};
+	/**
+	 * scan package list
+	 *
+	 * @return scan package list
+	 */
+	String[] scanPackages() default {};
 
-  /**
-   * query by id method name
-   *
-   * @return query by id method name
-   */
-  String byIdMethod() default "selectById";
+	/**
+	 * query by id method name
+	 *
+	 * @return query by id method name
+	 */
+	String byIdMethod() default "selectById";
 }

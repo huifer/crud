@@ -39,7 +39,7 @@ public class CrudControllerRunner implements Ordered, CommandLineRunner {
   public static final String DEL = "/del";
   public static final String EDITOR = "/editor";
   public static final String BY_ID = "/byId";
-  public static final String[] uriList = {ADD, DEL, EDITOR, BY_ID};
+  protected static final String[] uriList = {ADD, DEL, EDITOR, BY_ID};
   public static final String PRE = "/rest";
   private static final List<CrudControllerEntity> crudControllerEntities = new ArrayList<>();
   private static final Map<String, CrudControllerEntity> crudControllerEntityMap = new HashMap<>();

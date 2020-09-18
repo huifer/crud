@@ -19,8 +19,8 @@
 package com.github.huifer.crud.common.model.enums;
 
 public enum JsonEnums {
-  GSON,
-  JACK_JSON,
-  ;
+	GSON,
+	JACK_JSON,
+	;
 
 }

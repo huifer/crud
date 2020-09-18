@@ -18,13 +18,15 @@
 
 package com.github.huifer.crud.common.beans;
 
-import com.github.huifer.crud.common.importselector.CrudTemplateImportSelector;
-import com.github.huifer.crud.common.model.enums.JsonEnums;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import com.github.huifer.crud.common.importselector.CrudTemplateImportSelector;
+import com.github.huifer.crud.common.model.enums.JsonEnums;
+
 import org.springframework.context.annotation.Import;
 
 
@@ -34,46 +36,46 @@ import org.springframework.context.annotation.Import;
 @Import(value = {Beans.class, CrudTemplateImportSelector.class})
 public @interface EnableCrudTemplate {
 
-  /**
-   * scan package list
-   *
-   * @return scan package list
-   */
-  String[] scanPackages() default {};
+	/**
+	 * scan package list
+	 *
+	 * @return scan package list
+	 */
+	String[] scanPackages() default {};
 
-  /**
-   * json type
-   *
-   * @return json enums
-   */
-  JsonEnums jsonEnums() default JsonEnums.GSON;
+	/**
+	 * json type
+	 *
+	 * @return json enums
+	 */
+	JsonEnums jsonEnums() default JsonEnums.GSON;
 
-  /**
-   * by id method in mapper
-   *
-   * @return byId method name
-   */
-  String selectByIdMethodName();
+	/**
+	 * by id method in mapper
+	 *
+	 * @return byId method name
+	 */
+	String selectByIdMethodName();
 
-  /**
-   * delete by id method in mapper
-   *
-   * @return deleteById method name
-   */
-  String deleteByIdMethodName();
+	/**
+	 * delete by id method in mapper
+	 *
+	 * @return deleteById method name
+	 */
+	String deleteByIdMethodName();
 
-  /**
-   * update by id method in mapper
-   *
-   * @return updateById method name
-   */
-  String updateByIdMethodName();
+	/**
+	 * update by id method in mapper
+	 *
+	 * @return updateById method name
+	 */
+	String updateByIdMethodName();
 
-  /**
-   * insert method in mapper
-   *
-   * @return insert method name
-   */
-  String insertMethodName();
+	/**
+	 * insert method in mapper
+	 *
+	 * @return insert method name
+	 */
+	String insertMethodName();
 
 }

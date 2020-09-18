@@ -22,20 +22,21 @@ import com.github.huifer.crud.common.conf.json.GsonConfigSetting;
 import com.github.huifer.crud.common.utils.Constant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import org.springframework.stereotype.Service;
 
 @Service(Constant.GSON_SETTING_BEAN_NAME)
 public class GsonConfigSettingImpl implements GsonConfigSetting {
 
 
-  @Override
-  public GsonBuilder gsonBuild() {
-    return new GsonBuilder();
-  }
+	@Override
+	public GsonBuilder gsonBuild() {
+		return new GsonBuilder();
+	}
 
-  @Override
-  public Gson gson() {
-    return new Gson();
-  }
+	@Override
+	public Gson gson() {
+		return new Gson();
+	}
 
 }

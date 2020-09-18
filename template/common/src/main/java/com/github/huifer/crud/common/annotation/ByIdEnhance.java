@@ -36,31 +36,31 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 public @interface ByIdEnhance {
 
-  /**
-   * foreign key filed name
-   *
-   * @return foreign key filed name
-   */
-  String foreignKey();
+	/**
+	 * foreign key filed name
+	 *
+	 * @return foreign key filed name
+	 */
+	String foreignKey();
 
-  /**
-   * mapper query name
-   *
-   * @return queryById  method name
-   */
-  String queryMethod();
+	/**
+	 * mapper query name
+	 *
+	 * @return queryById  method name
+	 */
+	String queryMethod();
 
-  /**
-   * mapper
-   *
-   * @return mapper class
-   */
-  Class<?> mapper();
+	/**
+	 * mapper
+	 *
+	 * @return mapper class
+	 */
+	Class<?> mapper();
 
-  /**
-   * foreign key type
-   *
-   * @return foreign key type
-   */
-  Class<?> idType() default Integer.class;
+	/**
+	 * foreign key type
+	 *
+	 * @return foreign key type
+	 */
+	Class<?> idType() default Integer.class;
 }

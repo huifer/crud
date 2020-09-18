@@ -18,35 +18,36 @@
 
 package com.github.huifer.crud.common.serialize.gson;
 
-import static com.github.huifer.crud.common.utils.Constant.GSON_SERIALIZATION_BEAN_NAME;
-
 import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.serialize.Serialization;
 import com.github.huifer.crud.common.utils.GsonSingleManager;
 import com.google.gson.Gson;
+
 import org.springframework.stereotype.Service;
+
+import static com.github.huifer.crud.common.utils.Constant.GSON_SERIALIZATION_BEAN_NAME;
 
 @Service(GSON_SERIALIZATION_BEAN_NAME)
 public class GsonSerializationImpl implements Serialization {
 
 
-  @Override
-  public String serialize(Object object) {
-    Gson gson = GsonSingleManager.getGson();
-    if (gson == null) {
-      throw new RuntimeException("gson is null");
-    }
-    return gson.toJson(object);
-  }
+	@Override
+	public String serialize(Object object) {
+		Gson gson = GsonSingleManager.getGson();
+		if (gson == null) {
+			throw new RuntimeException("gson is null");
+		}
+		return gson.toJson(object);
+	}
 
-  @Override
-  public JsonEnums jsonType() {
-    return JsonEnums.GSON;
-  }
+	@Override
+	public JsonEnums jsonType() {
+		return JsonEnums.GSON;
+	}
 
-  @Override
-  public Object deserialize(String json, Class<?> type) {
-    Gson gson = GsonSingleManager.getGson();
-    return gson.fromJson(json, type);
-  }
+	@Override
+	public Object deserialize(String json, Class<?> type) {
+		Gson gson = GsonSingleManager.getGson();
+		return gson.fromJson(json, type);
+	}
 }

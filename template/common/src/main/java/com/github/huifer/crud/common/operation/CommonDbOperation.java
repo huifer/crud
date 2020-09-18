@@ -61,11 +61,9 @@ public class CommonDbOperation implements
 		if (method != null) {
 
 			Object invoke = MethodUtils.invoke(mapperObj, method, interfaces.id());
-			if (invoke != null) {
-				if (invoke instanceof Integer) {
-					int res = (int) invoke;
-					del = res > 0;
-				}
+			if (invoke instanceof Integer) {
+				int res = (int) invoke;
+				del = res > 0;
 			}
 		}
 		return del;
@@ -86,11 +84,9 @@ public class CommonDbOperation implements
 		if (method != null) {
 
 			Object invoke = MethodUtils.invoke(mapperObj, method, t);
-			if (invoke != null) {
-				if (invoke instanceof Integer) {
-					int res = (int) invoke;
-					editor = res > 0;
-				}
+			if (invoke instanceof Integer) {
+				int res = (int) invoke;
+				editor = res > 0;
 			}
 		}
 		return editor;
@@ -110,11 +106,9 @@ public class CommonDbOperation implements
 		if (method != null) {
 
 			Object invoke = MethodUtils.invoke(mapperObj, method, o);
-			if (invoke != null) {
-				if (invoke instanceof Integer) {
-					int res = (int) invoke;
-					insert = res > 0;
-				}
+			if (invoke instanceof Integer) {
+				int res = (int) invoke;
+				insert = res > 0;
 			}
 		}
 		return insert;

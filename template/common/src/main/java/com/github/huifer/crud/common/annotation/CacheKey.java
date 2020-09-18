@@ -31,31 +31,31 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 public @interface CacheKey {
 
-  /**
-   * redis-hash-key
-   *
-   * @return redis-hash-key
-   */
-  String key();
+	/**
+	 * redis-hash-key
+	 *
+	 * @return redis-hash-key
+	 */
+	String key();
 
-  /**
-   * entity.class
-   *
-   * @return entity.class
-   */
-  Class<?> type();
+	/**
+	 * entity.class
+	 *
+	 * @return entity.class
+	 */
+	Class<?> type();
 
-  /**
-   * id filed name (form entity )
-   *
-   * @return idFiled
-   */
-  String idFiled() default "";
+	/**
+	 * id filed name (form entity )
+	 *
+	 * @return idFiled
+	 */
+	String idFiled() default "";
 
-  /**
-   * id generator method name (form entity)
-   *
-   * @return id-method
-   */
-  String idMethod() default "";
+	/**
+	 * id generator method name (form entity)
+	 *
+	 * @return id-method
+	 */
+	String idMethod() default "";
 }

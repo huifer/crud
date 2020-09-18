@@ -22,9 +22,9 @@ import com.github.huifer.crud.common.model.enums.JsonEnums;
 
 public interface Serialization {
 
-  JsonEnums jsonType();
+	JsonEnums jsonType();
 
-  String serialize(Object object);
+	String serialize(Object object);
 
-  Object deserialize(String json, Class<?> type);
+	Object deserialize(String json, Class<?> type);
 }

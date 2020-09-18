@@ -23,14 +23,14 @@ import java.lang.reflect.Method;
 
 public class MapperTarget implements InvocationHandler {
 
-  private final Object target;
+	private final Object target;
 
-  public MapperTarget(Object target) {
-    this.target = target;
-  }
+	public MapperTarget(Object target) {
+		this.target = target;
+	}
 
-  @Override
-  public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-    return method.invoke(target, args);
-  }
+	@Override
+	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		return method.invoke(target, args);
+	}
 }

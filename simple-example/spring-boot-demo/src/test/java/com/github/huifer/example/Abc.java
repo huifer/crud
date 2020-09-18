@@ -18,12 +18,6 @@
 
 package com.github.huifer.example;
 
-import com.github.huifer.crud.common.intefaces.id.IntIdInterface;
-import com.github.huifer.crud.common.service.facade.CrudFacade;
-import com.github.huifer.example.model.Uc3User;
-import org.junit.Test;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest

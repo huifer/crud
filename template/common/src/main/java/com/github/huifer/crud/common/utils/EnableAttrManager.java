@@ -22,83 +22,88 @@ import com.github.huifer.crud.common.model.enums.JsonEnums;
 
 public class EnableAttrManager {
 
-  private static JsonEnums jsonEnums = null;
-  private static String[] scanPackageDao = null;
-  private static String byIdMethod = null;
-  private static String[] scanPackageDiff = null;
+	private static JsonEnums jsonEnums = null;
 
-  private static String selectByIdMethodName = null;
-  private static String deleteByIdMethodName = null;
-  private static String updateByIdMethodName = null;
-  private static String insertMethodName = null;
+	private static String[] scanPackageDao = null;
 
-  private EnableAttrManager() {
+	private static String byIdMethod = null;
 
-  }
+	private static String[] scanPackageDiff = null;
 
-  public static String getSelectByIdMethodName() {
-    return selectByIdMethodName;
-  }
+	private static String selectByIdMethodName = null;
 
-  public static void setSelectByIdMethodName(String selectByIdMethodName) {
-    EnableAttrManager.selectByIdMethodName = selectByIdMethodName;
-  }
+	private static String deleteByIdMethodName = null;
 
-  public static String getDeleteByIdMethodName() {
-    return deleteByIdMethodName;
-  }
+	private static String updateByIdMethodName = null;
 
-  public static void setDeleteByIdMethodName(String deleteByIdMethodName) {
-    EnableAttrManager.deleteByIdMethodName = deleteByIdMethodName;
-  }
+	private static String insertMethodName = null;
 
-  public static String getUpdateByIdMethodName() {
-    return updateByIdMethodName;
-  }
+	private EnableAttrManager() {
 
-  public static void setUpdateByIdMethodName(String updateByIdMethodName) {
-    EnableAttrManager.updateByIdMethodName = updateByIdMethodName;
-  }
+	}
 
-  public static String getInsertMethodName() {
-    return insertMethodName;
-  }
+	public static String getSelectByIdMethodName() {
+		return selectByIdMethodName;
+	}
 
-  public static void setInsertMethodName(String insertMethodName) {
-    EnableAttrManager.insertMethodName = insertMethodName;
-  }
+	public static void setSelectByIdMethodName(String selectByIdMethodName) {
+		EnableAttrManager.selectByIdMethodName = selectByIdMethodName;
+	}
 
-  public static JsonEnums getJsonEnums() {
-    return jsonEnums;
-  }
+	public static String getDeleteByIdMethodName() {
+		return deleteByIdMethodName;
+	}
 
-  public static void setJsonEnums(JsonEnums jsonEnums) {
-    EnableAttrManager.jsonEnums = jsonEnums;
-  }
+	public static void setDeleteByIdMethodName(String deleteByIdMethodName) {
+		EnableAttrManager.deleteByIdMethodName = deleteByIdMethodName;
+	}
 
-  public static String[] getScanPackageDao() {
-    return scanPackageDao;
-  }
+	public static String getUpdateByIdMethodName() {
+		return updateByIdMethodName;
+	}
 
-  public static void setScanPackageDao(String[] scanPackageDao) {
-    EnableAttrManager.scanPackageDao = scanPackageDao;
-  }
+	public static void setUpdateByIdMethodName(String updateByIdMethodName) {
+		EnableAttrManager.updateByIdMethodName = updateByIdMethodName;
+	}
 
-  public static String getByIdMethod() {
-    return byIdMethod;
-  }
+	public static String getInsertMethodName() {
+		return insertMethodName;
+	}
 
-  public static void setByIdMethod(String byIdMethod) {
-    EnableAttrManager.byIdMethod = byIdMethod;
-  }
+	public static void setInsertMethodName(String insertMethodName) {
+		EnableAttrManager.insertMethodName = insertMethodName;
+	}
 
-  public static String[] getScanPackageDiff() {
-    return scanPackageDiff;
-  }
+	public static JsonEnums getJsonEnums() {
+		return jsonEnums;
+	}
 
-  public static void setScanPackageDiff(String[] scanPackageDiff) {
-    EnableAttrManager.scanPackageDiff = scanPackageDiff;
-  }
+	public static void setJsonEnums(JsonEnums jsonEnums) {
+		EnableAttrManager.jsonEnums = jsonEnums;
+	}
 
+	public static String[] getScanPackageDao() {
+		return scanPackageDao;
+	}
+
+	public static void setScanPackageDao(String[] scanPackageDao) {
+		EnableAttrManager.scanPackageDao = scanPackageDao;
+	}
+
+	public static String getByIdMethod() {
+		return byIdMethod;
+	}
+
+	public static void setByIdMethod(String byIdMethod) {
+		EnableAttrManager.byIdMethod = byIdMethod;
+	}
+
+	public static String[] getScanPackageDiff() {
+		return scanPackageDiff;
+	}
+
+	public static void setScanPackageDiff(String[] scanPackageDiff) {
+		EnableAttrManager.scanPackageDiff = scanPackageDiff;
+	}
 
 }

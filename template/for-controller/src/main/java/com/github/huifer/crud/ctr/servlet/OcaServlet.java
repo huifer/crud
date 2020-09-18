@@ -42,8 +42,8 @@ public class OcaServlet extends HttpServlet {
 
 
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
+  public void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws  IOException {
     resp.setContentType(MediaType.APPLICATION_JSON_VALUE);
     PrintWriter writer = resp.getWriter();
 
@@ -72,21 +72,21 @@ public class OcaServlet extends HttpServlet {
 
   }
 
-  private Object fromJson(String wholeStr, Class<?> resType) {
+  protected Object fromJson(String wholeStr, Class<?> resType) {
     ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
     SerializationCall serializationCall = applicationContext.getBean(SerializationCall.class,
         Constant.SERIALIZATION_CALL_IMPL);
     return serializationCall.fromJson(wholeStr, resType);
   }
 
-  private String toJson(ResultVO failed) {
+  protected String toJson(ResultVO failed) {
     ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
     SerializationCall serializationCall = applicationContext
         .getBean(SerializationCall.class, Constant.SERIALIZATION_CALL_IMPL);
     return serializationCall.toJson(failed);
   }
 
-  private String getBody(HttpServletRequest req) throws IOException {
+  protected String getBody(HttpServletRequest req) throws IOException {
     BufferedReader br = req.getReader();
 
     String str, wholeStr = "";

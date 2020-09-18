@@ -18,8 +18,9 @@
 
 package com.github.huifer.crud.common.intefaces.diff;
 
-import com.github.huifer.crud.common.model.diff.DiffInfoEntity;
 import java.util.List;
+
+import com.github.huifer.crud.common.model.diff.DiffInfoEntity;
 
 /**
  * Object compare interface
@@ -29,13 +30,13 @@ import java.util.List;
 public interface IDiffInterface<T> {
 
 
-  /**
-   * object compare.
-   *
-   * @param source  source object
-   * @param target  target object
-   * @param logTxId log id
-   * @return object compare result
-   */
-  List<DiffInfoEntity> diff(T source, T target, String logTxId);
+	/**
+	 * object compare.
+	 *
+	 * @param source  source object
+	 * @param target  target object
+	 * @param logTxId log id
+	 * @return object compare result
+	 */
+	List<DiffInfoEntity> diff(T source, T target, String logTxId);
 }

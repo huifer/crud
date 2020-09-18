@@ -25,41 +25,43 @@ package com.github.huifer.crud.common.annotation.entity;
  */
 public class ByIdEnhanceEntity {
 
-  /**
-   * foreign key
-   */
-  private String foreignKey;
-  /**
-   * query method
-   */
-  private String queryMethod;
-  /**
-   * mapper class
-   */
-  private Class<?> mapper;
+	/**
+	 * foreign key
+	 */
+	private String foreignKey;
 
-  public String getForeignKey() {
-    return foreignKey;
-  }
+	/**
+	 * query method
+	 */
+	private String queryMethod;
 
-  public void setForeignKey(String foreignKey) {
-    this.foreignKey = foreignKey;
-  }
+	/**
+	 * mapper class
+	 */
+	private Class<?> mapper;
 
-  public String getQueryMethod() {
-    return queryMethod;
-  }
+	public String getForeignKey() {
+		return foreignKey;
+	}
 
-  public void setQueryMethod(String queryMethod) {
-    this.queryMethod = queryMethod;
-  }
+	public void setForeignKey(String foreignKey) {
+		this.foreignKey = foreignKey;
+	}
 
-  public Class<?> getMapper() {
-    return mapper;
-  }
+	public String getQueryMethod() {
+		return queryMethod;
+	}
 
-  public void setMapper(Class<?> mapper) {
-    this.mapper = mapper;
-  }
+	public void setQueryMethod(String queryMethod) {
+		this.queryMethod = queryMethod;
+	}
+
+	public Class<?> getMapper() {
+		return mapper;
+	}
+
+	public void setMapper(Class<?> mapper) {
+		this.mapper = mapper;
+	}
 
 }

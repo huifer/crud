@@ -41,11 +41,6 @@ public class InvokeServiceImpl implements
   @Autowired
   private SerializationCall serializationCall;
 
-  public static void main(String[] args) {
-
-    String[] split = splitByDotForId("4.88");
-    System.out.println();
-  }
 
   private static String[] splitByDotForId(String s2) {
     String s = s2;

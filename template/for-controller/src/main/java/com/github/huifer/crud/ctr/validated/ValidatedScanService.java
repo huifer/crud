@@ -18,9 +18,11 @@
 
 package com.github.huifer.crud.ctr.validated;
 
-import com.github.huifer.crud.ctr.entity.OpEnums;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.github.huifer.crud.ctr.entity.OpEnums;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -28,34 +30,31 @@ import org.springframework.stereotype.Service;
 @Service
 public class ValidatedScanService {
 
-  @Autowired
-  private ApplicationContext context;
+	@Autowired
+	private ApplicationContext context;
 
 
-  public void invoke(Object o, Class<?> clazz, OpEnums opEnums) {
+	public void invoke(Object o, Class<?> clazz, OpEnums opEnums) {
 
-    Map<String, ValidatedInterface> beansOfType = context.getBeansOfType(ValidatedInterface.class);
-    for (Entry<String, ValidatedInterface> entry : beansOfType.entrySet()) {
-      ValidatedInterface v = entry.getValue();
-      if (v.entityClass().equals(clazz)) {
-        switch (opEnums) {
-          case ADD:
-            v.validateAdd(o);
-            break;
-          case BY_ID:
-            v.validateById(o);
-            break;
-          case DELETE:
-            v.validateDelete(o);
-            break;
-          case EDITOR:
-            v.validateEditor(o);
-            break;
-        }
+		Map<String, ValidatedInterface> beansOfType = context.getBeansOfType(ValidatedInterface.class);
+		for (Entry<String, ValidatedInterface> entry : beansOfType.entrySet()) {
+			ValidatedInterface<Object> v = entry.getValue();
+			if (v.entityClass().equals(clazz)) {
+				if (opEnums == OpEnums.ADD) {
+					v.validateAdd(o);
+				}
+				else if (opEnums == OpEnums.BY_ID) {
+					v.validateById(o);
+				}
+				else if (opEnums == OpEnums.DELETE) {
+					v.validateDelete(o);
+				}
+				else if (opEnums == OpEnums.EDITOR) {
+					v.validateEditor(o);
+				}
 
-      }
-    }
-  }
-
+			}
+		}
+	}
 
 }

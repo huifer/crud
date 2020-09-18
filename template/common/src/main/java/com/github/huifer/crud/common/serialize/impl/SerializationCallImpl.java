@@ -23,27 +23,28 @@ import com.github.huifer.crud.common.serialize.SerializationCall;
 import com.github.huifer.crud.common.serialize.SerializationFactory;
 import com.github.huifer.crud.common.utils.Constant;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service(Constant.SERIALIZATION_CALL_IMPL)
 public class SerializationCallImpl implements
-    SerializationCall {
+		SerializationCall {
 
-  @Autowired
-  @Qualifier("serializationFactoryImpl")
-  private SerializationFactory serializationFactory;
+	@Autowired
+	@Qualifier("serializationFactoryImpl")
+	private SerializationFactory serializationFactory;
 
-  @Override
-  public String toJson(Object object) {
-    Serialization factory = serializationFactory.factory(EnableAttrManager.getJsonEnums());
-    return factory.serialize(object);
-  }
+	@Override
+	public String toJson(Object object) {
+		Serialization factory = serializationFactory.factory(EnableAttrManager.getJsonEnums());
+		return factory.serialize(object);
+	}
 
-  @Override
-  public Object fromJson(String json, Class<?> clazz) {
-    Serialization factory = serializationFactory.factory(EnableAttrManager.getJsonEnums());
-    return factory.deserialize(json, clazz);
-  }
+	@Override
+	public Object fromJson(String json, Class<?> clazz) {
+		Serialization factory = serializationFactory.factory(EnableAttrManager.getJsonEnums());
+		return factory.deserialize(json, clazz);
+	}
 }

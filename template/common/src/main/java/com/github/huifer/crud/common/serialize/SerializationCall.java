@@ -20,8 +20,8 @@ package com.github.huifer.crud.common.serialize;
 
 public interface SerializationCall {
 
-  String toJson(Object object);
+	String toJson(Object object);
 
 
-  Object fromJson(String json, Class<?> clazz);
+	Object fromJson(String json, Class<?> clazz);
 }

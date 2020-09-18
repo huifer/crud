@@ -20,82 +20,86 @@ package com.github.huifer.crud.common.model.diff;
 
 public class DiffInfoEntity {
 
-  /**
-   * filed name
-   */
-  private String field;
-  /**
-   * change message
-   */
-  private String msg;
-  /**
-   * tx id
-   */
-  private String txId;
-  /**
-   * old value
-   */
-  private String ov;
-  /***
-   * new value
-   *
-   * */
-  private String nv;
+	/**
+	 * filed name
+	 */
+	private String field;
 
-  public String getOv() {
-    return ov;
-  }
+	/**
+	 * change message
+	 */
+	private String msg;
 
-  public void setOv(String ov) {
-    this.ov = ov;
-  }
+	/**
+	 * tx id
+	 */
+	private String txId;
 
-  @Override
-  public String toString() {
-    return "{\"DiffInfoEntity\":{"
-        + "\"field\":\""
-        + field + '\"'
-        + ",\"msg\":\""
-        + msg + '\"'
-        + ",\"txId\":\""
-        + txId + '\"'
-        + ",\"ov\":\""
-        + ov + '\"'
-        + ",\"nv\":\""
-        + nv + '\"'
-        + "}}";
+	/**
+	 * old value
+	 */
+	private String ov;
 
-  }
+	/***
+	 * new value
+	 *
+	 * */
+	private String nv;
 
-  public String getNv() {
-    return nv;
-  }
+	public String getOv() {
+		return ov;
+	}
 
-  public void setNv(String nv) {
-    this.nv = nv;
-  }
+	public void setOv(String ov) {
+		this.ov = ov;
+	}
 
-  public String getField() {
-    return field;
-  }
+	@Override
+	public String toString() {
+		return "{\"DiffInfoEntity\":{"
+				+ "\"field\":\""
+				+ field + '\"'
+				+ ",\"msg\":\""
+				+ msg + '\"'
+				+ ",\"txId\":\""
+				+ txId + '\"'
+				+ ",\"ov\":\""
+				+ ov + '\"'
+				+ ",\"nv\":\""
+				+ nv + '\"'
+				+ "}}";
 
-  public void setField(String field) {
-    this.field = field;
-  }
+	}
 
-  public String getMsg() {
-    return msg;
-  }
+	public String getNv() {
+		return nv;
+	}
 
-  public void setMsg(String msg) {
-    this.msg = msg;
-  }
+	public void setNv(String nv) {
+		this.nv = nv;
+	}
 
-  public String getTxId() {
-    return txId;
-  }
+	public String getField() {
+		return field;
+	}
 
-  public void setTxId(String txId) {
-    this.txId = txId;
-  }
+	public void setField(String field) {
+		this.field = field;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public String getTxId() {
+		return txId;
+	}
+
+	public void setTxId(String txId) {
+		this.txId = txId;
+	}
 }

@@ -19,51 +19,53 @@
 package com.github.huifer.crud.common.operation;
 
 import com.github.huifer.crud.common.serialize.SerializationCall;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 public abstract class RedisHashKeyOperation<T> {
 
-  private StringRedisTemplate redisTemplate;
-  @Autowired
-  private SerializationCall serializationCall;
+	private StringRedisTemplate redisTemplate;
 
-  protected void update(String id, T t) {
+	@Autowired
+	private SerializationCall serializationCall;
 
-    T redisObj = this.byId(id);
-    if (redisObj != null) {
-      if (redisObj.getClass().equals(t.getClass())) {
-        this.insert(id, t);
-      }
-    }
-  }
+	protected void update(String id, T t) {
 
-  protected void insert(String id, T t) {
-    redisTemplate.opsForHash().put(key(), id, toJson(t));
-  }
+		T redisObj = this.byId(id);
+		if (redisObj != null) {
+			if (redisObj.getClass().equals(t.getClass())) {
+				this.insert(id, t);
+			}
+		}
+	}
 
-  private String toJson(T t) {
-    return serializationCall.toJson(t);
-  }
+	protected void insert(String id, T t) {
+		redisTemplate.opsForHash().put(key(), id, toJson(t));
+	}
 
-  protected T byId(String id) {
-    String o = (String) redisTemplate.opsForHash().get(key(), id);
-    return (T) fromJson(o);
-  }
+	private String toJson(T t) {
+		return serializationCall.toJson(t);
+	}
 
-  private Object fromJson(String o) {
-    return serializationCall.fromJson(o, type());
-  }
+	protected T byId(String id) {
+		String o = (String) redisTemplate.opsForHash().get(key(), id);
+		return (T) fromJson(o);
+	}
 
-  protected void delete(String id) {
-    this.redisTemplate.opsForHash().delete(key(), id);
-  }
+	private Object fromJson(String o) {
+		return serializationCall.fromJson(o, type());
+	}
 
-  protected Class<?> type() {
-    throw new RuntimeException("clazz is null");
-  }
+	protected void delete(String id) {
+		this.redisTemplate.opsForHash().delete(key(), id);
+	}
 
-  protected String key() {
-    throw new RuntimeException("key is null");
-  }
+	protected Class<?> type() {
+		throw new RuntimeException("clazz is null");
+	}
+
+	protected String key() {
+		throw new RuntimeException("key is null");
+	}
 }
