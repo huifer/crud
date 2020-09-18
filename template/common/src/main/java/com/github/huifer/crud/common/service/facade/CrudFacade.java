@@ -32,7 +32,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CrudFacade<T extends BaseEntity> {
+public class CrudFacade {
 
 
 	private static final Logger log = LoggerFactory.getLogger(CrudFacade.class);
@@ -45,7 +45,7 @@ public class CrudFacade<T extends BaseEntity> {
 	@Qualifier("crudHashTemplateForRedis")
 	private RedisOperation redisOperation;
 
-	public boolean insert(T t) {
+	public <T extends BaseEntity> boolean insert(T t) {
 		boolean insert = dbOperation.insert(t, t.getClass());
 		redisOperation.setClass(t.getClass());
 		if (insert) {
@@ -55,13 +55,13 @@ public class CrudFacade<T extends BaseEntity> {
 		return insert;
 	}
 
-	public T byId(Object i, Class<?> c) {
+	public <T extends BaseEntity> T byId(Object id, Class<?> c) {
 		redisOperation.setClass(c);
 
 		Object o = redisOperation.byId(new StrIdInterface() {
 			@Override
 			public String id() {
-				return String.valueOf(i);
+				return String.valueOf(id);
 			}
 		});
 		if (o != null) {
@@ -71,7 +71,7 @@ public class CrudFacade<T extends BaseEntity> {
 		Object db = dbOperation.byId(new IdInterface() {
 			@Override
 			public Object id() {
-				return i;
+				return id;
 			}
 		}, c);
 		if (db != null) {
@@ -80,7 +80,7 @@ public class CrudFacade<T extends BaseEntity> {
 			redisOperation.insert(db, new StrIdInterface() {
 				@Override
 				public String id() {
-					return String.valueOf(i);
+					return String.valueOf(id);
 				}
 			});
 			return (T) db;
@@ -107,7 +107,7 @@ public class CrudFacade<T extends BaseEntity> {
 		});
 	}
 
-	public boolean editor(T t) {
+	public <T extends BaseEntity> boolean editor(T t) {
 		redisOperation.setClass(t.getClass());
 		redisOperation.del((StrIdInterface) () -> t.getId().toString());
 

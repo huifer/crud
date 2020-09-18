@@ -29,12 +29,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class Abc {
 
-	@Autowired
-	private CrudFacade<Uc3User> crudFacade;
-	@Test
-	public void tt() {
-		Uc3User uc3User = new Uc3User();
-		uc3User.setName("aaaaaaaaaaaaaaaa");
-		crudFacade.insert(uc3User);
-	}
+
 }

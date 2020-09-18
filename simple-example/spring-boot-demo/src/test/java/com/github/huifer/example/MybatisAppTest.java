@@ -18,36 +18,36 @@
 
 package com.github.huifer.example;
 
-import com.github.huifer.crud.common.intefaces.id.IntIdInterface;
 import com.github.huifer.crud.common.service.facade.CrudEntityFacade;
 import com.github.huifer.crud.common.service.facade.CrudFacade;
-import com.github.huifer.example.mapper.IssuesMapper;
 import com.github.huifer.example.model.IssuesEntity;
 import com.github.huifer.example.model.Uc3User;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class MybatisAppTest {
 
-  @Autowired
-  private CrudFacade crudFacade;
-  @Autowired
-  private CrudEntityFacade<IssuesEntity> crudEntityFacade;
+	@Autowired
+	private CrudFacade crudFacade;
 
-  @Test
-  void testInsert() {
+	@Autowired
+	private CrudEntityFacade<IssuesEntity> crudEntityFacade;
+
+	@Test
+	void testInsert() {
 //    Uc3User issuesEntity = new Uc3User();
 //    issuesEntity.setName("mybatis_test");
 //    crudFacade.insert(issuesEntity);
 
 
-    Uc3User uc3User = (Uc3User) crudFacade.byId(1749, Uc3User.class);
-    uc3User.setAvatar("1111111111");
-    crudFacade.editor(uc3User);
-    System.out.println();
-  }
+		Uc3User uc3User = crudFacade.byId(1749, Uc3User.class);
+		uc3User.setAvatar("asfasfafs");
+		crudFacade.editor(uc3User);
+		System.out.println();
+	}
 
 //  @Test
 //  void testById() {
@@ -127,6 +127,5 @@ class MybatisAppTest {
 //    crudEntityFacade.insert(issuesEntity);
 //  }
 //
-
 
 }

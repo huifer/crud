@@ -32,7 +32,7 @@ import com.github.huifer.crud.common.intefaces.id.IdInterface;
  */
 public interface DbOperation<T extends BaseEntity, I extends IdInterface> {
 
-  boolean insert(T t, Class<?> c);
+  <T extends BaseEntity>  boolean insert(T t, Class<?> c);
 
   T byId(I interfaces, Class<?> c);
 
