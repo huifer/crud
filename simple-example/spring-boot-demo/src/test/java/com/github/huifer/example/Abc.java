@@ -30,7 +30,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class Abc {
 
 	@Autowired
-	private CrudFacade<Uc3User, IntIdInterface> crudFacade;
+	private CrudFacade<Uc3User> crudFacade;
 	@Test
 	public void tt() {
 		Uc3User uc3User = new Uc3User();

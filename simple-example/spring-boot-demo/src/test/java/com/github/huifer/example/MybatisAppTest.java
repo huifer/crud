@@ -32,15 +32,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 class MybatisAppTest {
 
   @Autowired
-  private CrudFacade<Uc3User, IntIdInterface> crudFacade;
+  private CrudFacade crudFacade;
   @Autowired
   private CrudEntityFacade<IssuesEntity> crudEntityFacade;
 
   @Test
   void testInsert() {
-    Uc3User issuesEntity = new Uc3User();
-    issuesEntity.setName("mybatis_test");
-    crudFacade.insert(issuesEntity);
+//    Uc3User issuesEntity = new Uc3User();
+//    issuesEntity.setName("mybatis_test");
+//    crudFacade.insert(issuesEntity);
+
+
+    Uc3User uc3User = (Uc3User) crudFacade.byId(1749, Uc3User.class);
+    uc3User.setAvatar("1111111111");
+    crudFacade.editor(uc3User);
+    System.out.println();
   }
 
 //  @Test

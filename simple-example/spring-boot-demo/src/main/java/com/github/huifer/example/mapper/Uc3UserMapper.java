@@ -25,7 +25,7 @@ public interface Uc3UserMapper {
 	@Select("select * from uc_user")
 	Uc3User selectByPrimaryKey(Integer id);
 
-	@Update(" update uc_user SET NAME = #{name} where id = #{id}  ")
+	@Update(" update uc_user SET NAME = #{name} , AVATAR = #{avatar}  where id = #{id}  ")
 	int updateByPrimaryKeySelective(Uc3User record);
 
 }
