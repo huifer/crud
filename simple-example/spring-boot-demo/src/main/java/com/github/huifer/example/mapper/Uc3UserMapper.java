@@ -22,7 +22,7 @@ public interface Uc3UserMapper {
 	int insertSelective(Uc3User record);
 
 
-	@Select("select * from uc_user")
+	@Select("select * from uc_user where id = #{id} ")
 	Uc3User selectByPrimaryKey(Integer id);
 
 	@Update(" update uc_user SET NAME = #{name} , AVATAR = #{avatar}  where id = #{id}  ")

@@ -21,20 +21,20 @@ package com.github.huifer.crud.common.intefaces.operation;
 
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 
-public interface RedisOperation<T, I extends IdInterface> {
+public interface RedisOperation {
 
-  void insert(T t, I id);
+	<T> void insert(T t, IdInterface id);
 
 
-  void update(I id, T t);
+	<T> void update(IdInterface id, T t);
 
-  void del(I id);
+	void del(IdInterface id);
 
-  T byId(I id);
+	<T> T byId(IdInterface id);
 
-  Class<?> type();
+	Class<?> type();
 
-  void setClass(Class<?> clazz);
+	void setClass(Class<?> clazz);
 
-  String key();
+	String key();
 }

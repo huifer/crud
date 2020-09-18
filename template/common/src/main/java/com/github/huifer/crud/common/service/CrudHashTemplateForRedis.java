@@ -18,13 +18,11 @@
 
 package com.github.huifer.crud.common.service;
 
-import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
-import com.github.huifer.crud.common.runner.CrudTemplateRunner;
-import com.github.huifer.crud.common.runner.MapperAndCacheInfo;
 import com.github.huifer.crud.common.runner.MapperSuperRunner;
 import com.github.huifer.crud.common.serialize.SerializationCall;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -36,77 +34,79 @@ import org.springframework.util.StringUtils;
  * @param <I> id interface
  */
 @Service("crudHashTemplateForRedis")
-public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterface> implements
-    RedisOperation<T, I> {
+public class CrudHashTemplateForRedis implements
+		RedisOperation {
 
-  Class<?> type;
-  @Autowired
-  @Qualifier("serializationCallImpl")
-  SerializationCall serializationCall;
-  @Autowired
-  private StringRedisTemplate redisTemplate;
+	Class<?> type;
 
-  @Override
-  public void update(I id, T t) {
-    this.insert(t, id);
-  }
+	@Autowired
+	@Qualifier("serializationCallImpl")
+	SerializationCall serializationCall;
 
-  public void insert(T t, I id) {
-    String key = key();
-    if (StringUtils.isEmpty(key)) {
-      return;
-    }
+	@Autowired
+	private StringRedisTemplate redisTemplate;
 
-    redisTemplate.opsForHash().put(key, String.valueOf(id.id()), objToJson(t));
-  }
+	@Override
+	public <T> void update(IdInterface id, T t) {
+		this.insert(t, id);
+	}
 
-  private String objToJson(T t) {
-    return serializationCall.toJson(t);
-  }
+	public <T> void insert(T t, IdInterface id) {
+		String key = key();
+		if (StringUtils.isEmpty(key)) {
+			return;
+		}
 
+		redisTemplate.opsForHash().put(key, String.valueOf(id.id()), objToJson(t));
+	}
 
-  public T byId(I id) {
-    String key = key();
-    if (StringUtils.isEmpty(key)) {
-      return null;
-    }
-
-    if (redisTemplate != null) {
-      String o = (String) redisTemplate.opsForHash().get(key(), String.valueOf(id.id()));
-      return (T) toObj(o);
-    }
-    return null;
-  }
-
-  private Object toObj(String o) {
-    return serializationCall.fromJson(o, type());
-  }
-
-  public void del(I id) {
-    String key = key();
-    if (StringUtils.isEmpty(key)) {
-      return;
-    }
-    if (redisTemplate != null) {
-      this.redisTemplate.opsForHash().delete(key(), String.valueOf(id.id()));
-    }
-  }
+	private <T> String objToJson(T t) {
+		return serializationCall.toJson(t);
+	}
 
 
-  public String key() {
-    Class type = type();
-    if (type == null) {
-      return "";
-    }
-  return MapperSuperRunner.getCacheKey(type);
-  }
+	public <T> T byId(IdInterface id) {
+		String key = key();
+		if (StringUtils.isEmpty(key)) {
+			return null;
+		}
 
-  @Override
-  public void setClass(Class<?> clazz) {
-    this.type = clazz;
-  }
+		if (redisTemplate != null) {
+			String o = (String) redisTemplate.opsForHash().get(key(), String.valueOf(id.id()));
+			return (T) toObj(o);
+		}
+		return null;
+	}
 
-  public Class type() {
-    return this.type;
-  }
+	private Object toObj(String o) {
+		return serializationCall.fromJson(o, type());
+	}
+
+	public void del(IdInterface id) {
+		String key = key();
+		if (StringUtils.isEmpty(key)) {
+			return;
+		}
+		if (redisTemplate != null) {
+			this.redisTemplate.opsForHash().delete(key(), String.valueOf(id.id()));
+		}
+	}
+
+
+	public String key() {
+		Class type = type();
+		if (type == null) {
+			return "";
+		}
+		return MapperSuperRunner.getCacheKey(type);
+	}
+
+	@Override
+	public void setClass(Class<?> clazz) {
+		this.type = clazz;
+	}
+
+	public Class type() {
+		return this.type;
+	}
 }

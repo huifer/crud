@@ -20,7 +20,6 @@ package com.github.huifer.example;
 
 import com.github.huifer.crud.common.service.facade.CrudEntityFacade;
 import com.github.huifer.crud.common.service.facade.CrudFacade;
-import com.github.huifer.example.model.IssuesEntity;
 import com.github.huifer.example.model.Uc3User;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +33,7 @@ class MybatisAppTest {
 	private CrudFacade crudFacade;
 
 	@Autowired
-	private CrudEntityFacade<IssuesEntity> crudEntityFacade;
+	private CrudEntityFacade crudEntityFacade;
 
 	@Test
 	void testInsert() {
@@ -43,7 +42,7 @@ class MybatisAppTest {
 //    crudFacade.insert(issuesEntity);
 
 
-		Uc3User uc3User = crudFacade.byId(1749, Uc3User.class);
+		Uc3User uc3User = crudFacade.byId(1751, Uc3User.class);
 		uc3User.setAvatar("asfasfafs");
 		crudFacade.editor(uc3User);
 		System.out.println();
