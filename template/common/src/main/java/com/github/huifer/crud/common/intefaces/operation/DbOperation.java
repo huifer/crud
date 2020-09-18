@@ -25,8 +25,6 @@ import com.github.huifer.crud.common.intefaces.id.IdInterface;
 /**
  * db operation interface
  *
- * @param <T> entity
- * @param <I> id type
  * @see BaseEntity
  * @see IdInterface
  */

@@ -28,11 +28,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
-/**
- * @param <T> entity
- * @param <I> id interface
- */
 @Service("crudHashTemplateForRedis")
 public class CrudHashTemplateForRedis implements
 		RedisOperation {
