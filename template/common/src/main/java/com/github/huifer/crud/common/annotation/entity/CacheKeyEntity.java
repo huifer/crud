@@ -19,58 +19,74 @@
 package com.github.huifer.crud.common.annotation.entity;
 
 
+import com.github.huifer.crud.common.annotation.CacheKey;
+
 /***
  * cache key annotation entity
  * @see com.github.huifer.crud.common.annotation.CacheKey
  */
 public class CacheKeyEntity {
 
-  /**
-   * redis-hash-key
-   */
-  private String key;
-  /**
-   * entity class
-   */
-  private Class<?> type;
-  /**
-   * id filed name (form entity )
-   */
-  private String idFiled;
-  /**
-   * id generator method name (form entity)
-   */
-  private String idMethod;
+	/**
+	 * redis-hash-key
+	 */
+	private String key;
 
-  public String getIdMethod() {
-    return idMethod;
-  }
+	/**
+	 * entity class
+	 */
+	private Class<?> type;
 
-  public void setIdMethod(String idMethod) {
-    this.idMethod = idMethod;
-  }
+	/**
+	 * id filed name (form entity )
+	 */
+	private String idFiled;
 
-  public String getKey() {
-    return key;
-  }
+	/**
+	 * id generator method name (form entity)
+	 */
+	private String idMethod;
 
-  public void setKey(String key) {
-    this.key = key;
-  }
+	public CacheKeyEntity() {
+	}
 
-  public Class<?> getType() {
-    return type;
-  }
+	public CacheKeyEntity(CacheKey cacheKey) {
+		this.idFiled = cacheKey.idFiled();
+		this.idMethod = cacheKey.idMethod();
+		this.key = cacheKey.key();
+		this.type = cacheKey.type();
 
-  public void setType(Class<?> type) {
-    this.type = type;
-  }
+	}
 
-  public String getIdFiled() {
-    return idFiled;
-  }
+	public String getIdMethod() {
+		return idMethod;
+	}
 
-  public void setIdFiled(String idFiled) {
-    this.idFiled = idFiled;
-  }
+	public void setIdMethod(String idMethod) {
+		this.idMethod = idMethod;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public Class<?> getType() {
+		return type;
+	}
+
+	public void setType(Class<?> type) {
+		this.type = type;
+	}
+
+	public String getIdFiled() {
+		return idFiled;
+	}
+
+	public void setIdFiled(String idFiled) {
+		this.idFiled = idFiled;
+	}
 }

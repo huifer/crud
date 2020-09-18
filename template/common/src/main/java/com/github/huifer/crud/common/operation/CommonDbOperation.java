@@ -25,6 +25,7 @@ import com.github.huifer.crud.common.intefaces.operation.DbOperation;
 import com.github.huifer.crud.common.proxy.MapperTarget;
 import com.github.huifer.crud.common.proxy.MethodUtils;
 import com.github.huifer.crud.common.runner.CrudTemplateRunner;
+import com.github.huifer.crud.common.runner.MapperSuperRunner;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -41,7 +42,7 @@ public class CommonDbOperation<T extends BaseEntity, I extends IdInterface> impl
   private SqlSession sqlSession;
 
   public Class<?> getMapperClazz() {
-    return CrudTemplateRunner.mapper(type());
+    return MapperSuperRunner.mapper(type());
   }
 
   @Override

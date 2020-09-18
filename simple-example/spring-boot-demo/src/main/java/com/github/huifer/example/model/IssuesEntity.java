@@ -21,7 +21,7 @@ package com.github.huifer.example.model;
 import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
 
-@CacheKey(key = "tt", type = IssuesEntity.class, idFiled = "newTitle")
+//@CacheKey(key = "tt", type = IssuesEntity.class, idFiled = "newTitle")
 public class IssuesEntity implements BaseEntity {
 
 

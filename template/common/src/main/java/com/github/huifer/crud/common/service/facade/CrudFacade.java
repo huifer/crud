@@ -25,6 +25,9 @@ import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
 import com.github.huifer.crud.common.intefaces.operation.DbOperation;
 import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -42,11 +45,12 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
   @Qualifier("crudHashTemplateForRedis")
   private RedisOperation redisOperation;
 
-
+private static final Logger log = LoggerFactory.getLogger(CrudFacade.class);
   public boolean insert(T t) {
     boolean insert = dbOperation.insert(t, t.getClass());
     redisOperation.setClass(t.getClass());
     if (insert) {
+      log.debug("开始进行redis插入");
       redisOperation.insert(t, (StrIdInterface) () -> t.getId().toString());
     }
 

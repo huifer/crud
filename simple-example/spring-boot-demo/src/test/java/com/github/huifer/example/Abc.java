@@ -16,31 +16,25 @@
  *
  */
 
-package com.github.huifer.crud.common.runner;
+package com.github.huifer.example;
 
-import com.github.huifer.crud.common.intefaces.A;
-import java.util.HashMap;
-import java.util.Map;
-import org.springframework.stereotype.Component;
+import com.github.huifer.crud.common.intefaces.id.IntIdInterface;
+import com.github.huifer.crud.common.service.facade.CrudFacade;
+import com.github.huifer.example.model.Uc3User;
+import org.junit.Test;
 
-@Component
-public class CrudTemplateRunner {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-  public static final Map<Class<?>, MapperAndCacheInfo> mapperAndCacheInfoMap = new HashMap<>();
+@SpringBootTest
+public class Abc {
 
-
-  public static Class<?> mapper(Class<?> a) {
-    return mapperAndCacheInfoMap.get(a).getMapperClazz();
-  }
-
-
-  public static MapperAndCacheInfo getMapperAndCacheInfo(Class clazz) {
-    return mapperAndCacheInfoMap.get(clazz);
-  }
-
-
-  protected void afterRunner() {
-
-  }
-
+	@Autowired
+	private CrudFacade<Uc3User, IntIdInterface> crudFacade;
+	@Test
+	public void tt() {
+		Uc3User uc3User = new Uc3User();
+		uc3User.setName("aaaaaaaaaaaaaaaa");
+		crudFacade.insert(uc3User);
+	}
 }

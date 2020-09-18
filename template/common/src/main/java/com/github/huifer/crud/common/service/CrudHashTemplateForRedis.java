@@ -23,6 +23,7 @@ import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
 import com.github.huifer.crud.common.runner.CrudTemplateRunner;
 import com.github.huifer.crud.common.runner.MapperAndCacheInfo;
+import com.github.huifer.crud.common.runner.MapperSuperRunner;
 import com.github.huifer.crud.common.serialize.SerializationCall;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -97,11 +98,7 @@ public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterfac
     if (type == null) {
       return "";
     }
-    MapperAndCacheInfo mapperAndCacheInfo = CrudTemplateRunner.getMapperAndCacheInfo(type);
-    if (mapperAndCacheInfo == null) {
-      return "";
-    }
-    return mapperAndCacheInfo.getKey();
+  return MapperSuperRunner.getCacheKey(type);
   }
 
   @Override
