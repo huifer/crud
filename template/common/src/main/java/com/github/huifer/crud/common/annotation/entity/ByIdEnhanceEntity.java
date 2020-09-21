@@ -18,6 +18,8 @@
 
 package com.github.huifer.crud.common.annotation.entity;
 
+import com.github.huifer.crud.common.annotation.ByIdEnhance;
+
 /**
  * byId enhance annotation entity
  *
@@ -39,6 +41,15 @@ public class ByIdEnhanceEntity {
 	 * mapper class
 	 */
 	private Class<?> mapper;
+
+	public ByIdEnhanceEntity(ByIdEnhance byIdEnhance) {
+		this.foreignKey = byIdEnhance.foreignKey();
+		this.queryMethod = byIdEnhance.queryMethod();
+		this.mapper = byIdEnhance.mapper();
+	}
+
+	public ByIdEnhanceEntity() {
+	}
 
 	public String getForeignKey() {
 		return foreignKey;

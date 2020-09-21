@@ -23,8 +23,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.github.huifer.crud.common.annotation.ByIdEnhance;
+import com.github.huifer.crud.common.annotation.entity.ByIdEnhanceEntity;
 import com.github.huifer.crud.common.intefaces.enhance.EnhanceService;
 import com.github.huifer.crud.common.proxy.MapperTarget;
 import com.github.huifer.crud.common.utils.ClassUtils;
@@ -35,6 +38,8 @@ import org.springframework.stereotype.Service;
 
 @Service("enhanceServiceImpl")
 public class EnhanceServiceImpl<T> implements EnhanceService<T> {
+
+	private final Map<Class<?>, ByIdEnhance> classByIdEnhanceEntityMap = new ConcurrentHashMap<>(64);
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -53,27 +58,47 @@ public class EnhanceServiceImpl<T> implements EnhanceService<T> {
 		Object q = null;
 		for (Field field : allFields) {
 
-			field.setAccessible(true);
-			ByIdEnhance annotation = field.getAnnotation(ByIdEnhance.class);
-			if (annotation != null) {
-				String foreignKey = annotation.foreignKey();
-				Class<?> mapper = annotation.mapper();
-				String queryMethod = annotation.queryMethod();
-				Object foreignKeyValue = ClassUtils.getFieldValue(t, enhanceClass, foreignKey);
-				if (foreignKeyValue != null) {
-					q = q(mapper, queryMethod, annotation.idType(), foreignKeyValue);
-				}
-				// Fields to be processed
-				Class<?> type = field.getType();
-				if (q != null) {
-					if (q.getClass().equals(type)) {
-						field.set(t, q);
-					}
-				}
-				calcData((T) q, type);
-			}
+			Class<?> fieldType = field.getType();
 
+			field.setAccessible(true);
+
+			// cache value
+			ByIdEnhance cacheByIdEnhance = classByIdEnhanceEntityMap.get(fieldType);
+			if (cacheByIdEnhance != null) {
+				q = calc(t, enhanceClass, q, field, cacheByIdEnhance);
+			}
+			else {
+				ByIdEnhance annotation = field.getAnnotation(ByIdEnhance.class);
+				classByIdEnhanceEntityMap.put(fieldType, annotation);
+				q = calc(t, enhanceClass, q, field, annotation);
+			}
 		}
+	}
+
+
+	private Object calc(T t, Class<?> enhanceClass, Object q, Field field, ByIdEnhance annotation) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException {
+		if (annotation != null) {
+			String foreignKey = annotation.foreignKey();
+			Class<?> mapper = annotation.mapper();
+			String queryMethod = annotation.queryMethod();
+
+			ByIdEnhanceEntity byIdEnhanceEntity = new ByIdEnhanceEntity(annotation);
+
+
+			Object foreignKeyValue = ClassUtils.getFieldValue(t, enhanceClass, foreignKey);
+			if (foreignKeyValue != null) {
+				q = q(mapper, queryMethod, annotation.idType(), foreignKeyValue);
+			}
+			// Fields to be processed
+			Class<?> type = field.getType();
+			if (q != null) {
+				if (q.getClass().equals(type)) {
+					field.set(t, q);
+				}
+			}
+			calcData((T) q, type);
+		}
+		return q;
 	}
 
 	private Object q(Class<?> mapper, String method, Class<?> idType, Object id)
