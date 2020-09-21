@@ -24,30 +24,31 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ClassUtils {
-	private ClassUtils() {
-		throw new IllegalStateException("util class");
-	}
 
-	public static List<Field> getAllFields(Class<?> input) {
-		List<Field> fieldList = new ArrayList<>();
-		while (input != null &&
-				!input.getName().equalsIgnoreCase("java.lang.object")) {
-			fieldList.addAll(Arrays.asList(input.getDeclaredFields()));
-			input = input.getSuperclass();
-		}
-		return fieldList;
-	}
+  private ClassUtils() {
+    throw new IllegalStateException("util class");
+  }
 
-	public static Object getFieldValue(Object t, Class<?> entityClass, String field)
-			throws IllegalAccessException {
-		List<Field> allFields = getAllFields(entityClass);
-		Object result = null;
-		for (Field allField : allFields) {
-			allField.setAccessible(true);
-			if (allField.getName().equals(field)) {
-				result = allField.get(t);
-			}
-		}
-		return result;
-	}
+  public static List<Field> getAllFields(Class<?> input) {
+    List<Field> fieldList = new ArrayList<>();
+    while (input != null &&
+        !input.getName().equalsIgnoreCase("java.lang.object")) {
+      fieldList.addAll(Arrays.asList(input.getDeclaredFields()));
+      input = input.getSuperclass();
+    }
+    return fieldList;
+  }
+
+  public static Object getFieldValue(Object t, Class<?> entityClass, String field)
+      throws IllegalAccessException {
+    List<Field> allFields = getAllFields(entityClass);
+    Object result = null;
+    for (Field allField : allFields) {
+      allField.setAccessible(true);
+      if (allField.getName().equals(field)) {
+        result = allField.get(t);
+      }
+    }
+    return result;
+  }
 }

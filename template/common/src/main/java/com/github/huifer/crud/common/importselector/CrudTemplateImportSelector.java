@@ -18,12 +18,10 @@
 
 package com.github.huifer.crud.common.importselector;
 
-import java.util.Map;
-
 import com.github.huifer.crud.common.beans.EnableCrudTemplate;
 import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
-
+import java.util.Map;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -33,26 +31,26 @@ import org.springframework.core.type.AnnotationMetadata;
 public class CrudTemplateImportSelector implements ImportSelector {
 
 
-	@Override
-	public String[] selectImports(AnnotationMetadata annotationMetadata) {
-		// read attributes for EnableCrudTemplate
-		Map<String, Object> annotationAttributes = annotationMetadata
-				.getAnnotationAttributes(EnableCrudTemplate.class.getName());
-		String[] scanPackages = (String[]) annotationAttributes.get("scanPackages");
-		EnableAttrManager.setScanPackageDao(scanPackages);
+  @Override
+  public String[] selectImports(AnnotationMetadata annotationMetadata) {
+    // read attributes for EnableCrudTemplate
+    Map<String, Object> annotationAttributes = annotationMetadata
+        .getAnnotationAttributes(EnableCrudTemplate.class.getName());
+    String[] scanPackages = (String[]) annotationAttributes.get("scanPackages");
+    EnableAttrManager.setScanPackageDao(scanPackages);
 
-		JsonEnums jsonEnums = (JsonEnums) annotationAttributes.get("jsonEnums");
-		EnableAttrManager.setJsonEnums(jsonEnums);
+    JsonEnums jsonEnums = (JsonEnums) annotationAttributes.get("jsonEnums");
+    EnableAttrManager.setJsonEnums(jsonEnums);
 
-		String selectByIdMethodName = (String) annotationAttributes.get("selectByIdMethodName");
-		EnableAttrManager.setSelectByIdMethodName(selectByIdMethodName);
-		String deleteByIdMethodName = (String) annotationAttributes.get("deleteByIdMethodName");
-		EnableAttrManager.setDeleteByIdMethodName(deleteByIdMethodName);
-		String updateByIdMethodName = (String) annotationAttributes.get("updateByIdMethodName");
-		EnableAttrManager.setUpdateByIdMethodName(updateByIdMethodName);
-		String insertMethodName = (String) annotationAttributes.get("insertMethodName");
-		EnableAttrManager.setInsertMethodName(insertMethodName);
+    String selectByIdMethodName = (String) annotationAttributes.get("selectByIdMethodName");
+    EnableAttrManager.setSelectByIdMethodName(selectByIdMethodName);
+    String deleteByIdMethodName = (String) annotationAttributes.get("deleteByIdMethodName");
+    EnableAttrManager.setDeleteByIdMethodName(deleteByIdMethodName);
+    String updateByIdMethodName = (String) annotationAttributes.get("updateByIdMethodName");
+    EnableAttrManager.setUpdateByIdMethodName(updateByIdMethodName);
+    String insertMethodName = (String) annotationAttributes.get("insertMethodName");
+    EnableAttrManager.setInsertMethodName(insertMethodName);
 
-		return new String[0];
-	}
+    return new String[0];
+  }
 }

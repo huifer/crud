@@ -20,10 +20,10 @@ package com.github.huifer.crud.ctr.invoke;
 
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.serialize.SerializationCall;
-import com.github.huifer.crud.common.service.facade.CrudFacade;
 import com.github.huifer.crud.ctr.entity.AbsEntity;
 import com.github.huifer.crud.ctr.entity.OpEnums;
 import com.github.huifer.crud.ctr.entity.ResultVO;
+import com.github.huifer.crud.ctr.service.CrudFacadeForController;
 import com.github.huifer.crud.ctr.validated.ValidatedScanService;
 import java.io.PrintWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class InvokeServiceImpl implements
     InvokeService {
 
   @Autowired
-  private CrudFacade crudFacade;
+  private CrudFacadeForController crudFacade;
   @Autowired
   private ValidatedScanService validatedScanService;
 
@@ -60,22 +60,19 @@ public class InvokeServiceImpl implements
     Object returnString = null;
     if (url.endsWith("add")) {
       operation = crudFacade.insert(param);
-    }
-    else if (url.endsWith("editor")) {
+    } else if (url.endsWith("editor")) {
       setParamId(param, idType);
 
       operation = crudFacade.editor(param);
 
-    }
-    else if (url.endsWith("byId")) {
-      Object o = crudFacade.byId(new IdInterface() {
+    } else if (url.endsWith("byId")) {
+      Object o = crudFacade.byIdForController(new IdInterface() {
         @Override
         public Object id() {
           if (idType.equals(Integer.class)) {
             String[] split = splitByDotForId(String.valueOf(param.getId()));
             return Integer.parseInt(split[0]);
-          }
-          else {
+          } else {
             return String.valueOf(param.getId());
           }
         }
@@ -85,16 +82,14 @@ public class InvokeServiceImpl implements
         returnString = o;
 
       }
-    }
-    else if (url.endsWith("del")) {
+    } else if (url.endsWith("del")) {
       operation = crudFacade.del(new IdInterface() {
         @Override
         public Object id() {
           if (idType.equals(Integer.class)) {
             String[] split = splitByDotForId(String.valueOf(param.getId()));
             return Integer.parseInt(split[0]);
-          }
-          else {
+          } else {
             return String.valueOf(param.getId());
           }
         }
@@ -104,8 +99,7 @@ public class InvokeServiceImpl implements
     ResultVO res = null;
     if (operation) {
       res = ResultVO.success(returnString);
-    }
-    else {
+    } else {
       res = ResultVO.failed();
     }
     writer.write(toJson(res));
@@ -126,16 +120,13 @@ public class InvokeServiceImpl implements
   private OpEnums conv(String url) {
     if (url.endsWith("add")) {
       return OpEnums.ADD;
-    }
-    else if (url.endsWith("editor")) {
+    } else if (url.endsWith("editor")) {
       return OpEnums.EDITOR;
 
-    }
-    else if (url.endsWith("byId")) {
+    } else if (url.endsWith("byId")) {
       return OpEnums.BY_ID;
 
-    }
-    else if (url.endsWith("del")) {
+    } else if (url.endsWith("del")) {
       return OpEnums.DELETE;
 
     }

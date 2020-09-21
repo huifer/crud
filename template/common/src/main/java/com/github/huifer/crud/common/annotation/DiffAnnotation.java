@@ -30,41 +30,41 @@ import java.lang.annotation.Target;
 public @interface DiffAnnotation {
 
 
-	/**
-	 * filed name
-	 *
-	 * @return filed name
-	 */
-	String name() default "";
+  /**
+   * filed name
+   *
+   * @return filed name
+   */
+  String name() default "";
 
-	/**
-	 * change message
-	 * <p>Keywords to be replaced: [old] and [new]</p>
-	 *
-	 * @return change message
-	 */
-	String msg() default "";
+  /**
+   * change message
+   * <p>Keywords to be replaced: [old] and [new]</p>
+   *
+   * @return change message
+   */
+  String msg() default "";
 
-	/**
-	 * mapper class
-	 *
-	 * @return mapper.class
-	 */
-	Class<?> mapper() default Object.class;
+  /**
+   * mapper class
+   *
+   * @return mapper.class
+   */
+  Class<?> mapper() default Object.class;
 
-	/**
-	 * foreign type
-	 *
-	 * @return object
-	 */
-	Class<?> outJoin() default Object.class;
+  /**
+   * foreign type
+   *
+   * @return object
+   */
+  Class<?> outJoin() default Object.class;
 
 
-	/**
-	 * foreign type filed name
-	 *
-	 * @return out-field
-	 */
-	String outField() default "";
+  /**
+   * foreign type filed name
+   *
+   * @return out-field
+   */
+  String outField() default "";
 
 }

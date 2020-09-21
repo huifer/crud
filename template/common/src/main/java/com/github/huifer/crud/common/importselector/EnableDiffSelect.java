@@ -18,11 +18,9 @@
 
 package com.github.huifer.crud.common.importselector;
 
-import java.util.Map;
-
 import com.github.huifer.crud.common.beans.EnableDiff;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
-
+import java.util.Map;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -31,16 +29,16 @@ import org.springframework.core.type.AnnotationMetadata;
  */
 public class EnableDiffSelect implements ImportSelector {
 
-	@Override
-	public String[] selectImports(
-			AnnotationMetadata annotationMetadata) {
+  @Override
+  public String[] selectImports(
+      AnnotationMetadata annotationMetadata) {
 
-		Map<String, Object> annotationAttributes = annotationMetadata
-				.getAnnotationAttributes(EnableDiff.class.getName());
-		String[] scanPackages = (String[]) annotationAttributes.get("scanPackages");
-		String byIdSQL = (String) annotationAttributes.get("byIdMethod");
-		EnableAttrManager.setScanPackageDiff(scanPackages);
-		EnableAttrManager.setByIdMethod(byIdSQL);
-		return new String[0];
-	}
+    Map<String, Object> annotationAttributes = annotationMetadata
+        .getAnnotationAttributes(EnableDiff.class.getName());
+    String[] scanPackages = (String[]) annotationAttributes.get("scanPackages");
+    String byIdSQL = (String) annotationAttributes.get("byIdMethod");
+    EnableAttrManager.setScanPackageDiff(scanPackages);
+    EnableAttrManager.setByIdMethod(byIdSQL);
+    return new String[0];
+  }
 }

@@ -27,52 +27,52 @@ import com.github.huifer.crud.common.annotation.ByIdEnhance;
  */
 public class ByIdEnhanceEntity {
 
-	/**
-	 * foreign key
-	 */
-	private String foreignKey;
+  /**
+   * foreign key
+   */
+  private String foreignKey;
 
-	/**
-	 * query method
-	 */
-	private String queryMethod;
+  /**
+   * query method
+   */
+  private String queryMethod;
 
-	/**
-	 * mapper class
-	 */
-	private Class<?> mapper;
+  /**
+   * mapper class
+   */
+  private Class<?> mapper;
 
-	public ByIdEnhanceEntity(ByIdEnhance byIdEnhance) {
-		this.foreignKey = byIdEnhance.foreignKey();
-		this.queryMethod = byIdEnhance.queryMethod();
-		this.mapper = byIdEnhance.mapper();
-	}
+  public ByIdEnhanceEntity(ByIdEnhance byIdEnhance) {
+    this.foreignKey = byIdEnhance.foreignKey();
+    this.queryMethod = byIdEnhance.queryMethod();
+    this.mapper = byIdEnhance.mapper();
+  }
 
-	public ByIdEnhanceEntity() {
-	}
+  public ByIdEnhanceEntity() {
+  }
 
-	public String getForeignKey() {
-		return foreignKey;
-	}
+  public String getForeignKey() {
+    return foreignKey;
+  }
 
-	public void setForeignKey(String foreignKey) {
-		this.foreignKey = foreignKey;
-	}
+  public void setForeignKey(String foreignKey) {
+    this.foreignKey = foreignKey;
+  }
 
-	public String getQueryMethod() {
-		return queryMethod;
-	}
+  public String getQueryMethod() {
+    return queryMethod;
+  }
 
-	public void setQueryMethod(String queryMethod) {
-		this.queryMethod = queryMethod;
-	}
+  public void setQueryMethod(String queryMethod) {
+    this.queryMethod = queryMethod;
+  }
 
-	public Class<?> getMapper() {
-		return mapper;
-	}
+  public Class<?> getMapper() {
+    return mapper;
+  }
 
-	public void setMapper(Class<?> mapper) {
-		this.mapper = mapper;
-	}
+  public void setMapper(Class<?> mapper) {
+    this.mapper = mapper;
+  }
 
 }

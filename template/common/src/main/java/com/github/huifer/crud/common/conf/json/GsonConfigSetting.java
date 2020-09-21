@@ -26,17 +26,17 @@ import com.google.gson.GsonBuilder;
  */
 public interface GsonConfigSetting {
 
-	/**
-	 * gson builder setting
-	 *
-	 * @return gson builder
-	 */
-	GsonBuilder gsonBuild();
+  /**
+   * gson builder setting
+   *
+   * @return gson builder
+   */
+  GsonBuilder gsonBuild();
 
-	/**
-	 * gson
-	 *
-	 * @return gson
-	 */
-	Gson gson();
+  /**
+   * gson
+   *
+   * @return gson
+   */
+  Gson gson();
 }

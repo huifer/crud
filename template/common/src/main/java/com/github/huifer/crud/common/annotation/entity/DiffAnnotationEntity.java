@@ -23,69 +23,69 @@ package com.github.huifer.crud.common.annotation.entity;
  */
 public class DiffAnnotationEntity {
 
-	/**
-	 * filed name (alias name )
-	 */
-	String name;
+  /**
+   * filed name (alias name )
+   */
+  String name;
 
-	/**
-	 * change message
-	 */
-	String msg;
+  /**
+   * change message
+   */
+  String msg;
 
-	/**
-	 * mapper.class
-	 */
-	Class<?> mapper;
+  /**
+   * mapper.class
+   */
+  Class<?> mapper;
 
-	/**
-	 * foreign type
-	 */
-	Class<?> outJoin;
+  /**
+   * foreign type
+   */
+  Class<?> outJoin;
 
-	/**
-	 * foreign type filed name
-	 */
-	String outField;
+  /**
+   * foreign type filed name
+   */
+  String outField;
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public String getMsg() {
-		return msg;
-	}
+  public String getMsg() {
+    return msg;
+  }
 
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
+  public void setMsg(String msg) {
+    this.msg = msg;
+  }
 
-	public Class<?> getMapper() {
-		return mapper;
-	}
+  public Class<?> getMapper() {
+    return mapper;
+  }
 
-	public void setMapper(Class<?> mapper) {
-		this.mapper = mapper;
-	}
+  public void setMapper(Class<?> mapper) {
+    this.mapper = mapper;
+  }
 
-	public Class<?> getOutJoin() {
-		return outJoin;
-	}
+  public Class<?> getOutJoin() {
+    return outJoin;
+  }
 
-	public void setOutJoin(Class<?> outJoin) {
-		this.outJoin = outJoin;
-	}
+  public void setOutJoin(Class<?> outJoin) {
+    this.outJoin = outJoin;
+  }
 
-	public String getOutField() {
-		return outField;
-	}
+  public String getOutField() {
+    return outField;
+  }
 
-	public void setOutField(String outField) {
-		this.outField = outField;
-	}
+  public void setOutField(String outField) {
+    this.outField = outField;
+  }
 
 }

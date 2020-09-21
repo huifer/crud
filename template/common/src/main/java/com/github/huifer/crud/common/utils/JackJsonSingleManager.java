@@ -22,18 +22,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JackJsonSingleManager {
 
-	private static ObjectMapper objectMapper = new ObjectMapper();
+  private static ObjectMapper objectMapper = new ObjectMapper();
 
-	private JackJsonSingleManager() {
+  private JackJsonSingleManager() {
 
-	}
+  }
 
-	public static ObjectMapper getObjectMapper() {
-		return objectMapper;
-	}
+  public static ObjectMapper getObjectMapper() {
+    return objectMapper;
+  }
 
-	public static void setObjectMapper(ObjectMapper objectMapper) {
-		JackJsonSingleManager.objectMapper = objectMapper;
-	}
+  public static void setObjectMapper(ObjectMapper objectMapper) {
+    JackJsonSingleManager.objectMapper = objectMapper;
+  }
 
 }

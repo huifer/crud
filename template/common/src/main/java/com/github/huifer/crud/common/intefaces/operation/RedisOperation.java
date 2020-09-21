@@ -23,18 +23,18 @@ import com.github.huifer.crud.common.intefaces.id.IdInterface;
 
 public interface RedisOperation {
 
-	<T> void insert(T t, IdInterface id);
+  <T> void insert(T t, IdInterface id);
 
 
-	<T> void update(IdInterface id, T t);
+  <T> void update(IdInterface id, T t);
 
-	void del(IdInterface id);
+  void del(IdInterface id);
 
-	<T> T byId(IdInterface id);
+  <T> T byId(IdInterface id);
 
-	Class<?> type();
+  Class<?> type();
 
-	void setClass(Class<?> clazz);
+  void setClass(Class<?> clazz);
 
-	String key();
+  String key();
 }

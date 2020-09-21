@@ -1,7 +1,6 @@
 package com.github.huifer.mp;
 
 import com.github.huifer.crud.common.beans.EnableCrudTemplate;
-import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.service.facade.CrudFacade;
 import com.github.huifer.mp.mapper.IssuesMapper;
 import com.github.huifer.mp.model.IssuesEntity;
@@ -23,18 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
     updateByIdMethodName = "updateById",
     insertMethodName = "insert")
 public class App {
+
+  @Autowired
+  private IssuesMapper mapper;
+  @Autowired
+  private CrudFacade crudFacade;
+
   public static void main(String[] args) {
     SpringApplication.run(App.class, args);
   }
 
-  @Autowired
-  private IssuesMapper mapper;
-
-  @Autowired
-  private CrudFacade crudFacade;
-
   @GetMapping("/do")
-  public void go(){
+  public void go() {
     IssuesEntity issuesEntity = new IssuesEntity();
     issuesEntity.setNewTitle("111111");
     IssuesEntity baseEntity = crudFacade.byId(4, IssuesEntity.class);

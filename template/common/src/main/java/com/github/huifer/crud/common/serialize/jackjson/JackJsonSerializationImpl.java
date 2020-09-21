@@ -22,37 +22,34 @@ import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.serialize.Serialization;
 import com.github.huifer.crud.common.utils.Constant;
 import com.github.huifer.crud.common.utils.JackJsonSingleManager;
-
 import org.springframework.stereotype.Service;
 
 @Service(Constant.JACK_JSON_SERIALIZATION_BEAN_NAME)
 public class JackJsonSerializationImpl implements Serialization {
 
-	@Override
-	public JsonEnums jsonType() {
-		return JsonEnums.JACK_JSON;
-	}
+  @Override
+  public JsonEnums jsonType() {
+    return JsonEnums.JACK_JSON;
+  }
 
-	@Override
-	public String serialize(Object object) {
-		try {
-			return JackJsonSingleManager.getObjectMapper().writeValueAsString(object);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			return "";
-		}
-	}
+  @Override
+  public String serialize(Object object) {
+    try {
+      return JackJsonSingleManager.getObjectMapper().writeValueAsString(object);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "";
+    }
+  }
 
-	@Override
-	public Object deserialize(String json, Class<?> type) {
-		try {
-			return JackJsonSingleManager.getObjectMapper().readValue(json, type);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+  @Override
+  public Object deserialize(String json, Class<?> type) {
+    try {
+      return JackJsonSingleManager.getObjectMapper().readValue(json, type);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
 
-	}
+  }
 }

@@ -25,13 +25,13 @@ package com.github.huifer.crud.common.intefaces.enhance;
  */
 public interface EnhanceService<T> {
 
-	/**
-	 * byId query enhance
-	 *
-	 * @param t enhance entity
-	 * @return enhance entity
-	 * @throws Exception ex
-	 */
-	T enhance(T t) throws Exception;
+  /**
+   * byId query enhance
+   *
+   * @param t enhance entity
+   * @return enhance entity
+   * @throws Exception ex
+   */
+  T enhance(T t) throws Exception;
 
 }

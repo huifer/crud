@@ -25,7 +25,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
 
 @TableName("issues")
-public class IssuesEntity  implements BaseEntity  {
+public class IssuesEntity implements BaseEntity {
 
 
   @TableId(value = "id", type = IdType.AUTO)

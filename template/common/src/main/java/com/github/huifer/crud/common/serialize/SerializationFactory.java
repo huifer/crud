@@ -22,6 +22,6 @@ import com.github.huifer.crud.common.model.enums.JsonEnums;
 
 public interface SerializationFactory {
 
-	Serialization factory(JsonEnums jsonEnums);
+  Serialization factory(JsonEnums jsonEnums);
 
 }

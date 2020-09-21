@@ -23,27 +23,27 @@ import com.google.gson.GsonBuilder;
 
 public class GsonSingleManager {
 
-	private static Gson gson = new Gson();
+  private static Gson gson = new Gson();
 
-	private static GsonBuilder gsonBuilder = new GsonBuilder();
+  private static GsonBuilder gsonBuilder = new GsonBuilder();
 
-	private GsonSingleManager() {
+  private GsonSingleManager() {
 
-	}
+  }
 
-	public static GsonBuilder getGsonBuilder() {
-		return gsonBuilder;
-	}
+  public static GsonBuilder getGsonBuilder() {
+    return gsonBuilder;
+  }
 
-	public static void setGsonBuilder(GsonBuilder gsonBuilder) {
-		GsonSingleManager.gsonBuilder = gsonBuilder;
-	}
+  public static void setGsonBuilder(GsonBuilder gsonBuilder) {
+    GsonSingleManager.gsonBuilder = gsonBuilder;
+  }
 
-	public static Gson getGson() {
-		return gson;
-	}
+  public static Gson getGson() {
+    return gson;
+  }
 
-	public static void setGson(Gson gson) {
-		GsonSingleManager.gson = gson;
-	}
+  public static void setGson(Gson gson) {
+    GsonSingleManager.gson = gson;
+  }
 }

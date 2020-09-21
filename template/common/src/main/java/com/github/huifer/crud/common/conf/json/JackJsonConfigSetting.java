@@ -25,10 +25,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public interface JackJsonConfigSetting {
 
-	/**
-	 * setting object mapper
-	 *
-	 * @return object mapper
-	 */
-	ObjectMapper setObjectMapper();
+  /**
+   * setting object mapper
+   *
+   * @return object mapper
+   */
+  ObjectMapper setObjectMapper();
 }

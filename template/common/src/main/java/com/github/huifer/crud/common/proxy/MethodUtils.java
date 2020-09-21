@@ -22,36 +22,35 @@ import java.lang.reflect.Method;
 
 public class MethodUtils {
 
-	private MethodUtils() {
+  private MethodUtils() {
 
-	}
+  }
 
-	public static Method getMethod(Class<?> clazz, String name) {
-		Method[] methods = clazz.getMethods();
-		return getMethod(methods, name);
-	}
+  public static Method getMethod(Class<?> clazz, String name) {
+    Method[] methods = clazz.getMethods();
+    return getMethod(methods, name);
+  }
 
-	public static Method getMethod(Method[] methods, String name) {
-		Method method = null;
-		for (Method check : methods) {
-			if (check.getName().equals(name)) {
-				method = check;
-				break;
-			}
-		}
-		return method;
-	}
+  public static Method getMethod(Method[] methods, String name) {
+    Method method = null;
+    for (Method check : methods) {
+      if (check.getName().equals(name)) {
+        method = check;
+        break;
+      }
+    }
+    return method;
+  }
 
 
-	public static Object invoke(Object o, Method method, Object... params) {
-		try {
-			return method.invoke(o, params);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
+  public static Object invoke(Object o, Method method, Object... params) {
+    try {
+      return method.invoke(o, params);
+    } catch (Exception e) {
+      e.printStackTrace();
 
-		}
-		return null;
-	}
+    }
+    return null;
+  }
 
 }

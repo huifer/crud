@@ -23,12 +23,12 @@ import com.github.huifer.crud.common.intefaces.id.IdInterface;
 
 public interface CrudTemplate {
 
-	<T> boolean insert(T t);
+  <T> boolean insert(T t);
 
-	<T> T byId(IdInterface<Object> i, Class<?> c);
+  <T> T byId(IdInterface<Object> i, Class<?> c);
 
-	boolean del(IdInterface<Object> i, Class<?> c);
+  boolean del(IdInterface<Object> i, Class<?> c);
 
-	<T> boolean editor(T t);
+  <T> boolean editor(T t);
 
 }

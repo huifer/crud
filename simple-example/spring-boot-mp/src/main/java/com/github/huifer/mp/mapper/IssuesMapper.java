@@ -21,7 +21,7 @@ package com.github.huifer.mp.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.mp.model.IssuesEntity;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 @CacheKey(key = "issues", type = IssuesEntity.class)

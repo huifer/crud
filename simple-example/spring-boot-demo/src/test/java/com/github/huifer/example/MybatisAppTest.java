@@ -22,31 +22,29 @@ import com.github.huifer.crud.common.service.facade.CrudEntityFacade;
 import com.github.huifer.crud.common.service.facade.CrudFacade;
 import com.github.huifer.example.model.Uc3User;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class MybatisAppTest {
 
-	@Autowired
-	private CrudFacade crudFacade;
+  @Autowired
+  private CrudFacade crudFacade;
 
-	@Autowired
-	private CrudEntityFacade crudEntityFacade;
+  @Autowired
+  private CrudEntityFacade crudEntityFacade;
 
-	@Test
-	void testInsert() {
+  @Test
+  void testInsert() {
 //    Uc3User issuesEntity = new Uc3User();
 //    issuesEntity.setName("mybatis_test");
 //    crudFacade.insert(issuesEntity);
 
-
-		Uc3User uc3User = crudFacade.byId(1751, Uc3User.class);
-		uc3User.setAvatar("asfasfafs");
-		crudFacade.editor(uc3User);
-		System.out.println();
-	}
+    Uc3User uc3User = crudFacade.byId(1751, Uc3User.class);
+    uc3User.setAvatar("asfasfafs");
+    crudFacade.editor(uc3User);
+    System.out.println();
+  }
 
 //  @Test
 //  void testById() {

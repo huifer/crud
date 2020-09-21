@@ -27,66 +27,66 @@ import com.github.huifer.crud.common.annotation.CacheKey;
  */
 public class CacheKeyEntity {
 
-	/**
-	 * redis-hash-key
-	 */
-	private String key;
+  /**
+   * redis-hash-key
+   */
+  private String key;
 
-	/**
-	 * entity class
-	 */
-	private Class<?> type;
+  /**
+   * entity class
+   */
+  private Class<?> type;
 
-	/**
-	 * id filed name (form entity )
-	 */
-	private String idFiled;
+  /**
+   * id filed name (form entity )
+   */
+  private String idFiled;
 
-	/**
-	 * id generator method name (form entity)
-	 */
-	private String idMethod;
+  /**
+   * id generator method name (form entity)
+   */
+  private String idMethod;
 
-	public CacheKeyEntity() {
-	}
+  public CacheKeyEntity() {
+  }
 
-	public CacheKeyEntity(CacheKey cacheKey) {
-		this.idFiled = cacheKey.idFiled();
-		this.idMethod = cacheKey.idMethod();
-		this.key = cacheKey.key();
-		this.type = cacheKey.type();
+  public CacheKeyEntity(CacheKey cacheKey) {
+    this.idFiled = cacheKey.idFiled();
+    this.idMethod = cacheKey.idMethod();
+    this.key = cacheKey.key();
+    this.type = cacheKey.type();
 
-	}
+  }
 
-	public String getIdMethod() {
-		return idMethod;
-	}
+  public String getIdMethod() {
+    return idMethod;
+  }
 
-	public void setIdMethod(String idMethod) {
-		this.idMethod = idMethod;
-	}
+  public void setIdMethod(String idMethod) {
+    this.idMethod = idMethod;
+  }
 
-	public String getKey() {
-		return key;
-	}
+  public String getKey() {
+    return key;
+  }
 
-	public void setKey(String key) {
-		this.key = key;
-	}
+  public void setKey(String key) {
+    this.key = key;
+  }
 
-	public Class<?> getType() {
-		return type;
-	}
+  public Class<?> getType() {
+    return type;
+  }
 
-	public void setType(Class<?> type) {
-		this.type = type;
-	}
+  public void setType(Class<?> type) {
+    this.type = type;
+  }
 
-	public String getIdFiled() {
-		return idFiled;
-	}
+  public String getIdFiled() {
+    return idFiled;
+  }
 
-	public void setIdFiled(String idFiled) {
-		this.idFiled = idFiled;
-	}
+  public void setIdFiled(String idFiled) {
+    this.idFiled = idFiled;
+  }
 }
