@@ -18,24 +18,26 @@
 
 package com.github.huifer.crud.common.service;
 
+import static com.github.huifer.crud.common.utils.Constant.CRUD_HASH_TEMPLATE_FOR_REDIS_BEAN_NAME;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
 import com.github.huifer.crud.common.runner.MapperSuperRunner;
 import com.github.huifer.crud.common.serialize.SerializationCall;
+import com.github.huifer.crud.common.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-@Service("crudHashTemplateForRedis")
+@Service(CRUD_HASH_TEMPLATE_FOR_REDIS_BEAN_NAME)
 public class CrudHashTemplateForRedis implements
     RedisOperation {
 
   Class<?> type;
 
   @Autowired
-  @Qualifier("serializationCallImpl")
+  @Qualifier(Constant.SERIALIZATION_CALL_IMPL)
   SerializationCall serializationCall;
 
   @Autowired

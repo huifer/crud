@@ -19,6 +19,7 @@
 package com.github.huifer.crud.common.serialize.impl;
 
 
+import static com.github.huifer.crud.common.utils.Constant.SERIALIZATION_FACTORY_BEAN_NAME;
 import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.serialize.Serialization;
 import com.github.huifer.crud.common.serialize.SerializationFactory;
@@ -33,7 +34,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 
-@Service("serializationFactoryImpl")
+@Service(SERIALIZATION_FACTORY_BEAN_NAME)
 public class SerializationFactoryImpl implements SerializationFactory {
 
   @Autowired

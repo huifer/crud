@@ -19,6 +19,9 @@
 package com.github.huifer.crud.common.service.facade;
 
 
+import static com.github.huifer.crud.common.utils.Constant.COMMON_DB_OPERATION_BEAN_NAME;
+import static com.github.huifer.crud.common.utils.Constant.CRUD_FACADE_BEAN_NAME;
+import static com.github.huifer.crud.common.utils.Constant.CRUD_HASH_TEMPLATE_FOR_REDIS_BEAN_NAME;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
@@ -30,18 +33,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service(CRUD_FACADE_BEAN_NAME)
 public class CrudFacade {
 
 
   private static final Logger log = LoggerFactory.getLogger(CrudFacade.class);
 
   @Autowired
-  @Qualifier("commonDbOperation")
+  @Qualifier(COMMON_DB_OPERATION_BEAN_NAME)
   protected DbOperation dbOperation;
 
   @Autowired
-  @Qualifier("crudHashTemplateForRedis")
+  @Qualifier(CRUD_HASH_TEMPLATE_FOR_REDIS_BEAN_NAME)
   protected RedisOperation redisOperation;
 
   public <T extends BaseEntity> boolean insert(T t) {

@@ -19,13 +19,14 @@
 package com.github.huifer.crud.ctr.validated;
 
 import com.github.huifer.crud.ctr.entity.OpEnums;
+import com.github.huifer.crud.ctr.utils.ConstantForController;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service(ConstantForController.VALIDATED_SCAN_SERVICE_BEAN_NAME)
 public class ValidatedScanService {
 
   @Autowired

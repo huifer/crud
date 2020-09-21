@@ -18,17 +18,20 @@
 
 package com.github.huifer.example;
 
+import static com.github.huifer.crud.common.utils.Constant.CRUD_FACADE_BEAN_NAME;
 import com.github.huifer.crud.common.service.facade.CrudEntityFacade;
 import com.github.huifer.crud.common.service.facade.CrudFacade;
 import com.github.huifer.example.model.Uc3User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class MybatisAppTest {
 
   @Autowired
+  @Qualifier(CRUD_FACADE_BEAN_NAME)
   private CrudFacade crudFacade;
 
   @Autowired

@@ -20,6 +20,7 @@ package com.github.huifer.crud.ctr.invoke;
 
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.serialize.SerializationCall;
+import com.github.huifer.crud.common.utils.Constant;
 import com.github.huifer.crud.ctr.entity.AbsEntity;
 import com.github.huifer.crud.ctr.entity.OpEnums;
 import com.github.huifer.crud.ctr.entity.ResultVO;
@@ -27,6 +28,7 @@ import com.github.huifer.crud.ctr.service.CrudFacadeForController;
 import com.github.huifer.crud.ctr.validated.ValidatedScanService;
 import java.io.PrintWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,6 +36,7 @@ public class InvokeServiceImpl implements
     InvokeService {
 
   @Autowired
+  @Qualifier(Constant.CRUD_FACADE_FOR_CONTROLLER_BEAN_NAME)
   private CrudFacadeForController crudFacade;
   @Autowired
   private ValidatedScanService validatedScanService;

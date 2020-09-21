@@ -19,6 +19,7 @@
 package com.github.huifer.crud.common.operation;
 
 
+import static com.github.huifer.crud.common.utils.Constant.COMMON_DB_OPERATION_BEAN_NAME;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.operation.DbOperation;
@@ -32,7 +33,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("commonDbOperation")
+@Service(COMMON_DB_OPERATION_BEAN_NAME)
 public class CommonDbOperation implements
     DbOperation {
 

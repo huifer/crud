@@ -18,9 +18,11 @@
 
 package com.github.huifer.example;
 
+import static com.github.huifer.crud.common.utils.Constant.EnhanceService_BEAN_NAME;
 import com.github.huifer.crud.common.annotation.ByIdEnhance;
 import com.github.huifer.crud.common.intefaces.enhance.EnhanceService;
 import com.github.huifer.crud.common.proxy.MapperTarget;
+import com.github.huifer.crud.common.utils.Constant;
 import com.github.huifer.example.mapper.SecondModelMapper;
 import com.github.huifer.example.mapper.TotalModelMapper;
 import com.github.huifer.example.model.SecondModel;
@@ -50,7 +52,7 @@ public class ByIdEnhanceTest {
   private SqlSession sqlSession;
 
   @Autowired
-  @Qualifier("enhanceServiceImpl")
+  @Qualifier(Constant.EnhanceService_BEAN_NAME)
   private EnhanceService enhanceService;
 
   @Autowired

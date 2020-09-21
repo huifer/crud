@@ -22,9 +22,10 @@ import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
 import com.github.huifer.crud.common.service.facade.CrudFacade;
+import com.github.huifer.crud.common.utils.Constant;
 import org.springframework.stereotype.Service;
 
-@Service("crudFacadeForController")
+@Service(Constant.CRUD_FACADE_FOR_CONTROLLER_BEAN_NAME)
 public class CrudFacadeForController extends CrudFacade {
 
   public <T extends BaseEntity> T byIdForController(Object id, Class<?> c) {

@@ -18,11 +18,13 @@
 
 package com.github.huifer.crud.common.service;
 
+import static com.github.huifer.crud.common.utils.Constant.EnhanceService_BEAN_NAME;
 import com.github.huifer.crud.common.annotation.ByIdEnhance;
 import com.github.huifer.crud.common.annotation.entity.ByIdEnhanceEntity;
 import com.github.huifer.crud.common.intefaces.enhance.EnhanceService;
 import com.github.huifer.crud.common.proxy.MapperTarget;
 import com.github.huifer.crud.common.utils.ClassUtils;
+import com.github.huifer.crud.common.utils.Constant;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -34,7 +36,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("enhanceServiceImpl")
+@Service(Constant.EnhanceService_BEAN_NAME)
 public class EnhanceServiceImpl<T> implements EnhanceService<T> {
 
   private final Map<Class<?>, ByIdEnhance> classByIdEnhanceEntityMap = new ConcurrentHashMap<>(64);

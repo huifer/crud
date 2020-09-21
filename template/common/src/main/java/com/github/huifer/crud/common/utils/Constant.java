@@ -20,6 +20,7 @@ package com.github.huifer.crud.common.utils;
 
 import java.util.Arrays;
 import java.util.List;
+import sun.security.provider.PolicySpiFile;
 
 public class Constant {
 
@@ -52,6 +53,13 @@ public class Constant {
 
   public static final String SERIALIZATION_CALL_IMPL = "serializationCallImpl";
 
+
+  public static final String CRUD_FACADE_BEAN_NAME = "crudFacade";
+  public static final String CRUD_FACADE_FOR_CONTROLLER_BEAN_NAME = "crudFacade";
+  public static final String CRUD_HASH_TEMPLATE_FOR_REDIS_BEAN_NAME = "crudHashTemplateForRedis";
+  public static final String COMMON_DB_OPERATION_BEAN_NAME = "commonDbOperation";
+  public static final String SERIALIZATION_FACTORY_BEAN_NAME = "serializationFactoryImpl";
+  public static final String EnhanceService_BEAN_NAME = "enhanceServiceImpl";
   private Constant() {
     throw new IllegalStateException("utils class");
   }
