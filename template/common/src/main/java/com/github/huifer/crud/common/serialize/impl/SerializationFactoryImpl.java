@@ -19,11 +19,11 @@
 package com.github.huifer.crud.common.serialize.impl;
 
 
-import static com.github.huifer.crud.common.utils.Constant.SERIALIZATION_BEAN_NAMES;
-
+import static com.github.huifer.crud.common.utils.Constant.SERIALIZATION_FACTORY_BEAN_NAME;
 import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.serialize.Serialization;
 import com.github.huifer.crud.common.serialize.SerializationFactory;
+import com.github.huifer.crud.common.utils.Constant;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
 import java.util.Iterator;
 import java.util.Map;
@@ -33,7 +33,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-@Service("serializationFactoryImpl")
+
+@Service(SERIALIZATION_FACTORY_BEAN_NAME)
 public class SerializationFactoryImpl implements SerializationFactory {
 
   @Autowired
@@ -48,9 +49,8 @@ public class SerializationFactoryImpl implements SerializationFactory {
 
     if (beansOfType.size() == 1) {
       setSerialization(beansOfType, result);
-    }
-    else {
-      for (String serializationBeanName : SERIALIZATION_BEAN_NAMES) {
+    } else {
+      for (String serializationBeanName : Constant.SERIALIZATION_BEAN_NAMES) {
         beansOfType.remove(serializationBeanName);
       }
 
@@ -62,8 +62,7 @@ public class SerializationFactoryImpl implements SerializationFactory {
 
   private void removeOtherJsonSerialization(JsonEnums jsonEnums,
       Map<String, Serialization> beansOfType) {
-    // 删除 类型不匹配的对象
-
+    // remove not match class
     Iterator<Entry<String, Serialization>> iterator = beansOfType.entrySet().iterator();
 
     while (iterator.hasNext()) {

@@ -1,16 +1,34 @@
+/*
+ *
+ * Copyright 2020-2020 HuiFer All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 package com.github.huifer.crud.ctr.invoke;
 
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.serialize.SerializationCall;
-import com.github.huifer.crud.common.service.facade.CrudFacade;
+import com.github.huifer.crud.common.utils.Constant;
 import com.github.huifer.crud.ctr.entity.AbsEntity;
 import com.github.huifer.crud.ctr.entity.OpEnums;
 import com.github.huifer.crud.ctr.entity.ResultVO;
+import com.github.huifer.crud.ctr.service.CrudFacadeForController;
 import com.github.huifer.crud.ctr.validated.ValidatedScanService;
-
 import java.io.PrintWriter;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,26 +36,27 @@ public class InvokeServiceImpl implements
     InvokeService {
 
   @Autowired
-  private CrudFacade crudFacade;
+  @Qualifier(Constant.CRUD_FACADE_FOR_CONTROLLER_BEAN_NAME)
+  private CrudFacadeForController crudFacade;
   @Autowired
   private ValidatedScanService validatedScanService;
 
   @Autowired
   private SerializationCall serializationCall;
 
-  public static void main(String[] args) {
 
-    String[] split = splitByDotForId("4.88");
-    System.out.println();
+  private static String[] splitByDotForId(String s2) {
+    String s = s2;
+    return s.split("\\.");
   }
 
   @Override
   public void invoke(PrintWriter writer, String url, AbsEntity param, Class<?> paramType,
-                     Class<?> idType) throws Exception {
+      Class<?> idType) throws Exception {
     if (crudFacade == null) {
-      throw new RuntimeException("操作机为空");
+      throw new RuntimeException("curd facade is null .");
     }
-    //  验证器 com.github.huifer.crud.ctr.validated.ValidatedInterface
+    //  validated com.github.huifer.crud.ctr.validated.ValidatedInterface
     OpEnums opEnums = conv(url);
     validatedScanService.invoke(param, paramType, opEnums);
     boolean operation = false;
@@ -50,7 +69,7 @@ public class InvokeServiceImpl implements
       operation = crudFacade.editor(param);
 
     } else if (url.endsWith("byId")) {
-      Object o = crudFacade.byId(new IdInterface() {
+      Object o = crudFacade.byIdForController(new IdInterface() {
         @Override
         public Object id() {
           if (idType.equals(Integer.class)) {
@@ -87,11 +106,6 @@ public class InvokeServiceImpl implements
       res = ResultVO.failed();
     }
     writer.write(toJson(res));
-  }
-
-  private static String[] splitByDotForId(String s2) {
-    String s = s2;
-    return s.split("\\.");
   }
 
   private void setParamId(AbsEntity param, Class<?> idType) {

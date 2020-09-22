@@ -18,39 +18,37 @@
 
 package com.github.huifer.crud.common.service;
 
-import com.github.huifer.crud.common.intefaces.BaseEntity;
+import static com.github.huifer.crud.common.utils.Constant.CRUD_HASH_TEMPLATE_FOR_REDIS_BEAN_NAME;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
-import com.github.huifer.crud.common.runner.CrudTemplateRunner;
-import com.github.huifer.crud.common.runner.MapperAndCacheInfo;
+import com.github.huifer.crud.common.runner.MapperSuperRunner;
 import com.github.huifer.crud.common.serialize.SerializationCall;
+import com.github.huifer.crud.common.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-/**
- * @param <T> entity
- * @param <I> id interface
- */
-@Service("crudHashTemplateForRedis")
-public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterface> implements
-    RedisOperation<T, I> {
+@Service(CRUD_HASH_TEMPLATE_FOR_REDIS_BEAN_NAME)
+public class CrudHashTemplateForRedis implements
+    RedisOperation {
 
   Class<?> type;
+
   @Autowired
-  @Qualifier("serializationCallImpl")
+  @Qualifier(Constant.SERIALIZATION_CALL_IMPL)
   SerializationCall serializationCall;
+
   @Autowired
   private StringRedisTemplate redisTemplate;
 
   @Override
-  public void update(I id, T t) {
+  public <T> void update(IdInterface id, T t) {
     this.insert(t, id);
   }
 
-  public void insert(T t, I id) {
+  public <T> void insert(T t, IdInterface id) {
     String key = key();
     if (StringUtils.isEmpty(key)) {
       return;
@@ -59,12 +57,12 @@ public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterfac
     redisTemplate.opsForHash().put(key, String.valueOf(id.id()), objToJson(t));
   }
 
-  private String objToJson(T t) {
+  private <T> String objToJson(T t) {
     return serializationCall.toJson(t);
   }
 
 
-  public T byId(I id) {
+  public <T> T byId(IdInterface id) {
     String key = key();
     if (StringUtils.isEmpty(key)) {
       return null;
@@ -81,7 +79,7 @@ public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterfac
     return serializationCall.fromJson(o, type());
   }
 
-  public void del(I id) {
+  public void del(IdInterface id) {
     String key = key();
     if (StringUtils.isEmpty(key)) {
       return;
@@ -97,11 +95,7 @@ public class CrudHashTemplateForRedis<T extends BaseEntity, I extends IdInterfac
     if (type == null) {
       return "";
     }
-    MapperAndCacheInfo mapperAndCacheInfo = CrudTemplateRunner.getMapperAndCacheInfo(type);
-    if (mapperAndCacheInfo == null) {
-      return "";
-    }
-    return mapperAndCacheInfo.getKey();
+    return MapperSuperRunner.getCacheKey(type);
   }
 
   @Override

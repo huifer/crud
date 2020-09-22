@@ -19,7 +19,6 @@
 package com.github.huifer.crud.common.serialize.gson;
 
 import static com.github.huifer.crud.common.utils.Constant.GSON_SERIALIZATION_BEAN_NAME;
-
 import com.github.huifer.crud.common.model.enums.JsonEnums;
 import com.github.huifer.crud.common.serialize.Serialization;
 import com.github.huifer.crud.common.utils.GsonSingleManager;

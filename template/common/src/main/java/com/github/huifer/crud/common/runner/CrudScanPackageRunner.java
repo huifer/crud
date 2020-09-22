@@ -35,7 +35,7 @@ public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
 
 
   /**
-   * key: 类型 value: 注解 {@link CacheKey } 的实体对象 用来对普通实体进行缓存使用
+   * key: entity class  value:  {@link CacheKey }
    */
   public static Map<Class<?>, CacheKeyEntity> PACKAGE_CACHE_INFO = new HashMap<>();
 
@@ -80,8 +80,7 @@ public class CrudScanPackageRunner implements CommandLineRunner, Ordered {
       CacheKeyEntity ck = PACKAGE_CACHE_INFO.get(type);
       if (ck != null) {
         throw new RuntimeException("has a cache" + type);
-      }
-      else {
+      } else {
         PACKAGE_CACHE_INFO.put(cacheKeyEntity.getType(), cacheKeyEntity);
       }
     }

@@ -17,46 +17,47 @@
   ~
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <packaging>pom</packaging>
-  <modules>
-    <module>spring-boot-demo</module>
-  </modules>
-  <groupId>com.github.huifer</groupId>
   <artifactId>simple-example</artifactId>
-  <version>0.0.1</version>
-  <name>simple-example</name>
-  <description>example for crud template</description>
-
-  <properties>
-    <java.version>8</java.version>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.source>1.8</maven.compiler.source>
-  </properties>
-
-
   <build>
     <resources>
       <resource>
         <directory>src/main/java</directory>
+        <filtering>false</filtering>
         <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
         </includes>
-        <filtering>false</filtering>
       </resource>
       <resource>
         <directory>src/main/resources</directory>
+        <filtering>false</filtering>
         <includes>
           <include>**/*.*</include>
         </includes>
-        <filtering>false</filtering>
       </resource>
     </resources>
 
   </build>
+  <description>example for crud template</description>
+  <groupId>com.github.huifer</groupId>
+  <modelVersion>4.0.0</modelVersion>
+  <modules>
+    <module>spring-boot-demo</module>
+    <module>spring-boot-mp</module>
+  </modules>
+  <name>simple-example</name>
+  <packaging>pom</packaging>
+
+  <properties>
+    <java.version>8</java.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+
+  <version>0.0.1</version>
 
 </project>

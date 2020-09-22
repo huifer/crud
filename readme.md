@@ -8,6 +8,7 @@
 - 单个表的数据库+缓存的增删改查操作
 - 单个实体的缓存增删改查操作
 - [对象比较](./doc/object-compare.md)
+- [Id增强查询](./doc/增强类查询.md)
 
 ## 如何使用
 - 在启动类上添加如下代码
@@ -24,7 +25,7 @@
 
 ```
 
-### mybatis 支持
+### mybatis+mybatis-plus 支持
 - 添加依赖  
 
 ```xml
@@ -38,7 +39,7 @@
 - 对mapper进行修改
 ```java
 @CacheKey(key = "issues", type = IssuesEntity.class)
-public interface IssuesMapper extends A<Integer, IssuesEntity> {}
+public interface IssuesMapper  {}
 ```
 
 - 对实体进行修改
@@ -49,13 +50,6 @@ public class IssuesEntity implements BaseEntity {}
 
 
 
-- 对mapper进行修改
-
-```java
-@CacheKey(key = "issues", type = IssuesEntity.class)
-public interface IssuesMapper extends BaseMapper<IssuesEntity>,
-    AforMybatisPlus<Integer, IssuesEntity> 
-```
 
 - 对实体进行修改
 
@@ -68,7 +62,7 @@ public class IssuesEntity implements BaseEntity {}
 
 ```java
   @Autowired
-  private CrudFacade<IssuesEntity, IntIdInterface<Integer>> crudFacade;
+  private CrudFacade crudFacade;
 ```
 - 只需要引入`CrudFacade`组件就可以拥有数据库+缓存的crud操作了. 如果不需要缓存请将mapper上的`@CacheKey`删掉
 
@@ -78,7 +72,8 @@ public class IssuesEntity implements BaseEntity {}
 ### entity 支持
 
 - 给实体对象添加注解 `@CacheKey`
-    - redis-hash field 取值说明: idFiled=实体类的某个字段, idMethod=实体类中的一个方法,如果两者同时存在以`idMethod`为准, 建议填写一个
+    - redis-hash field 取值说明: idFiled=实体类的某个字段, idMethod=实体类中的一个方法,
+    如果两者同时存在以`idMethod`为准, 建议填写一个
     
     
 ```java

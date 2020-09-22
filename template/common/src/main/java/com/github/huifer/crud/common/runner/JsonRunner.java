@@ -37,9 +37,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
-/**
- * // todo: 2020/8/29 json 启动配置
- */
 @Component
 public class JsonRunner implements CommandLineRunner, Ordered {
 
@@ -65,7 +62,6 @@ public class JsonRunner implements CommandLineRunner, Ordered {
         throw new RuntimeException("json type is null");
     }
 
-
   }
 
   private void settingJackJson() {
@@ -77,8 +73,7 @@ public class JsonRunner implements CommandLineRunner, Ordered {
         ObjectMapper objectMapper = v.setObjectMapper();
         JackJsonSingleManager.setObjectMapper(objectMapper);
       }
-    }
-    else {
+    } else {
       beansOfType.remove(Constant.JACK_SERIALIZATION_BEAN_NAME);
       JackJsonConfigSetting jackJsonConfigSetting = new ArrayList<>(beansOfType.values()).get(0);
       JackJsonSingleManager.setObjectMapper(jackJsonConfigSetting.setObjectMapper());
@@ -95,29 +90,22 @@ public class JsonRunner implements CommandLineRunner, Ordered {
           break;
         }
       }
-    }
-
-    else {
+    } else {
       beansOfType.remove(Constant.GSON_SETTING_BEAN_NAME);
       settingGsonManager(new ArrayList<>(beansOfType.values()).get(0));
     }
-
 
   }
 
   private boolean settingGsonManager(GsonConfigSetting v) {
     GsonBuilder gsonBuilder = v.gsonBuild();
-    // 如果 gson builder 不等价于 new GsonBuilder
     if (!gsonBuilder.equals(GsonSingleManager.getGsonBuilder())) {
-      // 设置 gsonBuilder
       GsonSingleManager.setGsonBuilder(gsonBuilder);
-      // 设置 gson
       Gson gson = gsonBuilder.create();
       GsonSingleManager.setGson(gson);
       return true;
     }
 
-    // 设置 gson
     Gson gson = v.gson();
     if (!gson.equals(GsonSingleManager.getGson())) {
       GsonSingleManager.setGson(gson);

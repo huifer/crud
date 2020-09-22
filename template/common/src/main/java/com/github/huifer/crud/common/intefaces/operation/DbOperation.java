@@ -23,21 +23,21 @@ import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 
 /**
- * 数据库操作
+ * db operation interface
  *
- * @param <T> 实体
- * @param <I> id接口
+ * @see BaseEntity
+ * @see IdInterface
  */
-public interface DbOperation<T extends BaseEntity, I extends IdInterface> {
+public interface DbOperation {
 
-  boolean insert(T t, Class<?> c);
+  <T extends BaseEntity> boolean insert(T t, Class<?> c);
 
-  T byId(I interfaces, Class<?> c);
+  <T extends BaseEntity> T byId(IdInterface interfaces, Class<?> c);
 
 
-  boolean del(I interfaces);
+  boolean del(IdInterface interfaces);
 
-  boolean editor(I interfaces, T t);
+  <T extends BaseEntity> boolean editor(IdInterface interfaces, T t);
 
   Class<?> type();
 

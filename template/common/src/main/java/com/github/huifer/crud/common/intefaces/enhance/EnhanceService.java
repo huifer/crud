@@ -16,8 +16,22 @@
  *
  */
 
-package com.github.huifer.crud.common.intefaces;
+package com.github.huifer.crud.common.intefaces.enhance;
 
-public interface A<Id, T> {
+/**
+ * byId query enhance
+ *
+ * @param <T> entity
+ */
+public interface EnhanceService<T> {
+
+  /**
+   * byId query enhance
+   *
+   * @param t enhance entity
+   * @return enhance entity
+   * @throws Exception ex
+   */
+  T enhance(T t) throws Exception;
 
 }

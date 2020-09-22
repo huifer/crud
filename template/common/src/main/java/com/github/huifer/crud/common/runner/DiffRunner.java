@@ -39,7 +39,7 @@ public class DiffRunner implements CommandLineRunner, Ordered {
 
 
   /**
-   * key: 类的字节码 value: Map -> key: 字段,value: 字段上面的注解对象
+   * key: entity class  value: Map -> key: filed ,value: {@link DiffAnnotationEntity}
    */
   static Map<Class<?>, Map<String, DiffAnnotationEntity>> cache = new HashMap<>();
 
@@ -73,15 +73,15 @@ public class DiffRunner implements CommandLineRunner, Ordered {
 
   private Map<String, DiffAnnotationEntity> clazzWork(Class<?> clazz) {
     HavingDiff havingDiff = clazz.getAnnotation(HavingDiff.class);
-    // 是否存在这个注解, 如果存在则进行
     Map<String, DiffAnnotationEntity> map = new HashMap<>();
+    // has havingDiff
     if (havingDiff != null) {
 
       for (Field declaredField : clazz.getDeclaredFields()) {
         declaredField.setAccessible(true);
-        // 字段名称
+        // filed name
         String fieldName = declaredField.getName();
-        // 获取注解
+        // get diffAnnotation
         DiffAnnotation diffAnnotation = declaredField.getAnnotation(DiffAnnotation.class);
         if (diffAnnotation != null) {
           DiffAnnotationEntity diffAnnotationEntity = annToEntity(diffAnnotation);
@@ -94,7 +94,7 @@ public class DiffRunner implements CommandLineRunner, Ordered {
 
 
   /**
-   * 注解转换成为实体对象
+   * annotation to entity
    */
   private DiffAnnotationEntity annToEntity(DiffAnnotation diffAnnotation) {
 

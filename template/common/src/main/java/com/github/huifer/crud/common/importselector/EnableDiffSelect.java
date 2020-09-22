@@ -24,6 +24,9 @@ import java.util.Map;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
+/**
+ * import selector for {@link EnableDiff}
+ */
 public class EnableDiffSelect implements ImportSelector {
 
   @Override
@@ -32,7 +35,6 @@ public class EnableDiffSelect implements ImportSelector {
 
     Map<String, Object> annotationAttributes = annotationMetadata
         .getAnnotationAttributes(EnableDiff.class.getName());
-
     String[] scanPackages = (String[]) annotationAttributes.get("scanPackages");
     String byIdSQL = (String) annotationAttributes.get("byIdMethod");
     EnableAttrManager.setScanPackageDiff(scanPackages);

@@ -20,7 +20,15 @@ package com.github.huifer.crud.common.conf.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * jack json setting
+ */
 public interface JackJsonConfigSetting {
 
+  /**
+   * setting object mapper
+   *
+   * @return object mapper
+   */
   ObjectMapper setObjectMapper();
 }

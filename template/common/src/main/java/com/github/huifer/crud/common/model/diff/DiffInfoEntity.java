@@ -21,23 +21,27 @@ package com.github.huifer.crud.common.model.diff;
 public class DiffInfoEntity {
 
   /**
-   * 对比字段:中文
+   * filed name
    */
   private String field;
+
   /**
-   * 对比后的消息结果
+   * change message
    */
   private String msg;
+
   /**
-   * 事件id
+   * tx id
    */
   private String txId;
+
   /**
-   * 老数据
+   * old value
    */
   private String ov;
+
   /***
-   * 新数据
+   * new value
    *
    * */
   private String nv;

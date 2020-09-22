@@ -21,7 +21,7 @@ package com.github.huifer.crud.common.intefaces.id;
 /**
  * string id
  */
-public interface StrIdInterface<String> extends IdInterface {
+public interface StrIdInterface extends IdInterface<String> {
 
   String id();
 }

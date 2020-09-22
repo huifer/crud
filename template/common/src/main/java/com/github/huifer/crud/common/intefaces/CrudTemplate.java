@@ -21,14 +21,14 @@ package com.github.huifer.crud.common.intefaces;
 
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 
-public interface CrudTemplate<T, I extends IdInterface> {
+public interface CrudTemplate {
 
-  boolean insert(T t);
+  <T> boolean insert(T t);
 
-  T byId(I i, Class<?> c);
+  <T> T byId(IdInterface<Object> i, Class<?> c);
 
-  boolean del(I i, Class<?> c);
+  boolean del(IdInterface<Object> i, Class<?> c);
 
-  boolean editor(T t);
+  <T> boolean editor(T t);
 
 }

@@ -19,31 +19,35 @@
 package com.github.huifer.crud.common.service.facade;
 
 
+import static com.github.huifer.crud.common.utils.Constant.COMMON_DB_OPERATION_BEAN_NAME;
+import static com.github.huifer.crud.common.utils.Constant.CRUD_FACADE_BEAN_NAME;
+import static com.github.huifer.crud.common.utils.Constant.CRUD_HASH_TEMPLATE_FOR_REDIS_BEAN_NAME;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
-import com.github.huifer.crud.common.intefaces.CrudTemplate;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.id.StrIdInterface;
 import com.github.huifer.crud.common.intefaces.operation.DbOperation;
 import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service
-public class CrudFacade<T extends BaseEntity, I extends IdInterface>
-    implements CrudTemplate<T, I> {
+@Service(CRUD_FACADE_BEAN_NAME)
+public class CrudFacade {
 
 
-  @Autowired
-  @Qualifier("commonDbOperation")
-  private DbOperation dbOperation;
+  private static final Logger log = LoggerFactory.getLogger(CrudFacade.class);
 
   @Autowired
-  @Qualifier("crudHashTemplateForRedis")
-  private RedisOperation redisOperation;
+  @Qualifier(COMMON_DB_OPERATION_BEAN_NAME)
+  protected DbOperation dbOperation;
 
+  @Autowired
+  @Qualifier(CRUD_HASH_TEMPLATE_FOR_REDIS_BEAN_NAME)
+  protected RedisOperation redisOperation;
 
-  public boolean insert(T t) {
+  public <T extends BaseEntity> boolean insert(T t) {
     boolean insert = dbOperation.insert(t, t.getClass());
     redisOperation.setClass(t.getClass());
     if (insert) {
@@ -53,34 +57,60 @@ public class CrudFacade<T extends BaseEntity, I extends IdInterface>
     return insert;
   }
 
-  public T byId(I i, Class<?> c) {
+  public <T extends BaseEntity> T byId(Object id, Class<T> c) {
     redisOperation.setClass(c);
 
-    Object o = redisOperation.byId(i);
+    Object o = redisOperation.byId(new StrIdInterface() {
+      @Override
+      public String id() {
+        return String.valueOf(id);
+      }
+    });
     if (o != null) {
       return (T) o;
     }
     // select by db
-    Object db = dbOperation.byId(i, c);
+    Object db = dbOperation.byId(new IdInterface() {
+      @Override
+      public Object id() {
+        return id;
+      }
+    }, c);
     if (db != null) {
 
       // insert redis
-      redisOperation.insert(db, (StrIdInterface) () -> i.id().toString());
+      redisOperation.insert(db, new StrIdInterface() {
+        @Override
+        public String id() {
+          return String.valueOf(id);
+        }
+      });
       return (T) db;
     }
 
     return null;
   }
 
-  public boolean del(I i, Class<?> c) {
+
+  public boolean del(Object i, Class<?> c) {
 
     // remove redis value
     redisOperation.setClass(c);
-    redisOperation.del(i);
-    return dbOperation.del(i);
+    redisOperation.del(new StrIdInterface() {
+      @Override
+      public String id() {
+        return String.valueOf(i);
+      }
+    });
+    return dbOperation.del(new IdInterface() {
+      @Override
+      public Object id() {
+        return i;
+      }
+    });
   }
 
-  public boolean editor(T t) {
+  public <T extends BaseEntity> boolean editor(T t) {
     redisOperation.setClass(t.getClass());
     redisOperation.del((StrIdInterface) () -> t.getId().toString());
 

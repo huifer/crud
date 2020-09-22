@@ -1,20 +1,18 @@
-
-
 server:
   port: 8080
 
 spring:
   datasource:
-    password: a12345
-    username: huifer
+    password: shandsuc3
+    username: shandsuc3
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.98.225.144:3306/scrum?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://10.10.0.124:3306/shandsuc3?useUnicode=true&characterEncoding=utf8&useSSL=false
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   redis:
-    database: 0
+    database: 3
     host: localhost
     port: 6379
     max-active: 4
@@ -25,6 +23,8 @@ spring:
 
 
 mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
   mapper-locations: classpath:mapperxml/*.xml
   type-aliases-package: com.example.webdemo.entity
 

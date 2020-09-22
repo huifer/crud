@@ -18,26 +18,31 @@
 
 package com.github.huifer.crud.common.utils;
 
+import java.util.Arrays;
+import java.util.List;
+import sun.security.provider.PolicySpiFile;
+
 public class Constant {
 
-
   /**
-   * gson 序列化的bean name
+   * gson serialization bean name
    */
   public static final String GSON_SERIALIZATION_BEAN_NAME = "crudGsoSerialization";
+
   /**
    * jack json serialization bean name
    */
   public static final String JACK_JSON_SERIALIZATION_BEAN_NAME = "crudJackJsonSerialization";
+
   /**
-   * 序列化的所有名字列表
+   * serialization bean names.
    */
-  public static final String[] SERIALIZATION_BEAN_NAMES = {GSON_SERIALIZATION_BEAN_NAME,
-      JACK_JSON_SERIALIZATION_BEAN_NAME};
-
+  public static final List<String> SERIALIZATION_BEAN_NAMES = Arrays
+      .asList(new String[]{GSON_SERIALIZATION_BEAN_NAME,
+          JACK_JSON_SERIALIZATION_BEAN_NAME}.clone());
 
   /**
-   * gson 配置类
+   * gson config bean name
    */
   public static final String GSON_SETTING_BEAN_NAME = "crudGsonConfigSetting";
 
@@ -47,4 +52,15 @@ public class Constant {
   public static final String JACK_SERIALIZATION_BEAN_NAME = "jackJsonSetting";
 
   public static final String SERIALIZATION_CALL_IMPL = "serializationCallImpl";
+
+
+  public static final String CRUD_FACADE_BEAN_NAME = "crudFacade";
+  public static final String CRUD_FACADE_FOR_CONTROLLER_BEAN_NAME = "crudFacade";
+  public static final String CRUD_HASH_TEMPLATE_FOR_REDIS_BEAN_NAME = "crudHashTemplateForRedis";
+  public static final String COMMON_DB_OPERATION_BEAN_NAME = "commonDbOperation";
+  public static final String SERIALIZATION_FACTORY_BEAN_NAME = "serializationFactoryImpl";
+  public static final String EnhanceService_BEAN_NAME = "enhanceServiceImpl";
+  private Constant() {
+    throw new IllegalStateException("utils class");
+  }
 }

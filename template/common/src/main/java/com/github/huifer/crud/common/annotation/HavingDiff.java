@@ -25,7 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 实体比较注解
+ * entity compare
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

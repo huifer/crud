@@ -19,12 +19,13 @@
 package com.github.huifer.crud.common.operation;
 
 
+import static com.github.huifer.crud.common.utils.Constant.COMMON_DB_OPERATION_BEAN_NAME;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
 import com.github.huifer.crud.common.intefaces.id.IdInterface;
 import com.github.huifer.crud.common.intefaces.operation.DbOperation;
 import com.github.huifer.crud.common.proxy.MapperTarget;
 import com.github.huifer.crud.common.proxy.MethodUtils;
-import com.github.huifer.crud.common.runner.CrudTemplateRunner;
+import com.github.huifer.crud.common.runner.MapperSuperRunner;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -32,20 +33,21 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("commonDbOperation")
-public class CommonDbOperation<T extends BaseEntity, I extends IdInterface> implements
-    DbOperation<T, I> {
+@Service(COMMON_DB_OPERATION_BEAN_NAME)
+public class CommonDbOperation implements
+    DbOperation {
 
   Class<?> type;
+
   @Autowired
   private SqlSession sqlSession;
 
   public Class<?> getMapperClazz() {
-    return CrudTemplateRunner.mapper(type());
+    return MapperSuperRunner.mapper(type());
   }
 
   @Override
-  public boolean del(I interfaces) {
+  public boolean del(IdInterface interfaces) {
     boolean del = false;
     Class<?> mapperClazz = getMapperClazz();
 
@@ -58,18 +60,16 @@ public class CommonDbOperation<T extends BaseEntity, I extends IdInterface> impl
     if (method != null) {
 
       Object invoke = MethodUtils.invoke(mapperObj, method, interfaces.id());
-      if (invoke != null) {
-        if (invoke instanceof Integer) {
-          int res = (int) invoke;
-          del = res > 0;
-        }
+      if (invoke instanceof Integer) {
+        int res = (int) invoke;
+        del = res > 0;
       }
     }
     return del;
   }
 
   @Override
-  public boolean editor(I interfaces, T t) {
+  public <T extends BaseEntity> boolean editor(IdInterface interfaces, T t) {
     this.type = t.getClass();
     boolean editor = false;
     Class<?> mapperClazz = getMapperClazz();
@@ -83,17 +83,15 @@ public class CommonDbOperation<T extends BaseEntity, I extends IdInterface> impl
     if (method != null) {
 
       Object invoke = MethodUtils.invoke(mapperObj, method, t);
-      if (invoke != null) {
-        if (invoke instanceof Integer) {
-          int res = (int) invoke;
-          editor = res > 0;
-        }
+      if (invoke instanceof Integer) {
+        int res = (int) invoke;
+        editor = res > 0;
       }
     }
     return editor;
   }
 
-  public boolean insert(T o, Class<?> c) {
+  public <T extends BaseEntity> boolean insert(T o, Class<?> c) {
     this.type = c;
     boolean insert = false;
     Class<?> mapperClazz = getMapperClazz();
@@ -107,18 +105,16 @@ public class CommonDbOperation<T extends BaseEntity, I extends IdInterface> impl
     if (method != null) {
 
       Object invoke = MethodUtils.invoke(mapperObj, method, o);
-      if (invoke != null) {
-        if (invoke instanceof Integer) {
-          int res = (int) invoke;
-          insert = res > 0;
-        }
+      if (invoke instanceof Integer) {
+        int res = (int) invoke;
+        insert = res > 0;
       }
     }
     return insert;
 
   }
 
-  public T byId(I idInterface, Class<?> c) {
+  public <T extends BaseEntity> T byId(IdInterface idInterface, Class<?> c) {
     this.type = c;
 
     Class<?> mapperClazz = getMapperClazz();

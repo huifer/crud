@@ -16,9 +16,17 @@
  *
  */
 
-package com.github.huifer.crud.common.intefaces;
+package com.github.huifer.example.mapper;
 
+import com.github.huifer.example.model.SecondModel;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
-public interface DaoTypeLabel {
+@Mapper
+public interface SecondModelMapper {
+
+  @Select("select * from scrum.second_model where id = #{idx} ")
+  SecondModel findById(@Param("idx") Integer idx);
 
 }

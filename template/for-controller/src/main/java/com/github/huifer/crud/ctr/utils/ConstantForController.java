@@ -16,12 +16,10 @@
  *
  */
 
-package com.github.huifer.crud.common.intefaces.id;
+package com.github.huifer.crud.ctr.utils;
 
-/**
- * int id
- */
-public interface IntIdInterface<Integer> extends IdInterface<Integer> {
+public class ConstantForController {
 
-  Integer id();
+  public static final String VALIDATED_SCAN_SERVICE_BEAN_NAME = "validatedScanService";
+
 }

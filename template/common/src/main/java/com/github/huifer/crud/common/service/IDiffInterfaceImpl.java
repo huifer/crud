@@ -24,7 +24,6 @@ import com.github.huifer.crud.common.model.diff.DiffInfoEntity;
 import com.github.huifer.crud.common.proxy.MapperTarget;
 import com.github.huifer.crud.common.runner.DiffRunner;
 import com.github.huifer.crud.common.utils.EnableAttrManager;
-import com.google.gson.Gson;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -34,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -42,17 +40,13 @@ import org.springframework.util.StringUtils;
 public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
 
   private static final String OLD_PLACEHOLDER = "old";
+
   private static final String NEW_PLACEHOLDER = "new";
-  Gson gson = new Gson();
-  @Autowired
-  private ApplicationContext context;
+
   @Autowired
   private SqlSession sqlSession;
 
-  /**
-   * @param source 原始对象
-   * @param target 修改后的对象
-   */
+
   @Override
   public List<DiffInfoEntity> diff(T source, T target, String logTxId) {
 
@@ -60,27 +54,26 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
     List<DiffInfoEntity> res = new ArrayList<>();
     for (Field declaredField : sourceClass.getDeclaredFields()) {
       declaredField.setAccessible(true);
-      // 字段名称
+      // filed name
       String fieldName = declaredField.getName();
 
       String oldValue = getTargetValue(source, fieldName);
       String newValue = getTargetValue(target, fieldName);
 
-      // 注解对象
+      // get diffAnnotation entity
       DiffAnnotationEntity fromFiled = getFromFiled(source, fieldName);
       if (fromFiled != null) {
 
-        // 字段中文
+        // filed cnName
         String nameCn = fromFiled.getName();
 
-        // 外联对象的取值字段
+        // foreign type filed name
         String outField = fromFiled.getOutField();
-        // 外联对象的字节码
+        // foreign type class
         Class<?> outJoin = fromFiled.getOutJoin();
-        // 外联对象的mapper
+        // mapper class
         Class<?> mapper = fromFiled.getMapper();
 
-        // 三个值都是默认值则不做外联查询
         if (StringUtils.isEmpty(outField) &&
             outJoin.equals(Object.class) &&
             mapper.equals(Object.class)
@@ -93,8 +86,7 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
             res.add(diffInfoEntity);
 
           }
-        }
-        else {
+        } else {
           String ov = mapper(mapper, oldValue, outField);
           String nv = mapper(mapper, newValue, outField);
           if (ov.equals(nv)) {
@@ -107,7 +99,6 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
       }
     }
     return res;
-
 
   }
 
@@ -141,7 +132,7 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
   }
 
   /**
-   * 获取变更的文字内容
+   * get change message
    */
   private String changeData(String oldValue, String newValue, String msg) {
     return msg.replace(OLD_PLACEHOLDER, oldValue).replace(NEW_PLACEHOLDER, newValue);
@@ -174,9 +165,9 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
   }
 
   /**
-   * 根据类型获取注解的实体对象
+   * gets the annotation entity object according to the type
    * <p>
-   * key:字段,value:对象
+   * key:filed,value: DiffAnnotationEntity
    *
    * @see DiffAnnotationEntity
    */
@@ -187,6 +178,5 @@ public class IDiffInterfaceImpl<T> implements IDiffInterface<T> {
   private DiffAnnotationEntity getFromFiled(T t, String field) {
     return getFromClazz(t).get(field);
   }
-
 
 }

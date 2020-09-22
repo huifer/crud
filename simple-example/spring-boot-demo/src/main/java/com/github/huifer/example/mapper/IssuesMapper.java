@@ -19,7 +19,6 @@
 package com.github.huifer.example.mapper;
 
 import com.github.huifer.crud.common.annotation.CacheKey;
-import com.github.huifer.crud.common.intefaces.A;
 import com.github.huifer.example.model.IssuesEntity;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -30,7 +29,7 @@ import org.apache.ibatis.annotations.Update;
 
 @Mapper
 @CacheKey(key = "issues", type = IssuesEntity.class)
-public interface IssuesMapper extends A<Integer, IssuesEntity> {
+public interface IssuesMapper {
 
   @Insert("   insert into issue(new_title)values(#{newTitle,jdbcType=VARCHAR})")
   @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")

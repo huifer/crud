@@ -18,9 +18,6 @@
 
 package com.github.huifer.crud.ctr.annotation.entity;
 
-/**
- * @see com.github.huifer.crud.ctr.annotation.CrudController
- */
 public class CrudControllerEntity {
 
   private String uri;

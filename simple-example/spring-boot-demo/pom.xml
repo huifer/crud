@@ -17,51 +17,51 @@
   ~
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>simple-example</artifactId>
-    <groupId>com.github.huifer</groupId>
-    <version>0.0.1</version>
-  </parent>
-  <modelVersion>4.0.0</modelVersion>
-
   <artifactId>spring-boot-demo</artifactId>
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework.boot</groupId>
       <version>2.3.3.RELEASE</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>
-      <version>2.3.3.RELEASE</version>
-    </dependency>
-    <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
       <version>2.3.3.RELEASE</version>
     </dependency>
     <dependency>
-      <groupId>mysql</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <version>2.3.3.RELEASE</version>
+    </dependency>
+    <dependency>
       <artifactId>mysql-connector-java</artifactId>
+      <groupId>mysql</groupId>
       <version>8.0.21</version>
     </dependency>
     <dependency>
-      <groupId>org.mybatis.spring.boot</groupId>
       <artifactId>mybatis-spring-boot-starter</artifactId>
+      <groupId>org.mybatis.spring.boot</groupId>
       <version>2.1.3</version>
     </dependency>
 
 
     <dependency>
-      <groupId>com.github.huifer</groupId>
       <artifactId>common</artifactId>
+      <groupId>com.github.huifer</groupId>
       <version>0.0.6-SNAPSHOT</version>
     </dependency>
   </dependencies>
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>simple-example</artifactId>
+    <groupId>com.github.huifer</groupId>
+    <version>0.0.1</version>
+  </parent>
 
 
 </project>

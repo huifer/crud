@@ -21,7 +21,7 @@ package com.github.huifer.crud.ctr.validated;
 public interface ValidatedInterface<T> {
 
   /**
-   * 实体类class
+   * entity class
    *
    * @return class
    */

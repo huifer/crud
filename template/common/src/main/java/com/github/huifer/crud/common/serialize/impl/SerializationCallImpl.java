@@ -18,6 +18,7 @@
 
 package com.github.huifer.crud.common.serialize.impl;
 
+import static com.github.huifer.crud.common.utils.Constant.SERIALIZATION_FACTORY_BEAN_NAME;
 import com.github.huifer.crud.common.serialize.Serialization;
 import com.github.huifer.crud.common.serialize.SerializationCall;
 import com.github.huifer.crud.common.serialize.SerializationFactory;
@@ -32,7 +33,7 @@ public class SerializationCallImpl implements
     SerializationCall {
 
   @Autowired
-  @Qualifier("serializationFactoryImpl")
+  @Qualifier(SERIALIZATION_FACTORY_BEAN_NAME)
   private SerializationFactory serializationFactory;
 
   @Override

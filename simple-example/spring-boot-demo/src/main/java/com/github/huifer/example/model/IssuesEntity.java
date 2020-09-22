@@ -18,12 +18,9 @@
 
 package com.github.huifer.example.model;
 
-import com.github.huifer.crud.common.annotation.CacheKey;
 import com.github.huifer.crud.common.intefaces.BaseEntity;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
-@CacheKey(key = "tt", type = IssuesEntity.class, idFiled = "newTitle")
+//@CacheKey(key = "tt", type = IssuesEntity.class, idFiled = "newTitle")
 public class IssuesEntity implements BaseEntity {
 
 
