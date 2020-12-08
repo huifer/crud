@@ -18,9 +18,12 @@
 
 package com.github.huifer.example.model;
 
-public class FirstModel {
+import com.github.huifer.crud.common.intefaces.BaseEntity;
+
+public class FirstModel implements BaseEntity {
 
   private String name;
+
   private Integer id;
 
   public String getName() {

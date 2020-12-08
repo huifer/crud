@@ -21,7 +21,9 @@ package com.github.huifer.example;
 import static com.github.huifer.crud.common.utils.Constant.CRUD_FACADE_BEAN_NAME;
 import com.github.huifer.crud.common.service.facade.CrudEntityFacade;
 import com.github.huifer.crud.common.service.facade.CrudFacade;
-import com.github.huifer.example.model.Uc3User;
+import com.github.huifer.example.model.FirstModel;
+import com.github.huifer.example.model.IssuesEntity;
+import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,6 +31,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class MybatisAppTest {
+
+  Gson gson = new Gson();
 
   @Autowired
   @Qualifier(CRUD_FACADE_BEAN_NAME)
@@ -38,15 +42,30 @@ class MybatisAppTest {
   private CrudEntityFacade crudEntityFacade;
 
   @Test
-  void testInsert() {
-//    Uc3User issuesEntity = new Uc3User();
-//    issuesEntity.setName("mybatis_test");
-//    crudFacade.insert(issuesEntity);
+  void testInsert() throws InterruptedException {
 
-    Uc3User uc3User = crudFacade.byId(1751, Uc3User.class);
-    uc3User.setAvatar("asfasfafs");
-    crudFacade.editor(uc3User);
-    System.out.println();
+    Thread t1 = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        System.out.println(System.currentTimeMillis());
+        IssuesEntity issuesEntity = crudFacade.byId(106, IssuesEntity.class);
+        System.out.println(gson.toJson(issuesEntity));
+      }
+    });
+
+    Thread t2 = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        System.out.println(System.currentTimeMillis());
+        FirstModel firstModel = crudFacade.byId(1, FirstModel.class);
+        System.out.println(gson.toJson(firstModel));
+      }
+    });
+
+    t1.start();
+    t2.start();
+    Thread.sleep(3000);
+    System.out.println("exit");
   }
 
 //  @Test

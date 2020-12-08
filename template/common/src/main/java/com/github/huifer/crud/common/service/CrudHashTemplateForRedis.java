@@ -24,6 +24,7 @@ import com.github.huifer.crud.common.intefaces.operation.RedisOperation;
 import com.github.huifer.crud.common.runner.MapperSuperRunner;
 import com.github.huifer.crud.common.serialize.SerializationCall;
 import com.github.huifer.crud.common.utils.Constant;
+import com.github.huifer.crud.common.utils.ThreadLocalHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -100,10 +101,11 @@ public class CrudHashTemplateForRedis implements
 
   @Override
   public void setClass(Class<?> clazz) {
-    this.type = clazz;
+    ThreadLocalHolder.setClassThreadLocal(clazz);
+
   }
 
   public Class type() {
-    return this.type;
+    return ThreadLocalHolder.getClassThreadLocal();
   }
 }

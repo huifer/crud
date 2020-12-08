@@ -57,7 +57,7 @@ public class CrudFacade {
     return insert;
   }
 
-  public <T extends BaseEntity> T byId(Object id, Class<T> c) {
+  public <T extends BaseEntity> T  byId(Object id, Class<T> c) {
     redisOperation.setClass(c);
 
     Object o = redisOperation.byId(new StrIdInterface() {
